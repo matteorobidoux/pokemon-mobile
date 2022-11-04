@@ -1,14 +1,11 @@
 package com.example.pokemonapp
 
 import android.app.AlertDialog
-import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.pokemonapp.databinding.NameFragmentBinding
@@ -21,7 +18,7 @@ class NameFragment : Fragment(){
         binding.confirmName.setOnClickListener{
             var builder = AlertDialog.Builder(context)
             var dialogInflater = layoutInflater
-            var dialogView = dialogInflater.inflate(R.layout.custom_dialog, null)
+            var dialogView = dialogInflater.inflate(R.layout.name_dialog, null)
             dialogView.findViewById<TextView>(R.id.confirm_text).text = "Your name is ${binding.trainerName.text}?"
 
             builder.setView(dialogView)
