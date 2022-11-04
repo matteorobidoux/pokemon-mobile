@@ -13,4 +13,8 @@ class FormActivity: AppCompatActivity() {
         binding = FormActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
+
+    public fun setText(text : String){
+        binding.profOakText.text = text
+    }
 }
