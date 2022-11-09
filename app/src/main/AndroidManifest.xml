@@ -26,6 +26,10 @@
             android:name=".FormActivity"
             android:label="Form">
         </activity>
+        <activity
+            android:name=".MenuActivity"
+            android:label="Menu">
+        </activity>
     </application>
 
 </manifest>
