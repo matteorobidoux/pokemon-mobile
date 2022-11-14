@@ -15,7 +15,7 @@ class FormActivity: AppCompatActivity() {
         setContentView(binding.root)
     }
 
-    public fun setText(text : String){
+    fun setText(text : String){
         binding.profOakText.text = text
     }
 }

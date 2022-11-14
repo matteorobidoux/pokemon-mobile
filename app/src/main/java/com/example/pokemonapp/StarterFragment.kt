@@ -17,9 +17,10 @@ import com.google.gson.reflect.TypeToken
 
 class StarterFragment : Fragment(){
     private var utils: Utils = Utils()
-    private var formActivtiy = activity as FormActivity
+    private lateinit var formActivtiy: FormActivity
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        formActivtiy = activity as FormActivity
         val binding = StarterFragmentBinding.inflate(inflater,container,false)
         formActivtiy.setText("To start your adventure, you must first chose your starter pokemon!")
         binding.firePokeball.setOnClickListener{
