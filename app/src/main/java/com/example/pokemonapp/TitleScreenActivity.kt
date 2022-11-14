@@ -1,6 +1,7 @@
 package com.example.pokemonapp
 
 import android.content.Context
+import android.content.Intent
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -18,11 +19,23 @@ class TitleScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = TitleScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setListeners()
         setTitleMusic()
     }
 
     private fun setTitleMusic(){
         var mediaPlayer = MediaPlayer.create(applicationContext, R.raw.title_screen_music)
         mediaPlayer.start()
+    }
+
+    private fun setListeners(){
+        binding.newGame.setOnClickListener{
+            changeActivity()
+        }
+    }
+
+    private fun changeActivity(){
+        var formIntent = Intent(applicationContext, FormActivity::class.java)
+        startActivity(formIntent)
     }
 }
