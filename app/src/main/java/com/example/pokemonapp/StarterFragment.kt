@@ -12,8 +12,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.pokemonapp.databinding.StarterFragmentBinding
 import com.google.android.material.button.MaterialButton
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import com.google.gson.JsonElement
+import com.google.gson.JsonParser
+import org.json.JSONObject
 
 class StarterFragment : Fragment(){
     private var utils: Utils = Utils()
@@ -36,9 +37,9 @@ class StarterFragment : Fragment(){
             alert.show()
 
             dialogView.findViewById<MaterialButton>(R.id.yes_pokemon).setOnClickListener{
-                var starterPokemon = getPokemon("charmander")
-                var pokemonTeam = PokemonTeam()
-                pokemonTeam?.pokemons?.add(starterPokemon)
+//                var starterPokemon = getPokemon("charmander")
+//                var pokemonTeam = PokemonTeam()
+//                pokemonTeam?.pokemons?.add(starterPokemon)
                 var menuIntent = Intent(activity, MenuActivity::class.java)
                 formActivtiy.startActivity(menuIntent)
             }
@@ -61,9 +62,9 @@ class StarterFragment : Fragment(){
             alert.show()
 
             dialogView.findViewById<MaterialButton>(R.id.yes_pokemon).setOnClickListener{
-                var starterPokemon = getPokemon("squirtle")
-                var pokemonTeam = PokemonTeam()
-                pokemonTeam?.pokemons?.add(starterPokemon)
+//                var starterPokemon = getPokemon("squirtle")
+//                var pokemonTeam = PokemonTeam()
+//                pokemonTeam?.pokemons?.add(starterPokemon)
                 var menuIntent = Intent(activity, MenuActivity::class.java)
                 formActivtiy.startActivity(menuIntent)
             }
@@ -86,9 +87,10 @@ class StarterFragment : Fragment(){
             alert.show()
 
             dialogView.findViewById<MaterialButton>(R.id.yes_pokemon).setOnClickListener{
-                var starterPokemon = getPokemon("bulbasaur")
+                var pokemon = getPokemon("bulbasaur")
+                Log.d("TAG", pokemon.toString())
                 var pokemonTeam = PokemonTeam()
-                pokemonTeam?.pokemons?.add(starterPokemon)
+                pokemonTeam?.pokemons?.add(pokemon)
                 var menuIntent = Intent(activity, MenuActivity::class.java)
                 formActivtiy.startActivity(menuIntent)
             }
@@ -102,8 +104,34 @@ class StarterFragment : Fragment(){
 
     private fun getPokemon(pokemon: String): Pokemon {
         val jsonFileString = context?.let { utils.getJsonData(it, "$pokemon.json") }
-        val gson = Gson()
-        val pokemonType = object : TypeToken<Pokemon>() {}.type
-        return gson.fromJson(jsonFileString,pokemonType)
+        val jsonParser = JsonParser()
+        var jsonObject = jsonParser.parse(jsonFileString).asJsonObject
+        var pokemon = Pokemon(jsonObject.get("baseExperienceReward").asInt, jsonObject.get("baseStateAttack").asInt, jsonObject.get("baseStatDefense").asInt, jsonObject.get("baseStateMaxHp").asInt, jsonObject.get("baseStatSpecialAttack").asInt, jsonObject.get("baseStatSpecialDefense").asInt, jsonObject.get("baseStatSpeed").asInt, jsonObject.get("pokemonNumber").asInt, jsonObject.get("species").asString, getTypes(jsonObject.get("types")), getMoves(jsonObject.get("moves")))
+        return pokemon
+    }
+
+    private fun getMoves(moves: JsonElement) : ArrayList<Move>{
+        var moveList = ArrayList<Move>()
+        for(move in moves.asJsonArray){
+            val jsonFileString = context?.let { utils.getJsonData(it, "${move.asJsonObject.get("move").asString}.json") }
+            val jsonParser = JsonParser()
+            var jsonObject = jsonParser.parse(jsonFileString).asJsonObject
+            if(jsonObject.get("ailment") == null){
+                var pokemonMove = Move(move.asJsonObject.get("level_learned_at").asInt, jsonObject.get("accuracy").asInt, "Nothing", jsonObject.get("ailmentChance").asInt, jsonObject.get("category").asString, jsonObject.get("damageClass").asString, jsonObject.get("heal").asInt, jsonObject.get("maxPP").asInt, jsonObject.get("name").asString, jsonObject.get("power").asInt, jsonObject.get("target").asString, jsonObject.get("type").asString)
+                moveList.add(pokemonMove)
+            } else {
+                var pokemonMove = Move(move.asJsonObject.get("level_learned_at").asInt, jsonObject.get("accuracy").asInt, jsonObject.get("ailment").asString, jsonObject.get("ailmentChance").asInt, jsonObject.get("category").asString, jsonObject.get("damageClass").asString, jsonObject.get("heal").asInt, jsonObject.get("maxPP").asInt, jsonObject.get("name").asString, jsonObject.get("power").asInt, jsonObject.get("target").asString, jsonObject.get("type").asString)
+                moveList.add(pokemonMove)
+            }
+        }
+        return moveList
+    }
+
+    private fun getTypes(types: JsonElement) : ArrayList<String>{
+        var typelist = ArrayList<String>()
+        for(type in types.asJsonArray){
+            typelist.add(type.asString)
+        }
+        return typelist
     }
 }

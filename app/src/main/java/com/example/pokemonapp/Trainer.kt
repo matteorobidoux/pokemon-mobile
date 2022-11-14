@@ -1,7 +1,11 @@
 package com.example.pokemonapp
 
-data class Trainer(val trainerName: String) {
-    private var pokemonTeam: PokemonTeam = PokemonTeam()
-    private var pokemonCollection: PokemonCollection = PokemonCollection()
+class Trainer(trainerName: String) {
+    var pokemonTeam: PokemonTeam = PokemonTeam()
+    var pokemonCollection: PokemonCollection = PokemonCollection()
+    var name : String
 
+    init {
+        name = trainerName
+    }
 }
