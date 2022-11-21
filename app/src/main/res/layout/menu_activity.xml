@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp">
@@ -14,8 +15,7 @@
         app:layout_constraintTop_toBottomOf="wrap_content"
         android:gravity="center"
         android:padding="20dp"
-        android:layout_margin="10dp"
-        android:textSize="18dp">
+        android:layout_margin="10dp">
     </TextView>
 
     <LinearLayout
@@ -29,159 +29,111 @@
         android:layout_marginTop="5dp"
         android:gravity="center">
 
-        <LinearLayout
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/wild_poke_battle_btn"
+            android:layout_width="wrap_content"
+            android:padding="20dp"
+            app:strokeColor="@color/black"
+            app:strokeWidth="4dp"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/shade_white"
+            android:layout_height="wrap_content"
+            android:text="@string/wild_battle"
+            android:layout_margin="10dp"
+            app:icon="@drawable/wild_poke_battle"
+            app:iconSize="25dp"
+            app:iconTint="@null"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/trainer_battle_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:weightSum="2"
-            android:gravity="center">
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            app:strokeColor="@color/black"
+            app:strokeWidth="4dp"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/shade_white"
+            android:text="@string/trainer_battle"
+            android:layout_margin="10dp"
+            app:icon="@drawable/trainer_battle"
+            app:iconSize="25dp"
+            app:iconTint="@null"/>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/wild_poke_battle_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="@color/shade_white"
-                android:text="@string/wild_battle"
-                android:textColor="@color/black"
-                app:strokeColor="@color/black"
-                app:strokeWidth="4dp"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:lineSpacingExtra="5dp"
-                android:layout_marginRight="10dp"/>
-                <!--android:padding="20dp"-->
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/trainer_battle_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="@color/shade_white"
-                android:text="@string/trainer_battle"
-                android:textColor="@color/black"
-                app:strokeColor="@color/black"
-                app:strokeWidth="4dp"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:lineSpacingExtra="5dp"/>
-<!--                android:paddingLeft="50dp"-->
-<!--                android:paddingTop="20dp"-->
-<!--                android:paddingRight="50dp"-->
-<!--                android:paddingBottom="20dp"-->
-<!--            android:layout_marginStart="20dp"-->
-
-        </LinearLayout>
-
-        <LinearLayout
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/pokecenter_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:weightSum="2"
-            android:gravity="center">
+            android:paddingLeft="80dp"
+            android:paddingRight="80dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            app:strokeColor="@color/black"
+            app:strokeWidth="4dp"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/shade_white"
+            android:text="@string/pokecenter"
+            android:layout_margin="10dp"
+            app:icon="@drawable/pokecenter"
+            app:iconSize="25dp"
+            app:iconTint="@null"/>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/pokecenter_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                app:strokeColor="@color/black"
-                app:strokeWidth="4dp"
-                android:textColor="@color/black"
-                android:backgroundTint="@color/shade_white"
-                android:text="@string/pokecenter"
-                android:layout_margin="10dp"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:paddingLeft="18dp"
-                android:paddingRight="18dp"
-                android:layout_marginRight="10dp"/>
-<!--            android:paddingLeft="80dp"-->
-<!--            android:paddingRight="80dp"-->
-<!--            android:paddingTop="20dp"-->
-<!--            android:paddingBottom="20dp"-->
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/pokemart_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="2"
-                android:backgroundTint="@color/shade_white"
-                android:text="@string/pokemart"
-                android:textColor="@color/black"
-                app:strokeColor="@color/black"
-                app:strokeWidth="4dp"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:paddingLeft="18dp"
-                android:paddingRight="18dp"/>
-<!--            android:paddingLeft="95dp"-->
-<!--            android:paddingTop="20dp"-->
-<!--            android:paddingRight="95dp"-->
-<!--            android:paddingBottom="20dp"-->
-
-        </LinearLayout>
-
-        <LinearLayout
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/pokemart_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:weightSum="2"
-            android:gravity="center">
+            android:paddingLeft="95dp"
+            android:paddingRight="95dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            app:strokeColor="@color/black"
+            app:strokeWidth="4dp"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/shade_white"
+            android:text="@string/pokemart"
+            android:layout_margin="10dp"
+            app:icon="@drawable/pokemart"
+            app:iconSize="25dp"
+            app:iconTint="@null"/>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/change_team_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:strokeColor="@color/black"
-                app:strokeWidth="4dp"
-                android:textColor="@color/black"
-                android:backgroundTint="@color/shade_white"
-                android:text="@string/change_team"
-                android:layout_margin="10dp"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:paddingLeft="18dp"
-                android:paddingRight="18dp"/>
-<!--            android:paddingLeft="70dp"-->
-<!--            android:paddingRight="70dp"-->
-<!--            android:paddingTop="20dp"-->
-<!--            android:paddingBottom="20dp"-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/change_team_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="70dp"
+            android:paddingRight="70dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            app:strokeColor="@color/black"
+            app:strokeWidth="4dp"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/shade_white"
+            android:text="@string/change_team"
+            android:layout_margin="10dp"
+            app:icon="@drawable/change_teams"
+            app:iconSize="25dp"
+            app:iconTint="@null"/>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/save_game_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:strokeColor="@color/black"
-                app:strokeWidth="4dp"
-                android:textColor="@color/black"
-                android:backgroundTint="@color/shade_white"
-                android:text="@string/save_game"
-                android:gravity="center"
-                android:layout_margin="10dp"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:paddingLeft="50dp"
-                android:paddingRight="25dp"/>
-<!--            android:paddingLeft="125dp"-->
-<!--            android:paddingRight="125dp"-->
-<!--            android:paddingTop="20dp"-->
-<!--            android:paddingBottom="20dp"-->
-
-        </LinearLayout>
-
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/save_game_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="125dp"
+            android:paddingRight="125dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            app:strokeColor="@color/black"
+            app:strokeWidth="4dp"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/shade_white"
+            android:text="@string/save_game"
+            android:gravity="center"
+            android:layout_margin="10dp"
+            app:icon="@drawable/save"
+            app:iconSize="25dp"
+            app:iconTint="@null"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
