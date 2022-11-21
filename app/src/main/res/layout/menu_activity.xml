@@ -26,8 +26,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_menu_text"
-        android:layout_marginTop="5dp"
-        android:gravity="center">
+        android:layout_marginTop="5dp">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/wild_poke_battle_btn"
@@ -40,15 +39,16 @@
             android:layout_height="wrap_content"
             android:text="@string/wild_battle"
             android:layout_margin="10dp"
+            android:gravity="left|center_vertical"
             app:icon="@drawable/wild_poke_battle"
-            app:iconSize="25dp"
+            app:iconSize="35dp"
             app:iconTint="@null"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/trainer_battle_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="50dp"
+            android:paddingLeft="20dp"
             android:paddingRight="50dp"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
@@ -58,16 +58,17 @@
             android:backgroundTint="@color/shade_white"
             android:text="@string/trainer_battle"
             android:layout_margin="10dp"
+            android:gravity="left|center_vertical"
             app:icon="@drawable/trainer_battle"
-            app:iconSize="25dp"
+            app:iconSize="35dp"
             app:iconTint="@null"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/pokecenter_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="80dp"
-            android:paddingRight="80dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="100dp"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
             app:strokeColor="@color/black"
@@ -76,16 +77,17 @@
             android:backgroundTint="@color/shade_white"
             android:text="@string/pokecenter"
             android:layout_margin="10dp"
+            android:gravity="left|center_vertical"
             app:icon="@drawable/pokecenter"
-            app:iconSize="25dp"
+            app:iconSize="35dp"
             app:iconTint="@null"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/pokemart_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="95dp"
-            android:paddingRight="95dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="130dp"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
             app:strokeColor="@color/black"
@@ -94,16 +96,17 @@
             android:backgroundTint="@color/shade_white"
             android:text="@string/pokemart"
             android:layout_margin="10dp"
+            android:gravity="left|center_vertical"
             app:icon="@drawable/pokemart"
-            app:iconSize="25dp"
+            app:iconSize="35dp"
             app:iconTint="@null"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/change_team_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="70dp"
-            android:paddingRight="70dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="90dp"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
             app:strokeColor="@color/black"
@@ -112,16 +115,17 @@
             android:backgroundTint="@color/shade_white"
             android:text="@string/change_team"
             android:layout_margin="10dp"
+            android:gravity="left|center_vertical"
             app:icon="@drawable/change_teams"
-            app:iconSize="25dp"
+            app:iconSize="35dp"
             app:iconTint="@null"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/save_game_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="125dp"
-            android:paddingRight="125dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="190dp"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
             app:strokeColor="@color/black"
@@ -129,10 +133,10 @@
             android:textColor="@color/black"
             android:backgroundTint="@color/shade_white"
             android:text="@string/save_game"
-            android:gravity="center"
             android:layout_margin="10dp"
+            android:gravity="left|center_vertical"
             app:icon="@drawable/save"
-            app:iconSize="25dp"
+            app:iconSize="35dp"
             app:iconTint="@null"/>
     </LinearLayout>
 
