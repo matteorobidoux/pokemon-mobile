@@ -2,4 +2,11 @@
     <string name="app_name">PokemonApp</string>
     <string name="pokecenter_title">Pokémon Center</string>
     <string name="heal_description">Do you want to heal your Pokémon?</string>
+    <string name="main_menu">Main Menu</string>
+    <string name="wild_battle">Wild Pokemon Battle</string>
+    <string name="trainer_battle">Trainer Battle</string>
+    <string name="pokecenter">Pokecenter</string>
+    <string name="pokemart">Pokemart</string>
+    <string name="change_team">Change Team</string>
+    <string name="save_game">Save</string>
 </resources>

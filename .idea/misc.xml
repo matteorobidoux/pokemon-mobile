@@ -17,6 +17,7 @@
         <entry key="..\:/Users/Matteo/Documents/Mobile Development - Android/Pokemon/pokemonmobile/app/src/main/res/layout/pokemon_dialog.xml" value="0.1" />
         <entry key="..\:/Users/Matteo/Documents/Mobile Development - Android/Pokemon/pokemonmobile/app/src/main/res/layout/starter_fragment.xml" value="0.3155080213903743" />
         <entry key="..\:/Users/Matteo/Documents/Mobile Development - Android/Pokemon/pokemonmobile/app/src/main/res/layout/title_screen.xml" value="0.22" />
+<<<<<<< HEAD
         <entry key="..\:/Users/amina/Documents/CompSci/MobileDev/pokemonmobile/app/src/main/res/layout/form_activity.xml" value="0.1" />
         <entry key="..\:/Users/amina/Documents/CompSci/MobileDev/pokemonmobile/app/src/main/res/layout/menu_activity.xml" value="0.1" />
         <entry key="..\:/Users/amina/Documents/CompSci/MobileDev/pokemonmobile/app/src/main/res/layout/name_dialog.xml" value="0.2" />
@@ -25,6 +26,12 @@
         <entry key="..\:/Users/amina/Documents/CompSci/MobileDev/pokemonmobile/app/src/main/res/layout/pokemon_dialog.xml" value="0.1" />
         <entry key="..\:/Users/amina/Documents/CompSci/MobileDev/pokemonmobile/app/src/main/res/layout/starter_fragment.xml" value="0.1" />
         <entry key="..\:/Users/amina/Documents/CompSci/MobileDev/pokemonmobile/app/src/main/res/layout/title_screen.xml" value="0.1" />
+=======
+        <entry key="..\:/Users/veron/Documents/MobileDev/pokemonmobile/app/src/main/res/font/pokemon.xml" value="0.20572916666666666" />
+        <entry key="..\:/Users/veron/Documents/MobileDev/pokemonmobile/app/src/main/res/layout/menu_activity.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/veron/Documents/MobileDev/pokemonmobile/app/src/main/res/layout/pokemon_dialog.xml" value="0.1213768115942029" />
+        <entry key="..\:/Users/veron/Documents/MobileDev/pokemonmobile/app/src/main/res/layout/starter_fragment.xml" value="0.1213768115942029" />
+>>>>>>> d66245408a19614fc7a56af208445ee3318030ab
       </map>
     </option>
   </component>
