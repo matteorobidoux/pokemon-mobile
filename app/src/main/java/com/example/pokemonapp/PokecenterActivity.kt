@@ -1,10 +1,12 @@
 package com.example.pokemonapp
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
@@ -25,9 +27,11 @@ class PokecenterActivity : AppCompatActivity() {
     private fun setListeners(){
         binding.yesButton.setOnClickListener{
             heal()
+            // alert, display message saying "pokemon has been healed"
         }
 
         binding.noButton.setOnClickListener{
+            // alert, display message saying "pokemon has been healed"
             backToMain()
         }
     }
