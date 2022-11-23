@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PokemonApp</string>
+    <string name="pokecenter_title">Pokémon Center</string>
+    <string name="heal_description">Do you want to heal your Pokémon?</string>
 </resources>
