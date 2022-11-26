@@ -1,31 +1,24 @@
 package com.example.pokemonapp
 
-class Move(level_learned_at: Int, moveAccuracy: Int, moveAilment: String, moveAilmentChance: Int, moveCategory: String, moveDamageClass: String, moveHeal: Int, moveMaxPP: Int, moveName: String, movePower: Int, moveTarget: String, moveType: String) {
-    val lvl_learned_at: Int
-    val accuracy: Int
-    val ailment: String
-    val ailmentChance: Int
-    val category: String
-    val damageClass: String
-    val heal: Int
-    val maxPP: Int
-    val name: String
-    val power: Int
-    val target: String
-    val type: String
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "move_table")
+class Move(@PrimaryKey @ColumnInfo(name="name") val name: String,
+           @ColumnInfo(name="level_learned_at") val level_learned_at: String,
+           @ColumnInfo(name="accuracy") val accuracy: Int,
+           @ColumnInfo(name="ailment") val ailment: String,
+           @ColumnInfo(name="ailmentChance") val ailmentChance: Int,
+           @ColumnInfo(name="category") val category: String,
+           @ColumnInfo(name="damageClass") val damageClass: String,
+           @ColumnInfo(name="heal") val heal: Int,
+           @ColumnInfo(name="maxPP") val maxPP: Int,
+           @ColumnInfo(name="power") val power: Int,
+           @ColumnInfo(name="target") val target: String,
+           @ColumnInfo(name="type") val type: String) {
 
     init {
-        lvl_learned_at = level_learned_at
-        accuracy = moveAccuracy
-        ailment = moveAilment
-        ailmentChance = moveAilmentChance
-        category = moveCategory
-        damageClass = moveDamageClass
-        heal = moveHeal
-        maxPP = moveMaxPP
-        name = moveName
-        power = movePower
-        target = moveTarget
-        type = moveType
+
     }
 }

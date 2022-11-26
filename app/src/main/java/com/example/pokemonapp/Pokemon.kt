@@ -1,33 +1,26 @@
 package com.example.pokemonapp
 
-class Pokemon(pokemonBaseExperienceReward: Int, pokemonBaseStateAttack: Int, pokemonBaseStatDefense: Int, pokemonBaseStateMaxHp: Int, pokemonBaseStatSpecialAttack: Int, pokemonBaseStatSpecialDefense: Int, pokemonBaseStatSpeed: Int, number: Int, pokemonSpecies: String, pokemonTypes: ArrayList<String>, pokemonMoves: ArrayList<Move>){
-    val baseExperienceReward : Int
-    val baseStateAttack : Int
-    val baseStatDefense : Int
-    val baseStateMaxHp : Int
-    val baseStatSpecialAttack : Int
-    val baseStatSpecialDefense : Int
-    val baseStatSpeed : Int
-    val pokemonNumber : Int
-    val species : String
-    val types : ArrayList<String>
-    val moves : ArrayList<Move>
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "pokemon_table")
+class Pokemon(@PrimaryKey @ColumnInfo(name = "pokemonNumber") val pokemonNumber: String,
+              @ColumnInfo(name="species") val species : String,
+              @ColumnInfo(name="baseStateAttack") val baseStateAttack : Int,
+              @ColumnInfo(name="baseStatDefense") val baseStatDefense : Int,
+              @ColumnInfo(name="baseStatSpecialAttack") val baseStatSpecialAttack : Int,
+              @ColumnInfo(name="baseStatSpecialDefense") val baseStatSpecialDefense: Int,
+              @ColumnInfo(name="baseStateMaxHp") val baseStateMaxHp : Int,
+              @ColumnInfo(name="baseStatSpeed") val baseStatSpeed : Int,
+              @ColumnInfo(name="baseExperienceReward") val baseExperienceReward : Int,
+              @ColumnInfo(name="types") val types : ArrayList<String>,
+              @ColumnInfo(name="frontSprite") val frontSprite : String,
+              @ColumnInfo(name="backSprite") val backSprite : String,
+              @ColumnInfo(name="moves") val moves : ArrayList<Move>){
 
     init {
-        baseExperienceReward = pokemonBaseExperienceReward
-        baseStateAttack = pokemonBaseStateAttack
-        baseStatDefense = pokemonBaseStatDefense
-        baseStateMaxHp = pokemonBaseStateMaxHp
-        baseStatSpecialAttack = pokemonBaseStatSpecialAttack
-        baseStatSpecialDefense = pokemonBaseStatSpecialDefense
-        baseStatSpeed = pokemonBaseStatSpeed
-        pokemonNumber = number
-        species = pokemonSpecies
-        types = pokemonTypes
-        moves = pokemonMoves
+
     }
 
-    override fun toString(): String {
-        return "$baseExperienceReward $baseStateAttack $baseStatDefense $baseStateMaxHp $baseStatSpecialAttack $baseStatSpecialDefense $baseStatSpeed $pokemonNumber $species $types $moves"
-    }
 }

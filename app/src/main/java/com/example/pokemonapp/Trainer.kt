@@ -1,11 +1,20 @@
 package com.example.pokemonapp
 
-class Trainer(trainerName: String) {
-    var pokemonTeam: PokemonTeam = PokemonTeam()
-    var pokemonCollection: PokemonCollection = PokemonCollection()
-    var name : String
+import androidx.room.Entity
 
-    init {
-        name = trainerName
+
+@Entity(tableName = "trainer_table")
+class Trainer(trainerName: String) {
+    lateinit var pokemonTeam: PokemonTeam
+    lateinit var pokemonCollection: PokemonCollection
+
+    @JvmName("setPokemonTeam1")
+    fun setPokemonTeam(team: PokemonTeam){
+        pokemonTeam = team
+    }
+
+    @JvmName("setPokemonCollection1")
+    fun setPokemonCollection(collection: PokemonCollection){
+        pokemonCollection = collection
     }
 }
