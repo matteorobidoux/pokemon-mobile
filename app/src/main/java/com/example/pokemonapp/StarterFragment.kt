@@ -121,7 +121,7 @@ class StarterFragment : Fragment(){
                         if (jsonObjectMove != null) {
                             var pokemonMove = Move(
                                 jsonObjectMove.get("name").asString,
-                                move.asJsonObject.get("level_learned_at").asString,
+                                move.asJsonObject.get("level_learned_at").asInt,
                                 jsonObjectMove.get("accuracy").asInt,
                                 jsonObjectMove.get("ailment").asString,
                                 jsonObjectMove.get("ailmentChance").asInt,
@@ -155,6 +155,7 @@ class StarterFragment : Fragment(){
                         jsonObject.get("sprites").asJsonObject.get("back").asString,
                         moveList
                     )
+                    Log.d("PokeFetch", pokemon.moves[0].level_learned_at.toString())
                     pokemonTeam.pokemons.add(pokemon!!)
                     Log.d("POKEMONFETCH", pokemon.toString())
                 }

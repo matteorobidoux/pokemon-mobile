@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "move_table")
 class Move(@PrimaryKey @ColumnInfo(name="name") val name: String,
-           @ColumnInfo(name="level_learned_at") val level_learned_at: String,
+           @ColumnInfo(name="level_learned_at") val level_learned_at: Int,
            @ColumnInfo(name="accuracy") val accuracy: Int,
            @ColumnInfo(name="ailment") val ailment: String,
            @ColumnInfo(name="ailmentChance") val ailmentChance: Int,
