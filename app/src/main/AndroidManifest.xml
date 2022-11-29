@@ -30,6 +30,10 @@
             android:name=".MenuActivity"
             android:label="Menu">
         </activity>
+        <activity
+            android:name=".PokecenterActivity"
+            android:label="Pokecenter">
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
