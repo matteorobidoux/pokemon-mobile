@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -25,7 +26,8 @@ class TeamAdapter(var context: Context, var teamList: MutableList<String>) :
 
         val food = teamlist[position]
         val context = holder.view.context
-        holder.textView.text = food
+        holder.imageView.setImageResource(R.drawable.charmander)
+       //set image to url received
 
     }
 
@@ -35,6 +37,6 @@ class TeamAdapter(var context: Context, var teamList: MutableList<String>) :
 
     // Initializing the Views
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        val textView = view.findViewById<TextView>(R.id.textView)
+        val imageView = view.findViewById<ImageView>(R.id.imageView)
     }
 }
