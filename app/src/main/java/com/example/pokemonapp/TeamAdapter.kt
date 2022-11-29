@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class TeamAdapter(var context: Context, var movesList: MutableList<String>) :
+class TeamAdapter(var context: Context, var teamList: MutableList<String>) :
     RecyclerView.Adapter<TeamAdapter.ViewHolder>() {
 
-    private var moveslist : MutableList<String> = movesList.toMutableList()
+    private var teamlist : MutableList<String> = teamList.toMutableList()
     private var thisContext : Context = context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -23,14 +23,14 @@ class TeamAdapter(var context: Context, var movesList: MutableList<String>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val food = moveslist[position]
+        val food = teamlist[position]
         val context = holder.view.context
         holder.textView.text = food
 
     }
 
 
-    override fun getItemCount(): Int = moveslist.size
+    override fun getItemCount(): Int = teamlist.size
 
 
     // Initializing the Views
