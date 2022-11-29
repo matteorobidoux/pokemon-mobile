@@ -1,33 +1,108 @@
 package com.example.pokemonapp
 
-class Pokemon(pokemonBaseExperienceReward: Int, pokemonBaseStateAttack: Int, pokemonBaseStatDefense: Int, pokemonBaseStateMaxHp: Int, pokemonBaseStatSpecialAttack: Int, pokemonBaseStatSpecialDefense: Int, pokemonBaseStatSpeed: Int, number: Int, pokemonSpecies: String, pokemonTypes: ArrayList<String>, pokemonMoves: ArrayList<Move>){
-    val baseExperienceReward : Int
-    val baseStateAttack : Int
-    val baseStatDefense : Int
-    val baseStateMaxHp : Int
-    val baseStatSpecialAttack : Int
-    val baseStatSpecialDefense : Int
-    val baseStatSpeed : Int
-    val pokemonNumber : Int
-    val species : String
-    val types : ArrayList<String>
-    val moves : ArrayList<Move>
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import kotlin.math.floor
+import kotlin.math.pow
+import kotlin.math.roundToInt
+
+@Entity(tableName = "pokemon_table")
+class Pokemon(@PrimaryKey @ColumnInfo(name = "pokemonNumber") val pokemonNumber: String,
+              @ColumnInfo(name="species") val species : String,
+              @ColumnInfo(name="baseStateAttack") val pokemonBaseStateAttack : Int,
+              @ColumnInfo(name="baseStatDefense") val pokemonBaseStatDefense : Int,
+              @ColumnInfo(name="baseStatSpecialAttack") val pokemonBaseStatSpecialAttack : Int,
+              @ColumnInfo(name="baseStatSpecialDefense") val pokemonBaseStatSpecialDefense: Int,
+              @ColumnInfo(name="baseStateMaxHp") val pokemonBaseStateMaxHp : Int,
+              @ColumnInfo(name="baseStatSpeed") val pokemonBaseStatSpeed : Int,
+              @ColumnInfo(name="baseExperienceReward") val baseExperienceReward : Int,
+              @ColumnInfo(name="types") val types : ArrayList<String>,
+              @ColumnInfo(name="frontSprite") val frontSprite : String,
+              @ColumnInfo(name="backSprite") val backSprite : String,
+              @ColumnInfo(name="moves") val pokemonMoves : ArrayList<Move>){
+
+    var name = species
+    var level = floor(baseExperienceReward.toDouble().pow(1/3)).toInt()
+    var experience = level*level*level
+    var baseStatAttack = pokemonBaseStateAttack * (50 + level)/50
+    var baseStatDefense = pokemonBaseStatDefense * (50 + level)/50
+    var baseStatSpecialAttack = pokemonBaseStatSpecialAttack * (50 + level)/50
+    var baseStatSpecialDefense = pokemonBaseStatSpecialDefense * (50 + level)/50
+    var baseStatSpeed = pokemonBaseStatSpeed * (50 + level)/50
+    var baseStatMaxHp = pokemonBaseStateMaxHp * (50 + level)/50
+    var currentHp = baseStatMaxHp
+    var moves: ArrayList<Move> = ArrayList()
 
     init {
-        baseExperienceReward = pokemonBaseExperienceReward
-        baseStateAttack = pokemonBaseStateAttack
-        baseStatDefense = pokemonBaseStatDefense
-        baseStateMaxHp = pokemonBaseStateMaxHp
-        baseStatSpecialAttack = pokemonBaseStatSpecialAttack
-        baseStatSpecialDefense = pokemonBaseStatSpecialDefense
-        baseStatSpeed = pokemonBaseStatSpeed
-        pokemonNumber = number
-        species = pokemonSpecies
-        types = pokemonTypes
-        moves = pokemonMoves
+        for(move in pokemonMoves){
+            if(moves.size < 4 && move.level_learned_at <= level){
+                moves.add(move)
+            }
+        }
     }
 
-    override fun toString(): String {
-        return "$baseExperienceReward $baseStateAttack $baseStatDefense $baseStateMaxHp $baseStatSpecialAttack $baseStatSpecialDefense $baseStatSpeed $pokemonNumber $species $types $moves"
+    fun calculateExperienceGained(oppenentPokemon: Pokemon) : Boolean{
+        var newMoveAvailable = false
+        val prevLevel = level
+        experience = (0.3 * oppenentPokemon.baseExperienceReward * oppenentPokemon.level).roundToInt()
+        level = floor(baseExperienceReward.toDouble().pow(1/3)).toInt()
+        if(prevLevel != level){
+            increaseStats()
+             newMoveAvailable = newMoveAvailable()
+        }
+        return newMoveAvailable
+    }
+
+    private fun increaseStats(){
+        baseStatDefense = baseStatDefense * (50 + level)/50
+        baseStatSpecialAttack = baseStatSpecialAttack * (50 + level)/50
+        baseStatSpecialDefense = baseStatSpecialDefense * (50 + level)/50
+        baseStatSpeed = baseStatSpeed * (50 + level)/50
+        baseStatMaxHp = baseStatMaxHp * (50 + level)/50
+    }
+
+    private fun newMoveAvailable(): Boolean{
+        for(move in pokemonMoves){
+            if(moves.size < 4 && move.level_learned_at == level){
+                if(!moves.contains(move)) {
+                    moves.add(move)
+                    return false
+                }
+            } else if(moves.size == 4 && move.level_learned_at == level){
+                if(!moves.contains(move)) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
+    fun attackOpponent(opposingPokemon: Pokemon, move: Move) : Double{
+        if(move.damageClass == "physical") {
+            val calculaton = ((2 * level) / 5 + 2).toDouble()
+            var baseDamage =
+                (1 / 50 * calculaton * move.power * (baseStatAttack / opposingPokemon.baseStatDefense) + 2).toDouble()
+            for (type in types) {
+                if (move.type == type) {
+                    baseDamage *= 1.5
+                    break
+                }
+                //TODO Create the type chart to calculate effective not effective moves
+            }
+            return baseDamage
+        } else {
+            val calculaton = ((2 * level) / 5 + 2).toDouble()
+            var baseSpecialDamage =
+                (1 / 50 * calculaton * move.power * (baseStatSpecialAttack / opposingPokemon.baseStatSpecialDefense) + 2).toDouble()
+            for (type in types) {
+                if (move.type == type) {
+                    baseSpecialDamage *= 1.5
+                    break
+                }
+                //TODO Create the type chart to calculate effective not effective moves
+            }
+            return baseSpecialDamage
+        }
     }
 }
