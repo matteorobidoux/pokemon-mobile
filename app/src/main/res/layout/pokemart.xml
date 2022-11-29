@@ -42,7 +42,7 @@
 
         </TextView>
 
-        
+
 
         <TextView
             android:id="@+id/in_bag_view"
