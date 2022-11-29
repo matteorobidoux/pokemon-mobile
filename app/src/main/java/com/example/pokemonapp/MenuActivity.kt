@@ -17,10 +17,19 @@ class MenuActivity: AppCompatActivity() {
         binding.pokecenterBtn.setOnClickListener{
             changeActivityPokecenter()
         }
+
+        binding.pokemartBtn.setOnClickListener {
+            changeActivityPokemart()
+        }
     }
 
     private fun changeActivityPokecenter(){
         var formIntent = Intent(applicationContext, PokecenterActivity::class.java)
         startActivity(formIntent)
+    }
+
+    private fun changeActivityPokemart(){
+        var martIntent = Intent(applicationContext, Pokemart::class.java)
+        startActivity(martIntent)
     }
 }

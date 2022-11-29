@@ -34,6 +34,10 @@
             android:name=".PokecenterActivity"
             android:label="Pokecenter">
         </activity>
+        <activity
+            android:name=".Pokemart"
+            android:label="Pokemart">
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
