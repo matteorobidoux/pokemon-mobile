@@ -1,0 +1,40 @@
+package com.example.pokemonapp
+
+import android.content.Context
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+
+class TeamAdapter(var context: Context, var movesList: MutableList<String>) :
+    RecyclerView.Adapter<TeamAdapter.ViewHolder>() {
+
+    private var moveslist : MutableList<String> = movesList.toMutableList()
+    private var thisContext : Context = context
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val layout = LayoutInflater
+            .from(parent.context)
+            .inflate(R.layout.team_recycler, parent, false)
+        return ViewHolder(layout)
+    }
+
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
+        val food = moveslist[position]
+        val context = holder.view.context
+        holder.textView.text = food
+
+    }
+
+
+    override fun getItemCount(): Int = moveslist.size
+
+
+    // Initializing the Views
+    inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+        val textView = view.findViewById<TextView>(R.id.textView)
+    }
+}
