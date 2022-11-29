@@ -11,6 +11,13 @@
     <string name="save_game">Save</string>
     <string name="money">Money: </string>
     <string name="in_bag">In Bag: </string>
-    <string name="pokeball_buy">Pokeball</string>
-    <string name="potion_buy">Potion</string>
+    <string name="pokeball_text">POKEBALL</string>
+    <string name="potion_text">POTION</string>
+    <string name="pokemart_title">POKEMART</string>
+    <string name="pokeball_btn">Pokeball</string>
+    <string name="potion_btn">Potion</string>
+    <string name="poke_potion_text">Heals 20 HP from selected Pokémon.</string>
+    <string name="poke_pokeball_text">Can be used to catch the Pokémon in the wild.</string>
+    <string name="buy_text">BUY</string>
+    <string name="back_text">BACK</string>
 </resources>
