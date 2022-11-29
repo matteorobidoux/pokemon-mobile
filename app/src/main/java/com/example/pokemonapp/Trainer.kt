@@ -4,7 +4,7 @@ import androidx.room.Entity
 
 
 @Entity(tableName = "trainer_table")
-class Trainer(var trainerName: String) {
+class Trainer(var trainerName: String) : java.io.Serializable{
     lateinit var pokemonTeam: PokemonTeam
     lateinit var pokemonCollection: PokemonCollection
     var items = Items()

@@ -14,13 +14,19 @@ import com.example.pokemonapp.databinding.PokecenterBinding
 class PokecenterActivity : AppCompatActivity() {
 
     private lateinit var binding: PokecenterBinding
+    private lateinit var trainer: Trainer
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = PokecenterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val extras = intent.extras
+        if (extras != null) {
+            trainer = extras.getSerializable("trainer") as Trainer
+        }
+
         animateBackground()
-        var mediaPlayer = MediaPlayer.create(applicationContext, com.example.pokemonapp.R.raw.title_screen_music)
-        mediaPlayer.start()
         setListeners()
     }
 
@@ -51,7 +57,9 @@ class PokecenterActivity : AppCompatActivity() {
     }
 
     private fun heal(){
-        // loop through teams and put health to 100
+        trainer.pokemonTeam.pokemons.forEach {
+            it.currentHp = it.baseStatMaxHp
+        }
         backToMain()
     }
 }

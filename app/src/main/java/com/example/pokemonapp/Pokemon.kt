@@ -20,7 +20,7 @@ class Pokemon(@PrimaryKey @ColumnInfo(name = "pokemonNumber") val pokemonNumber:
               @ColumnInfo(name="types") val types : ArrayList<String>,
               @ColumnInfo(name="frontSprite") val frontSprite : String,
               @ColumnInfo(name="backSprite") val backSprite : String,
-              @ColumnInfo(name="moves") val pokemonMoves : ArrayList<Move>){
+              @ColumnInfo(name="moves") val pokemonMoves : ArrayList<Move>) : java.io.Serializable{
 
     var name = species
     var level = floor(baseExperienceReward.toDouble().pow(1/3)).toInt()

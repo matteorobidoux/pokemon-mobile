@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
 import com.example.pokemonapp.databinding.StarterFragmentBinding
 import com.google.android.material.button.MaterialButton
@@ -22,10 +23,16 @@ class StarterFragment : Fragment(){
     private var utils: Utils = Utils()
     private lateinit var formActivtiy: FormActivity
     private var pokemonTeam = PokemonTeam()
+    private lateinit var trainer: Trainer
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         formActivtiy = activity as FormActivity
         val binding = StarterFragmentBinding.inflate(inflater,container,false)
+
+        setFragmentResultListener("requestKey") {key, bundle ->
+            trainer = bundle.getSerializable("trainer") as Trainer
+            trainer.setPokemonTeam(pokemonTeam)
+        }
         //TODO Receive trainer from name fragment and set his values
         formActivtiy.setText("To start your adventure, you must first chose your starter pokemon!")
         binding.firePokeball.setOnClickListener{
@@ -43,6 +50,7 @@ class StarterFragment : Fragment(){
             dialogView.findViewById<MaterialButton>(R.id.yes_pokemon).setOnClickListener{
                 retrievePokemon("charmander")
                 var menuIntent = Intent(activity, MenuActivity::class.java)
+                menuIntent.putExtra("trainer", trainer)
                 formActivtiy.startActivity(menuIntent)
             }
 
@@ -66,6 +74,7 @@ class StarterFragment : Fragment(){
             dialogView.findViewById<MaterialButton>(R.id.yes_pokemon).setOnClickListener{
                 retrievePokemon("squirtle")
                 var menuIntent = Intent(activity, MenuActivity::class.java)
+                menuIntent.putExtra("trainer", trainer)
                 formActivtiy.startActivity(menuIntent)
             }
 
@@ -89,6 +98,7 @@ class StarterFragment : Fragment(){
             dialogView.findViewById<MaterialButton>(R.id.yes_pokemon).setOnClickListener{
                 retrievePokemon("bulbasaur")
                 var menuIntent = Intent(activity, MenuActivity::class.java)
+                menuIntent.putExtra("trainer", trainer)
                 formActivtiy.startActivity(menuIntent)
             }
 
@@ -155,9 +165,7 @@ class StarterFragment : Fragment(){
                         jsonObject.get("sprites").asJsonObject.get("back").asString,
                         moveList
                     )
-                    Log.d("PokeFetch", pokemon.moves[0].level_learned_at.toString())
                     pokemonTeam.pokemons.add(pokemon!!)
-                    Log.d("POKEMONFETCH", pokemon.toString())
                 }
             }
         }
