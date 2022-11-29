@@ -18,6 +18,7 @@ class PokecenterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = PokecenterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        animateBackground()
         var mediaPlayer = MediaPlayer.create(applicationContext, com.example.pokemonapp.R.raw.title_screen_music)
         mediaPlayer.start()
         setListeners()
