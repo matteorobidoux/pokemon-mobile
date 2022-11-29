@@ -1,18 +1,15 @@
 package com.example.pokemonapp
 
-import android.app.AlertDialog
-import android.content.Context
-import android.content.Intent
+import android.R
+import android.animation.ValueAnimator
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.TransitionDrawable
 import android.media.MediaPlayer
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModel
+import androidx.appcompat.app.AppCompatActivity
 import com.example.pokemonapp.databinding.PokecenterBinding
-import kotlinx.coroutines.delay
+
 
 class PokecenterActivity : AppCompatActivity() {
 
@@ -21,7 +18,18 @@ class PokecenterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = PokecenterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        var mediaPlayer = MediaPlayer.create(applicationContext, com.example.pokemonapp.R.raw.title_screen_music)
+        mediaPlayer.start()
         setListeners()
+    }
+
+    // This method will animate the background color change from white to black
+    private fun animateBackground(){
+        val mColors = arrayOf(ColorDrawable(Color.WHITE), ColorDrawable(Color.BLACK))
+        val mTransition = TransitionDrawable(mColors)
+        binding.relativeLayout.background = mTransition
+        mTransition.startTransition(2000)
+
     }
 
     private fun setListeners(){
@@ -31,18 +39,18 @@ class PokecenterActivity : AppCompatActivity() {
         }
 
         binding.noButton.setOnClickListener{
-            // alert, display message saying "pokemon has been healed"
+            // alert, display message saying "pokemon has not been healed"
             backToMain()
         }
     }
 
     private fun backToMain(){
         // go back to main
+        finish();
     }
 
     private fun heal(){
         // loop through teams and put health to 100
-        // heal then redirect back to main
         backToMain()
     }
 }
