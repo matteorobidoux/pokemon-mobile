@@ -1,11 +1,11 @@
-package com.example.pokemonapp
+package com.example.pokemonapp.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverter
 import androidx.room.TypeConverters
+import com.example.pokemonapp.objects.*
 
 @Database(entities = [Pokemon::class, Move::class, PokemonAndMoves::class], version = 1, exportSchema = false)
 @TypeConverters(StringArrayListTypeConverter::class, MoveArrayListTypeConverter::class)

@@ -1,9 +1,8 @@
-package com.example.pokemonapp
+package com.example.pokemonapp.objects
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
 import kotlin.math.floor
 import kotlin.math.pow
 import kotlin.math.roundToInt

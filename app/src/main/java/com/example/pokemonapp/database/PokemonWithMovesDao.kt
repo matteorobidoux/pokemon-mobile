@@ -1,6 +1,8 @@
-package com.example.pokemonapp
+package com.example.pokemonapp.database
 
 import androidx.room.*
+import com.example.pokemonapp.objects.PokemonAndMoves
+import com.example.pokemonapp.objects.PokemonWithMoves
 
 @Dao
 interface PokemonWithMovesDao {

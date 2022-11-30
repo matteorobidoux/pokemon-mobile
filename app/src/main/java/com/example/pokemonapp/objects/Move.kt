@@ -1,4 +1,4 @@
-package com.example.pokemonapp
+package com.example.pokemonapp.objects
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

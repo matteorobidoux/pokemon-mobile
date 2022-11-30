@@ -1,14 +1,12 @@
 package com.example.pokemonapp
 
-import android.R
-import android.animation.ValueAnimator
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.TransitionDrawable
-import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pokemonapp.databinding.PokecenterBinding
+import com.example.pokemonapp.objects.Trainer
 
 
 class PokecenterActivity : AppCompatActivity() {
