@@ -9,12 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
 import com.example.pokemonapp.databinding.StarterFragmentBinding
 import com.google.android.material.button.MaterialButton
 import com.google.gson.JsonElement
+import com.google.gson.JsonObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -22,18 +24,18 @@ import kotlinx.coroutines.withContext
 class StarterFragment : Fragment(){
     private var utils: Utils = Utils()
     private lateinit var formActivtiy: FormActivity
-    private var pokemonTeam = PokemonTeam()
     private lateinit var trainer: Trainer
+    private lateinit var pokemonRoomDatabase: PokemonRoomDatabase
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         formActivtiy = activity as FormActivity
         val binding = StarterFragmentBinding.inflate(inflater,container,false)
 
+        pokemonRoomDatabase = PokemonRoomDatabase.getDatabase(formActivtiy.applicationContext)
+
         setFragmentResultListener("requestKey") {key, bundle ->
             trainer = bundle.getSerializable("trainer") as Trainer
-            trainer.setPokemonTeam(pokemonTeam)
         }
-        //TODO Receive trainer from name fragment and set his values
         formActivtiy.setText("To start your adventure, you must first chose your starter pokemon!")
         binding.firePokeball.setOnClickListener{
             var builder = AlertDialog.Builder(context)
@@ -165,8 +167,21 @@ class StarterFragment : Fragment(){
                         jsonObject.get("sprites").asJsonObject.get("back").asString,
                         moveList
                     )
-                    pokemonTeam.pokemons.add(pokemon!!)
+                    trainer.addPokemon(pokemon!!)
+                    SaveToDatabase(pokemon, moveList)
                 }
+            }
+        }
+    }
+    private fun SaveToDatabase(pokemon: Pokemon, moveList: List<Move>){
+        lifecycleScope.launch(Dispatchers.IO) {
+            withContext(Dispatchers.IO) {
+                moveList.forEach {
+                    var pokemonWithMove = PokemonAndMoves(pokemon.pokemonNumber, it.name)
+                    pokemonRoomDatabase.pokemonWithMoves().insert(pokemonWithMove)
+                    pokemonRoomDatabase.moveDao().insert(it)
+                }
+                pokemonRoomDatabase.pokemonDao().insert(pokemon)
             }
         }
     }
