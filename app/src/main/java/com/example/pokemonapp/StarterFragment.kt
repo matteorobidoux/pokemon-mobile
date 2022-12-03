@@ -3,13 +3,11 @@ package com.example.pokemonapp
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
@@ -30,7 +28,6 @@ class StarterFragment : Fragment(){
     private lateinit var formActivtiy: FormActivity
     private lateinit var trainer: Trainer
     private lateinit var pokemonRoomDatabase: PokemonRoomDatabase
-    private val TAG = "STARTER"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         formActivtiy = activity as FormActivity
@@ -56,11 +53,6 @@ class StarterFragment : Fragment(){
 
             dialogView.findViewById<MaterialButton>(R.id.yes_pokemon).setOnClickListener{
                 retrievePokemon("charmander")
-                Toast.makeText(context, "added charmander to team", Toast.LENGTH_SHORT).show()
-                Log.d(TAG, "start trainer: ${trainer.pokemonTeam.pokemons}")
-                var menuIntent = Intent(activity, MenuActivity::class.java)
-                menuIntent.putExtra("trainer", trainer)
-                formActivtiy.startActivity(menuIntent)
             }
 
             dialogView.findViewById<MaterialButton>(R.id.no_pokemon).setOnClickListener{
@@ -82,9 +74,6 @@ class StarterFragment : Fragment(){
 
             dialogView.findViewById<MaterialButton>(R.id.yes_pokemon).setOnClickListener{
                 retrievePokemon("squirtle")
-                var menuIntent = Intent(activity, MenuActivity::class.java)
-                menuIntent.putExtra("trainer", trainer)
-                formActivtiy.startActivity(menuIntent)
             }
 
             dialogView.findViewById<MaterialButton>(R.id.no_pokemon).setOnClickListener{
@@ -104,11 +93,8 @@ class StarterFragment : Fragment(){
 
             alert.show()
 
-            dialogView.findViewById<MaterialButton>(R.id.yes_pokemon).setOnClickListener{
+            dialogView.findViewById<MaterialButton>(R.id.yes_pokemon).setOnClickListener {
                 retrievePokemon("bulbasaur")
-                var menuIntent = Intent(activity, MenuActivity::class.java)
-                menuIntent.putExtra("trainer", trainer)
-                formActivtiy.startActivity(menuIntent)
             }
 
             dialogView.findViewById<MaterialButton>(R.id.no_pokemon).setOnClickListener{
@@ -116,15 +102,6 @@ class StarterFragment : Fragment(){
             }
         }
         return binding.root
-    }
-
-
-    private fun getTypes(types: JsonElement) : ArrayList<String>{
-        var typelist = ArrayList<String>()
-        for(type in types.asJsonArray){
-            typelist.add(type.asString)
-        }
-        return typelist
     }
 
     private fun retrievePokemon(data : String){
@@ -149,14 +126,16 @@ class StarterFragment : Fragment(){
                         databasePokemon.pokemonMoves
                     )
                     trainer.addPokemon(pokemon)
-                    Log.d(TAG, "pokemons: ${trainer.pokemonTeam.pokemons.size}")
-
-                } else {
+                }
+            }
+            withContext(Dispatchers.IO){
+                if(databasePokemon == null) {
                     val jsonObject = Utils().getPokemonJSON(data)
                     var moveList = ArrayList<Move>()
                     if (jsonObject != null) {
-                        for(move in jsonObject.get("moves").asJsonArray){
-                            val jsonObjectMove = Utils().getMoveJSON(move.asJsonObject.get("move").asString)
+                        for (move in jsonObject.get("moves").asJsonArray) {
+                            val jsonObjectMove =
+                                Utils().getMoveJSON(move.asJsonObject.get("move").asString)
                             if (jsonObjectMove != null) {
                                 var pokemonMove = Move(
                                     jsonObjectMove.get("name").asString,
@@ -176,7 +155,7 @@ class StarterFragment : Fragment(){
                             }
                         }
                         var typeList = ArrayList<String>()
-                        for(type in jsonObject.get("types").asJsonArray){
+                        for (type in jsonObject.get("types").asJsonArray) {
                             typeList.add(type.asString)
                         }
                         pokemon = Pokemon(
@@ -194,13 +173,14 @@ class StarterFragment : Fragment(){
                             jsonObject.get("sprites").asJsonObject.get("back").asString,
                             moveList
                         )
-
-                        trainer.addPokemon(pokemon)
-                        Log.d(TAG, "trainer: ${trainer.pokemonTeam.pokemons}")
+                        trainer.addPokemon(pokemon!!)
                         SaveToDatabase(pokemon, moveList)
                     }
                 }
             }
+            var menuIntent = Intent(activity, MenuActivity::class.java)
+            menuIntent.putExtra("trainer", trainer)
+            formActivtiy.startActivity(menuIntent)
         }
     }
 

@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.TransitionDrawable
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pokemonapp.databinding.PokecenterBinding
 import com.example.pokemonapp.objects.Trainer
@@ -22,6 +23,7 @@ class PokecenterActivity : AppCompatActivity() {
         val extras = intent.extras
         if (extras != null) {
             trainer = extras.getSerializable("trainer") as Trainer
+            Log.d("TRAINER", trainer.pokemonTeam.pokemons.size.toString())
         }
 
         animateBackground()
