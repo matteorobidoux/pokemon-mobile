@@ -126,72 +126,75 @@ class StarterFragment : Fragment(){
         var pokemon: Pokemon
         lifecycleScope.launch(Dispatchers.IO) {
             val databasePokemon = pokemonRoomDatabase.pokemonDao().getPokemonWithName(data)
-            withContext(Dispatchers.Main) {
-                if (databasePokemon != null) {
-                    val pokemon = Pokemon(
-                        databasePokemon.pokemonNumber,
-                        databasePokemon.species,
-                        databasePokemon.pokemonBaseStateAttack,
-                        databasePokemon.pokemonBaseStatDefense,
-                        databasePokemon.pokemonBaseStatSpecialAttack,
-                        databasePokemon.pokemonBaseStatSpecialDefense,
-                        databasePokemon.pokemonBaseStateMaxHp,
-                        databasePokemon.pokemonBaseStatSpeed,
-                        databasePokemon.baseExperienceReward,
-                        databasePokemon.types,
-                        databasePokemon.frontSprite,
-                        databasePokemon.backSprite,
-                        databasePokemon.pokemonMoves
-                    )
-                    trainer.addPokemon(pokemon)
-                } else {
-                    val jsonObject = Utils().getPokemonJSON(data)
-                    var moveList = ArrayList<Move>()
-                    if (jsonObject != null) {
-                        for(move in jsonObject.get("moves").asJsonArray){
-                            val jsonObjectMove = Utils().getMoveJSON(move.asJsonObject.get("move").asString)
-                            if (jsonObjectMove != null) {
-                                var pokemonMove = Move(
-                                    jsonObjectMove.get("name").asString,
-                                    move.asJsonObject.get("level_learned_at").asInt,
-                                    jsonObjectMove.get("accuracy").asInt,
-                                    jsonObjectMove.get("ailment").asString,
-                                    jsonObjectMove.get("ailmentChance").asInt,
-                                    jsonObjectMove.get("category").asString,
-                                    jsonObjectMove.get("damageClass").asString,
-                                    jsonObjectMove.get("heal").asInt,
-                                    jsonObjectMove.get("maxPP").asInt,
-                                    jsonObjectMove.get("power").asInt,
-                                    jsonObjectMove.get("target").asString,
-                                    jsonObjectMove.get("type").asString
-                                )
-                                moveList.add(pokemonMove)
-                            }
+            if (databasePokemon != null) {
+                val pokemon = Pokemon(
+                    databasePokemon.pokemonNumber,
+                    databasePokemon.species,
+                    databasePokemon.pokemonBaseStateAttack,
+                    databasePokemon.pokemonBaseStatDefense,
+                    databasePokemon.pokemonBaseStatSpecialAttack,
+                    databasePokemon.pokemonBaseStatSpecialDefense,
+                    databasePokemon.pokemonBaseStateMaxHp,
+                    databasePokemon.pokemonBaseStatSpeed,
+                    databasePokemon.baseExperienceReward,
+                    databasePokemon.types,
+                    databasePokemon.frontSprite,
+                    databasePokemon.backSprite,
+                    databasePokemon.pokemonMoves
+                )
+                trainer.addPokemon(pokemon)
+            } else {
+                val jsonObject = Utils().getPokemonJSON(data)
+                var moveList = ArrayList<Move>()
+                if (jsonObject != null) {
+                    for(move in jsonObject.get("moves").asJsonArray){
+                        val jsonObjectMove = Utils().getMoveJSON(move.asJsonObject.get("move").asString)
+                        if (jsonObjectMove != null) {
+                            var pokemonMove = Move(
+                                jsonObjectMove.get("name").asString,
+                                move.asJsonObject.get("level_learned_at").asInt,
+                                jsonObjectMove.get("accuracy").asInt,
+                                jsonObjectMove.get("ailment").asString,
+                                jsonObjectMove.get("ailmentChance").asInt,
+                                jsonObjectMove.get("category").asString,
+                                jsonObjectMove.get("damageClass").asString,
+                                jsonObjectMove.get("heal").asInt,
+                                jsonObjectMove.get("maxPP").asInt,
+                                jsonObjectMove.get("power").asInt,
+                                jsonObjectMove.get("target").asString,
+                                jsonObjectMove.get("type").asString
+                            )
+                            moveList.add(pokemonMove)
                         }
-                        var typeList = ArrayList<String>()
-                        for(type in jsonObject.get("types").asJsonArray){
-                            typeList.add(type.asString)
-                        }
-                        pokemon = Pokemon(
-                            jsonObject.get("pokemonNumber").asString,
-                            jsonObject.get("species").asString,
-                            jsonObject.get("baseStateAttack").asInt,
-                            jsonObject.get("baseStatDefense").asInt,
-                            jsonObject.get("baseStatSpecialAttack").asInt,
-                            jsonObject.get("baseStatSpecialDefense").asInt,
-                            jsonObject.get("baseStateMaxHp").asInt,
-                            jsonObject.get("baseStatSpeed").asInt,
-                            jsonObject.get("baseExperienceReward").asInt,
-                            typeList,
-                            jsonObject.get("sprites").asJsonObject.get("front").asString,
-                            jsonObject.get("sprites").asJsonObject.get("back").asString,
-                            moveList
-                        )
-                        trainer.addPokemon(pokemon!!)
-                        SaveToDatabase(pokemon, moveList)
                     }
+                    var typeList = ArrayList<String>()
+                    for(type in jsonObject.get("types").asJsonArray){
+                        typeList.add(type.asString)
+                    }
+                    pokemon = Pokemon(
+                        jsonObject.get("pokemonNumber").asString,
+                        jsonObject.get("species").asString,
+                        jsonObject.get("baseStateAttack").asInt,
+                        jsonObject.get("baseStatDefense").asInt,
+                        jsonObject.get("baseStatSpecialAttack").asInt,
+                        jsonObject.get("baseStatSpecialDefense").asInt,
+                        jsonObject.get("baseStateMaxHp").asInt,
+                        jsonObject.get("baseStatSpeed").asInt,
+                        jsonObject.get("baseExperienceReward").asInt,
+                        typeList,
+                        jsonObject.get("sprites").asJsonObject.get("front").asString,
+                        jsonObject.get("sprites").asJsonObject.get("back").asString,
+                        moveList
+                    )
+                    trainer.addPokemon(pokemon!!)
+                    SaveToDatabase(pokemon, moveList)
                 }
             }
+
+
+//            withContext(Dispatchers.Main) {
+//
+//            }
         }
     }
 

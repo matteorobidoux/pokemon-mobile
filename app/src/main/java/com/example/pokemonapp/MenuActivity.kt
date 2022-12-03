@@ -24,11 +24,21 @@ class MenuActivity: AppCompatActivity() {
         binding.pokecenterBtn.setOnClickListener{
             changeActivityPokecenter()
         }
+
+        binding.wildPokeBattleBtn.setOnClickListener{
+            changeActivityWildBattle()
+        }
     }
 
     private fun changeActivityPokecenter(){
         var pokeCenter = Intent(applicationContext, PokecenterActivity::class.java)
         pokeCenter.putExtra("trainer", trainer)
         startActivity(pokeCenter)
+    }
+
+    private fun changeActivityWildBattle(){
+        var battle = Intent(applicationContext, BattleActivity::class.java)
+        battle.putExtra("trainer", trainer)
+        startActivity(battle)
     }
 }
