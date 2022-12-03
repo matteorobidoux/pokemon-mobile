@@ -29,51 +29,10 @@
         android:paddingLeft="15dp"
         android:background="@drawable/battle_text_box" />
 
-    <LinearLayout
-        android:id="@+id/battle_bottom"
-        android:layout_weight="1"
+    <fragment
+        android:id="@+id/battle_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:orientation="vertical"
-        >
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_margin="10dp"
-            android:layout_width="250dp"
-            android:layout_height="200dp"
-            android:text="FIGHT"
-            android:layout_gravity="center"
-            android:background="@drawable/fight_button"
-            />
-
-        <LinearLayout
-            android:id="@+id/lower_buttons"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginTop="10dp">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/bag_button"
-                android:text="BAG" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/run_button"
-                android:text="RUN" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/team_button"
-                android:text="POKEMON" />
-        </LinearLayout>
-    </LinearLayout>
+        android:name="com.example.pokemonapp.BattleMenuFragment"/>
 
 </LinearLayout>

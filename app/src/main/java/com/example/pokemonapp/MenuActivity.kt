@@ -2,6 +2,7 @@ package com.example.pokemonapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pokemonapp.databinding.MenuActivityBinding
 import com.example.pokemonapp.objects.Trainer
@@ -10,6 +11,7 @@ class MenuActivity: AppCompatActivity() {
 
     private lateinit var binding: MenuActivityBinding
     private lateinit var trainer: Trainer
+    private val TAG = "MENU"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,6 +21,7 @@ class MenuActivity: AppCompatActivity() {
         val extras = intent.extras
         if (extras != null) {
             trainer = extras.getSerializable("trainer") as Trainer
+            Log.d(TAG, "trainer: ${trainer.pokemonTeam.pokemons}")
         }
 
         binding.pokecenterBtn.setOnClickListener{
