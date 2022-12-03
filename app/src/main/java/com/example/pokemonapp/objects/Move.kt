@@ -1,4 +1,4 @@
-package com.example.pokemonapp
+package com.example.pokemonapp.objects
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -16,7 +16,7 @@ class Move(@PrimaryKey @ColumnInfo(name="name") val name: String,
            @ColumnInfo(name="maxPP") val maxPP: Int,
            @ColumnInfo(name="power") val power: Int,
            @ColumnInfo(name="target") val target: String,
-           @ColumnInfo(name="type") val type: String) {
+           @ColumnInfo(name="type") val type: String) : java.io.Serializable {
 
     init {
 

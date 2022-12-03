@@ -2,17 +2,17 @@ package com.example.pokemonapp
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import androidx.navigation.findNavController
 import com.example.pokemonapp.databinding.NameFragmentBinding
+import com.example.pokemonapp.objects.Trainer
 import com.google.android.material.button.MaterialButton
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 
 class NameFragment : Fragment(){
 
@@ -30,6 +30,7 @@ class NameFragment : Fragment(){
             alert.show()
             dialogView.findViewById<MaterialButton>(R.id.yes_name).setOnClickListener{
                 var trainer = Trainer(binding.trainerName.text.toString())
+                setFragmentResult("requestKey", bundleOf("trainer" to trainer))
                 view?.findNavController()?.navigate(R.id.action_nameFragment_to_starterFragment)
                 alert.dismiss()
             }
