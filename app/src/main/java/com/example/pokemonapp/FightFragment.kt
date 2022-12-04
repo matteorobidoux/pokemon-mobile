@@ -24,11 +24,6 @@ class FightFragment : Fragment() {
     private val TAG = "BATTLE_FIGHT_FRAGMENT"
     private lateinit var adapter: MoveRecyclerViewAdapter
     private lateinit var list: MutableList<Move>
-//    private val typeChart  = arrayOf(
-//        arrayOf(1,1,1,1,1,1,1,1,1,1,1,1,0.5,0,1),
-//        arrayOf(1,0.5,0.5,1,2,2,1,1,1,1,1,2,0.5,1,0.5)
-//
-//    )
     private val typeCharString: String =  """{
   "normal": {
     "normal": 1,
