@@ -1,6 +1,7 @@
 package com.example.pokemonapp
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.pokemonapp.objects.Pokemon
 
-class CollectionAdapter(var context: Context, var collectionList: MutableList<Pokemon>) :
+class CollectionAdapter(var context: Context, var collectionList: MutableList<Pokemon>, val teamList:MutableList<Pokemon>, var teamAdapter: TeamAdapter) :
     RecyclerView.Adapter<CollectionAdapter.ViewHolder>() {
 
     private var collectionlist : MutableList<Pokemon> = collectionList.toMutableList()
+    private var teamlist : MutableList<Pokemon> = teamList.toMutableList()
     private var thisContext : Context = context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -21,6 +23,8 @@ class CollectionAdapter(var context: Context, var collectionList: MutableList<Po
             .from(parent.context)
             .inflate(R.layout.collection_recycler, parent, false)
         return ViewHolder(layout)
+
+
     }
 
 
@@ -29,7 +33,16 @@ class CollectionAdapter(var context: Context, var collectionList: MutableList<Po
         val collection = collectionlist[position]
         val context = holder.view.context
         holder.imageView.load(collection.frontSprite)
+        holder.imageView.setOnClickListener {addToTeam(collection)}
         holder.textiew.text=position.toString()
+    }
+
+    fun addToTeam(pokemonToAdd : Pokemon) {
+        (context as TeamActivity).addToTeamActivity(pokemonToAdd)
+//        val id = teamList.size
+//        teamList.add(pokemonToAdd)
+//        teamAdapter.notifyItemInserted(id)
+        Log.d("TRAINER", "adding to list having " + teamList.size)
     }
 
 
@@ -40,7 +53,6 @@ class CollectionAdapter(var context: Context, var collectionList: MutableList<Po
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val imageView = view.findViewById<ImageView>(R.id.imageView)
         val textiew = view.findViewById<TextView>(R.id.number)
-
     }
 }
 

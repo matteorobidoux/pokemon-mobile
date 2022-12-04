@@ -9,8 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pokemonapp.databinding.TeamActivityBinding
 import com.example.pokemonapp.objects.Pokemon
 import com.example.pokemonapp.objects.Trainer
+import com.google.gson.internal.bind.ReflectiveTypeAdapterFactory.Adapter
 
 private lateinit var trainer: Trainer
+private var teamlist : MutableList<Pokemon> = mutableListOf()
+private var collectionlist : MutableList<Pokemon> = mutableListOf()
+private lateinit var adapterTeam : TeamAdapter
+private lateinit var adapterCollection: CollectionAdapter
+
 
 class TeamActivity : AppCompatActivity(){
     private lateinit var binding: TeamActivityBinding
@@ -26,19 +32,17 @@ class TeamActivity : AppCompatActivity(){
             Log.d("TRAINER", trainer.pokemonTeam.pokemons.size.toString())
         }
 
-        var teamlist : MutableList<Pokemon> = mutableListOf()
         teamlist = trainer.pokemonTeam.pokemons.toMutableList()
         Log.d("TRAINER", teamlist.size.toString())
 
-        var collectionlist : MutableList<Pokemon> = mutableListOf()
         collectionlist = trainer.pokemonCollection.pokemons.toMutableList()
 
 
         // setting the recycler view for the teams list
         val recyclerViewTeam = findViewById<RecyclerView>(R.id.recyclerviewTeam)
-        val adapterTeam = TeamAdapter(this, teamlist)
+        adapterTeam = TeamAdapter(this, teamlist)
         recyclerViewTeam.adapter = adapterTeam
-        recyclerViewTeam.layoutManager = LinearLayoutManager(this)
+        recyclerViewTeam.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         // setting the recycler view for the collection list
         collectionlist.add(teamlist[0])
@@ -47,10 +51,18 @@ class TeamActivity : AppCompatActivity(){
 
         // adding hardcoded data to the colection for testing purposes
         val recyclerViewCollection = findViewById<RecyclerView>(R.id.recyclerviewCollection)
-        val adapterCollection = CollectionAdapter(this, collectionlist)
+        adapterCollection = CollectionAdapter(this, collectionlist, teamlist, adapterTeam)
         recyclerViewCollection.adapter = adapterCollection
         recyclerViewCollection.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-
     }
+
+    fun addToTeamActivity(pokemonToAdd : Pokemon) {
+        val id = teamlist.size
+        teamlist.add(pokemonToAdd)
+        adapterTeam.notifyItemInserted(id)
+        Log.d("TRAINER", "updating " + teamlist.size)
+    }
+
+
 }
