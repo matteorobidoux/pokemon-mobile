@@ -3,63 +3,75 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:id="@+id/page"
+    android:layout_height="wrap_content"
+    android:backgroundTint="@color/shade_white">
 
-    <TextView
-        android:id="@+id/page_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Change Team"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        <RelativeLayout
+            android:id="@+id/relative_layout"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/team_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Your Team"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/page_title"
-        />
+        </RelativeLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerviewTeam"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/team_recycler"
-        android:padding="1dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/team_title"
-        android:nestedScrollingEnabled="false"
-        android:orientation="horizontal"
-        android:overScrollMode="never"/>
+        <TextView
+            android:id="@+id/page_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Change Team"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/collection_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Your collection"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recyclerviewTeam"
-        />
+        <TextView
+            android:id="@+id/team_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your Team"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/page_title" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerviewTeam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never"
+            android:padding="1dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/team_title"
+            tools:listitem="@layout/team_recycler" />
+
+        <TextView
+            android:id="@+id/collection_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your collection"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recyclerviewTeam" />
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerviewCollection"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/collection_recycler"
-        android:padding="1dp"
-        app:layout_constraintLeft_toLeftOf="@id/recyclerviewTeam"
-        app:layout_constraintRight_toRightOf="@id/recyclerviewTeam"
-        app:layout_constraintTop_toBottomOf="@id/collection_title"
-        android:nestedScrollingEnabled="false"
-        android:orientation="horizontal"
-        android:overScrollMode="never"
-        />
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerviewCollection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never"
+            android:padding="1dp"
+            app:layout_constraintLeft_toLeftOf="@id/recyclerviewTeam"
+            app:layout_constraintRight_toRightOf="@id/recyclerviewTeam"
+            app:layout_constraintTop_toBottomOf="@id/collection_title"
+            tools:listitem="@layout/collection_recycler" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

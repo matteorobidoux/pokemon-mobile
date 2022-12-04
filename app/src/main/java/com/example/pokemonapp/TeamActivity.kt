@@ -1,5 +1,8 @@
 package com.example.pokemonapp
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.TransitionDrawable
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
@@ -23,6 +26,9 @@ class TeamActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = TeamActivityBinding.inflate(layoutInflater)
+
+        animateBackground()
+
         setContentView(binding.root)
 
         val extras = intent.extras
@@ -56,6 +62,16 @@ class TeamActivity : AppCompatActivity(){
         recyclerViewCollection.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
     }
+
+    // This method will animate the background color change from white to black
+    private fun animateBackground(){
+        val mColors = arrayOf(ColorDrawable(Color.WHITE), ColorDrawable(Color.BLACK))
+        val mTransition = TransitionDrawable(mColors)
+        binding.relativeLayout.background = mTransition
+        mTransition.startTransition(3000)
+
+    }
+
 
 
 }
