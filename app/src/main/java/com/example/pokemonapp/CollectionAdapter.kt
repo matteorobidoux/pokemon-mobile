@@ -23,8 +23,6 @@ class CollectionAdapter(var context: Context, var collectionList: MutableList<Po
             .from(parent.context)
             .inflate(R.layout.collection_recycler, parent, false)
         return ViewHolder(layout)
-
-
     }
 
 
