@@ -37,6 +37,7 @@ class MenuActivity: AppCompatActivity() {
 
     private fun changeActivityChangeTeam(){
         var formIntent = Intent(applicationContext, TeamActivity::class.java)
+        formIntent.putExtra("trainer", trainer)
         startActivity(formIntent)
     }
 }
