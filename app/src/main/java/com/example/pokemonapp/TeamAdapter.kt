@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.pokemonapp.objects.Pokemon
@@ -29,7 +30,7 @@ class TeamAdapter(var context: Context, var teamList: MutableList<Pokemon>) :
         val context = holder.view.context
         holder.imageView.load(team.frontSprite)
         holder.imageView.setOnClickListener {removeTeam(team)}
-
+        holder.textView.text=teamlist.size.toString()
     }
 
     fun addTeam(pokemonToAdd : Pokemon) {
@@ -51,6 +52,8 @@ class TeamAdapter(var context: Context, var teamList: MutableList<Pokemon>) :
     // Initializing the Views
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val imageView = view.findViewById<ImageView>(R.id.imageView)
+        val textView = view.findViewById<TextView>(R.id.number)
+
     }
 }
 

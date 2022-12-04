@@ -31,7 +31,6 @@ class CollectionAdapter(var context: Context, var collectionList: MutableList<Po
         val context = holder.view.context
         holder.imageView.load(collection.frontSprite)
         holder.imageView.setOnClickListener {addToTeam(collection)}
-        holder.textiew.text=position.toString()
     }
 
     fun addToTeam(pokemonToAdd : Pokemon) {
@@ -45,7 +44,6 @@ class CollectionAdapter(var context: Context, var collectionList: MutableList<Po
     // Initializing the Views
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val imageView = view.findViewById<ImageView>(R.id.imageView)
-        val textiew = view.findViewById<TextView>(R.id.number)
     }
 }
 

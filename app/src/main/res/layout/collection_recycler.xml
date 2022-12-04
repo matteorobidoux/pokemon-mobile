@@ -16,14 +16,7 @@
         app:layout_constraintLeft_toLeftOf="parent">
     </ImageView>
 
-<!--    for testing purpose added a text view displaying the id number-->
-    <TextView
-        android:id="@+id/number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent">
-    </TextView>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
