@@ -31,7 +31,7 @@ class TeamAdapter(var context: Context, var teamList: MutableList<Pokemon>) :
         val context = holder.view.context
         holder.imageView.load(team.frontSprite)
         holder.imageView.setOnClickListener {removeTeam(team)}
-        holder.textView.text=teamlist.size.toString()
+        holder.textView.text=(position+1).toString()
     }
 
     fun addTeam(pokemonToAdd : Pokemon) {
@@ -41,13 +41,15 @@ class TeamAdapter(var context: Context, var teamList: MutableList<Pokemon>) :
             val id = teamlist.size
             teamlist.add(pokemonToAdd)
             notifyItemInserted(id)
+
         }
     }
 
     fun removeTeam(pokemonToRemove : Pokemon) {
-        val id = teamlist.size
+        val id = teamlist.indexOf(pokemonToRemove)
         teamlist.remove(pokemonToRemove)
-        notifyItemRemoved(id)
+//        notifyItemRemoved(id)
+        notifyDataSetChanged()
     }
 
 

@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="300px"
-        android:layout_height="300px"
+        android:layout_width="500px"
+        android:layout_height="500px"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent">
     </ImageView>

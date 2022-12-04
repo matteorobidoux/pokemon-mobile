@@ -60,7 +60,7 @@ class TeamActivity : AppCompatActivity(){
         val recyclerViewCollection = findViewById<RecyclerView>(R.id.recyclerviewCollection)
         adapterCollection = CollectionAdapter(this, collectionlist, adapterTeam)
         recyclerViewCollection.adapter = adapterCollection
-        recyclerViewCollection.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        recyclerViewCollection.layoutManager = GridLayoutManager(this, 3)
 
     }
 
