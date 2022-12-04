@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.pokemonapp.objects.Pokemon
@@ -18,7 +19,7 @@ class CollectionAdapter(var context: Context, var collectionList: MutableList<Po
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layout = LayoutInflater
             .from(parent.context)
-            .inflate(R.layout.team_recycler, parent, false)
+            .inflate(R.layout.collection_recycler, parent, false)
         return ViewHolder(layout)
     }
 
@@ -28,6 +29,7 @@ class CollectionAdapter(var context: Context, var collectionList: MutableList<Po
         val collection = collectionlist[position]
         val context = holder.view.context
         holder.imageView.load(collection.frontSprite)
+        holder.textiew.text=position.toString()
     }
 
 
@@ -37,6 +39,8 @@ class CollectionAdapter(var context: Context, var collectionList: MutableList<Po
     // Initializing the Views
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val imageView = view.findViewById<ImageView>(R.id.imageView)
+        val textiew = view.findViewById<TextView>(R.id.number)
+
     }
 }
 

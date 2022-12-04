@@ -32,7 +32,6 @@ class TeamActivity : AppCompatActivity(){
 
         var collectionlist : MutableList<Pokemon> = mutableListOf()
         collectionlist = trainer.pokemonCollection.pokemons.toMutableList()
-        Log.d("TRAINER", collectionlist.size.toString())
 
 
         // setting the recycler view for the teams list
@@ -42,10 +41,15 @@ class TeamActivity : AppCompatActivity(){
         recyclerViewTeam.layoutManager = LinearLayoutManager(this)
 
         // setting the recycler view for the collection list
+        collectionlist.add(teamlist[0])
+        collectionlist.add(teamlist[0])
+        Log.d("TRAINER", collectionlist.size.toString())
+
+        // adding hardcoded data to the colection for testing purposes
         val recyclerViewCollection = findViewById<RecyclerView>(R.id.recyclerviewCollection)
         val adapterCollection = CollectionAdapter(this, collectionlist)
         recyclerViewCollection.adapter = adapterCollection
-        recyclerViewCollection.layoutManager = LinearLayoutManager(this)
+        recyclerViewCollection.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
 
     }
