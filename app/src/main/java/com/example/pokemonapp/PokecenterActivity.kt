@@ -1,26 +1,32 @@
 package com.example.pokemonapp
 
-import android.R
-import android.animation.ValueAnimator
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.TransitionDrawable
-import android.media.MediaPlayer
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pokemonapp.databinding.PokecenterBinding
+import com.example.pokemonapp.objects.Trainer
 
 
 class PokecenterActivity : AppCompatActivity() {
 
     private lateinit var binding: PokecenterBinding
+    private lateinit var trainer: Trainer
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = PokecenterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val extras = intent.extras
+        if (extras != null) {
+            trainer = extras.getSerializable("trainer") as Trainer
+            Log.d("TRAINER", trainer.pokemonTeam.pokemons.size.toString())
+        }
+
         animateBackground()
-        var mediaPlayer = MediaPlayer.create(applicationContext, com.example.pokemonapp.R.raw.title_screen_music)
-        mediaPlayer.start()
         setListeners()
     }
 
@@ -51,7 +57,9 @@ class PokecenterActivity : AppCompatActivity() {
     }
 
     private fun heal(){
-        // loop through teams and put health to 100
+        trainer.pokemonTeam.pokemons.forEach {
+            it.currentHp = it.baseStatMaxHp
+        }
         backToMain()
     }
 }

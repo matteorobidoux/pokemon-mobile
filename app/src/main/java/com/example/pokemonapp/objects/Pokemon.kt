@@ -1,4 +1,4 @@
-package com.example.pokemonapp
+package com.example.pokemonapp.objects
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -11,16 +11,16 @@ import kotlin.math.roundToInt
 class Pokemon(@PrimaryKey @ColumnInfo(name = "pokemonNumber") val pokemonNumber: String,
               @ColumnInfo(name="species") val species : String,
               @ColumnInfo(name="baseStateAttack") val pokemonBaseStateAttack : Int,
-              @ColumnInfo(name="baseStatDefense") val pokemonBaseStatDefense : Int,
-              @ColumnInfo(name="baseStatSpecialAttack") val pokemonBaseStatSpecialAttack : Int,
-              @ColumnInfo(name="baseStatSpecialDefense") val pokemonBaseStatSpecialDefense: Int,
-              @ColumnInfo(name="baseStateMaxHp") val pokemonBaseStateMaxHp : Int,
-              @ColumnInfo(name="baseStatSpeed") val pokemonBaseStatSpeed : Int,
+              @ColumnInfo(name="pokemonBaseStatDefense") val pokemonBaseStatDefense : Int,
+              @ColumnInfo(name="pokemonBaseStatSpecialAttack") val pokemonBaseStatSpecialAttack : Int,
+              @ColumnInfo(name="pokemonBaseStatSpecialDefense") val pokemonBaseStatSpecialDefense: Int,
+              @ColumnInfo(name="pokemonBaseStateMaxHp") val pokemonBaseStateMaxHp : Int,
+              @ColumnInfo(name="pokemonBaseStatSpeed") val pokemonBaseStatSpeed : Int,
               @ColumnInfo(name="baseExperienceReward") val baseExperienceReward : Int,
               @ColumnInfo(name="types") val types : ArrayList<String>,
               @ColumnInfo(name="frontSprite") val frontSprite : String,
               @ColumnInfo(name="backSprite") val backSprite : String,
-              @ColumnInfo(name="moves") val pokemonMoves : ArrayList<Move>){
+              @ColumnInfo(name="pokemonMoves") val pokemonMoves : ArrayList<Move>) : java.io.Serializable{
 
     var name = species
     var level = floor(baseExperienceReward.toDouble().pow(1/3)).toInt()
