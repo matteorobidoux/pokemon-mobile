@@ -48,8 +48,8 @@ class TeamAdapter(var context: Context, var teamList: MutableList<Pokemon>) :
     fun removeTeam(pokemonToRemove : Pokemon) {
         val id = teamlist.indexOf(pokemonToRemove)
         teamlist.remove(pokemonToRemove)
-//        notifyItemRemoved(id)
         notifyDataSetChanged()
+        (context as TeamActivity).addToCollection(pokemonToRemove)
     }
 
 

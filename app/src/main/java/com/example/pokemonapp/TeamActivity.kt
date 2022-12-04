@@ -73,6 +73,10 @@ class TeamActivity : AppCompatActivity(){
 
     }
 
+    public fun addToCollection(pokemonToRemove : Pokemon){
+        adapterCollection.addCollection(pokemonToRemove)
+    }
+
 
 
 }

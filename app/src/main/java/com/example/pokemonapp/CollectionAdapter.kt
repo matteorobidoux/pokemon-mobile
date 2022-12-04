@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.pokemonapp.objects.Pokemon
@@ -34,7 +35,16 @@ class CollectionAdapter(var context: Context, var collectionList: MutableList<Po
     }
 
     fun addToTeam(pokemonToAdd : Pokemon) {
+        val id = collectionlist.indexOf(pokemonToAdd)
+        collectionlist.remove(pokemonToAdd)
+        notifyItemRemoved(id)
         teamAdapter.addTeam(pokemonToAdd)
+    }
+
+    fun addCollection(pokemonToAdd : Pokemon) {
+        val id = collectionlist.size
+        collectionlist.add(pokemonToAdd)
+        notifyItemInserted(id)
     }
 
 
