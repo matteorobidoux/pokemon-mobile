@@ -39,9 +39,6 @@ class CollectionAdapter(var context: Context, var collectionList: MutableList<Po
 
     fun addToTeam(pokemonToAdd : Pokemon) {
         (context as TeamActivity).addToTeamActivity(pokemonToAdd)
-//        val id = teamList.size
-//        teamList.add(pokemonToAdd)
-//        teamAdapter.notifyItemInserted(id)
         Log.d("TRAINER", "adding to list having " + teamList.size)
     }
 
