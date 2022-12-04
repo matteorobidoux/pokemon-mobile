@@ -7,6 +7,7 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokemonapp.databinding.TeamActivityBinding
@@ -48,7 +49,7 @@ class TeamActivity : AppCompatActivity(){
         val recyclerViewTeam = findViewById<RecyclerView>(R.id.recyclerviewTeam)
         adapterTeam = TeamAdapter(this, teamlist)
         recyclerViewTeam.adapter = adapterTeam
-        recyclerViewTeam.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        recyclerViewTeam.layoutManager = GridLayoutManager(this, 3)
 
         // setting the recycler view for the collection list
         collectionlist.add(teamlist[0])
