@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.pokemonapp.objects.Pokemon
@@ -34,9 +35,13 @@ class TeamAdapter(var context: Context, var teamList: MutableList<Pokemon>) :
     }
 
     fun addTeam(pokemonToAdd : Pokemon) {
-        val id = teamlist.size
-        teamlist.add(pokemonToAdd)
-        notifyItemInserted(id)
+        if (teamlist.size >=6){
+            Toast.makeText(thisContext, "A team can not have more than 6 Pokémons", Toast.LENGTH_LONG).show()
+        } else {
+            val id = teamlist.size
+            teamlist.add(pokemonToAdd)
+            notifyItemInserted(id)
+        }
     }
 
     fun removeTeam(pokemonToRemove : Pokemon) {
