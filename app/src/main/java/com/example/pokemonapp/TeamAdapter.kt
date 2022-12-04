@@ -30,6 +30,12 @@ class TeamAdapter(var context: Context, var teamList: MutableList<Pokemon>) :
         holder.imageView.load(team.frontSprite)
     }
 
+    fun addTeam(pokemonToAdd : Pokemon) {
+        val id = teamlist.size
+        teamlist.add(pokemonToAdd)
+        notifyItemInserted(id)
+    }
+
 
     override fun getItemCount(): Int = teamlist.size
 

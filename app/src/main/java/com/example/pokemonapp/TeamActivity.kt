@@ -60,7 +60,8 @@ class TeamActivity : AppCompatActivity(){
     fun addToTeamActivity(pokemonToAdd : Pokemon) {
         val id = teamlist.size
         teamlist.add(pokemonToAdd)
-        adapterTeam.notifyItemInserted(id)
+        //adapterTeam.notifyItemInserted(id)
+        adapterTeam.addTeam(pokemonToAdd)
         Log.d("TRAINER", "updating " + teamlist.size)
     }
 
