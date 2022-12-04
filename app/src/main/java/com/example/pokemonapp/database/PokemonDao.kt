@@ -15,6 +15,9 @@ interface PokemonDao {
     @Query("SELECT * FROM pokemon_table WHERE species == :pokemonName")
     fun getPokemonWithName(pokemonName : String): Pokemon
 
+    @Query("SELECT * FROM pokemon_table WHERE pokemonNumber = :pokemonNum")
+    fun getPokemonWithNumber(pokemonNum: String): Pokemon
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(pokemon: Pokemon)
 

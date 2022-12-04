@@ -33,6 +33,8 @@ class MoveRecyclerViewAdapter internal constructor(context: Context, private val
     // binds the data to the TextView in each row
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val move = mData[position]
+        val name = move.name
+        holder.tv.text = name
 //        val name = pokemon.species
 //        val pokeNum = pokemon.pokemonNumber
 //        val uri = Uri.parse(pokemon.sprites.split(",").toTypedArray()[0].replace("\"",""))
