@@ -38,6 +38,14 @@
             android:name=".Pokemart"
             android:label="Pokemart">
         </activity>
+        <activity
+            android:name=".PokemartPokeball"
+            android:label="PokemartPokeball">
+        </activity>
+        <activity
+            android:name=".PokemartPotion"
+            android:label="PokemartPotion">
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

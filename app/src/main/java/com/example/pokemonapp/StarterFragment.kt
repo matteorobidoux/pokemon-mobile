@@ -53,6 +53,9 @@ class StarterFragment : Fragment(){
 
             dialogView.findViewById<MaterialButton>(R.id.yes_pokemon).setOnClickListener{
                 retrievePokemon("charmander")
+                var menuIntent = Intent(activity, MenuActivity::class.java)
+                formActivtiy.startActivity(menuIntent)
+
             }
 
             dialogView.findViewById<MaterialButton>(R.id.no_pokemon).setOnClickListener{
@@ -74,6 +77,9 @@ class StarterFragment : Fragment(){
 
             dialogView.findViewById<MaterialButton>(R.id.yes_pokemon).setOnClickListener{
                 retrievePokemon("squirtle")
+                var menuIntent = Intent(activity, MenuActivity::class.java)
+                formActivtiy.startActivity(menuIntent)
+
             }
 
             dialogView.findViewById<MaterialButton>(R.id.no_pokemon).setOnClickListener{
@@ -95,6 +101,8 @@ class StarterFragment : Fragment(){
 
             dialogView.findViewById<MaterialButton>(R.id.yes_pokemon).setOnClickListener {
                 retrievePokemon("bulbasaur")
+                var menuIntent = Intent(activity, MenuActivity::class.java)
+                formActivtiy.startActivity(menuIntent)
             }
 
             dialogView.findViewById<MaterialButton>(R.id.no_pokemon).setOnClickListener{
