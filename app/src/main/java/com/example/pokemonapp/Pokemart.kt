@@ -21,6 +21,10 @@ class Pokemart: AppCompatActivity() {
         binding.pokePotionBtn.setOnClickListener {
             changeActivityPotion()
         }
+
+        binding.pokemartBackBtn.setOnClickListener {
+            changeActivityBack()
+        }
     }
 
     private fun changeActivityPokeball(){
@@ -31,6 +35,11 @@ class Pokemart: AppCompatActivity() {
     private fun changeActivityPotion(){
         var potionIntent = Intent(applicationContext, PokemartPotion::class.java)
         startActivity(potionIntent)
+    }
+
+    private fun changeActivityBack(){
+        var backIntent = Intent(applicationContext, MenuActivity::class.java)
+        startActivity(backIntent)
     }
 
 }
