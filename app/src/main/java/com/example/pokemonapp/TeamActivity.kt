@@ -30,6 +30,10 @@ class TeamActivity : AppCompatActivity(){
         teamlist = trainer.pokemonTeam.pokemons.toMutableList()
         Log.d("TRAINER", teamlist.size.toString())
 
+        var collectionlist : MutableList<Pokemon> = mutableListOf()
+        collectionlist = trainer.pokemonCollection.pokemons.toMutableList()
+        Log.d("TRAINER", collectionlist.size.toString())
+
 
         // setting the recycler view for the teams list
         val recyclerViewTeam = findViewById<RecyclerView>(R.id.recyclerviewTeam)
@@ -39,7 +43,7 @@ class TeamActivity : AppCompatActivity(){
 
         // setting the recycler view for the collection list
         val recyclerViewCollection = findViewById<RecyclerView>(R.id.recyclerviewCollection)
-        val adapterCollection = CollectionAdapter(this, teamlist)
+        val adapterCollection = CollectionAdapter(this, collectionlist)
         recyclerViewCollection.adapter = adapterCollection
         recyclerViewCollection.layoutManager = LinearLayoutManager(this)
 
