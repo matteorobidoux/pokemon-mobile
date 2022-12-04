@@ -51,18 +51,10 @@ class TeamActivity : AppCompatActivity(){
 
         // adding hardcoded data to the colection for testing purposes
         val recyclerViewCollection = findViewById<RecyclerView>(R.id.recyclerviewCollection)
-        adapterCollection = CollectionAdapter(this, collectionlist, teamlist, adapterTeam)
+        adapterCollection = CollectionAdapter(this, collectionlist, adapterTeam)
         recyclerViewCollection.adapter = adapterCollection
         recyclerViewCollection.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-    }
-
-    fun addToTeamActivity(pokemonToAdd : Pokemon) {
-        val id = teamlist.size
-        teamlist.add(pokemonToAdd)
-        //adapterTeam.notifyItemInserted(id)
-        adapterTeam.addTeam(pokemonToAdd)
-        Log.d("TRAINER", "updating " + teamlist.size)
     }
 
 

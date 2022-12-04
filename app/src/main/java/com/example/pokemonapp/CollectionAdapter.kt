@@ -11,11 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.pokemonapp.objects.Pokemon
 
-class CollectionAdapter(var context: Context, var collectionList: MutableList<Pokemon>, val teamList:MutableList<Pokemon>, var teamAdapter: TeamAdapter) :
+class CollectionAdapter(var context: Context, var collectionList: MutableList<Pokemon>, var teamAdapter: TeamAdapter) :
     RecyclerView.Adapter<CollectionAdapter.ViewHolder>() {
 
     private var collectionlist : MutableList<Pokemon> = collectionList.toMutableList()
-    private var teamlist : MutableList<Pokemon> = teamList.toMutableList()
     private var thisContext : Context = context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -36,8 +35,7 @@ class CollectionAdapter(var context: Context, var collectionList: MutableList<Po
     }
 
     fun addToTeam(pokemonToAdd : Pokemon) {
-        (context as TeamActivity).addToTeamActivity(pokemonToAdd)
-        Log.d("TRAINER", "adding to list having " + teamList.size)
+        teamAdapter.addTeam(pokemonToAdd)
     }
 
 
