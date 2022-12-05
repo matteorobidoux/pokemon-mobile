@@ -39,12 +39,12 @@
             android:label="Pokemart">
         </activity>
         <activity
-            android:name=".PokemartPokeball"
-            android:label="PokemartPokeball">
+            android:name=".Pokeball"
+            android:label="Pokeball">
         </activity>
         <activity
-            android:name=".PokemartPotion"
-            android:label="PokemartPotion">
+            android:name=".Potion"
+            android:label="Potion">
         </activity>
     </application>
 

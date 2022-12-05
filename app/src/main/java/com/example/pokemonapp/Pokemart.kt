@@ -28,12 +28,12 @@ class Pokemart: AppCompatActivity() {
     }
 
     private fun changeActivityPokeball(){
-        var pokeballIntent = Intent(applicationContext, PokemartPokeball::class.java)
+        var pokeballIntent = Intent(applicationContext, Pokeball::class.java)
         startActivity(pokeballIntent)
     }
 
     private fun changeActivityPotion(){
-        var potionIntent = Intent(applicationContext, PokemartPotion::class.java)
+        var potionIntent = Intent(applicationContext, Potion::class.java)
         startActivity(potionIntent)
     }
 

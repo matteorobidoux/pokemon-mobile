@@ -3,17 +3,16 @@ package com.example.pokemonapp
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.pokemonapp.databinding.PokemartPotionBinding
+import com.example.pokemonapp.databinding.PotionBinding
 
-class PokemartPotion: AppCompatActivity()  {
-    private lateinit var binding: PokemartPotionBinding
+class Potion: AppCompatActivity()  {
+    private lateinit var binding: PotionBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = PokemartPotionBinding.inflate(layoutInflater)
+        binding = PotionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.buyPotionBtn.setOnClickListener {

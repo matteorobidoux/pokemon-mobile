@@ -3,15 +3,15 @@ package com.example.pokemonapp
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.pokemonapp.databinding.PokemartPokeballBinding
+import com.example.pokemonapp.databinding.PokeballBinding
 
-class PokemartPokeball: AppCompatActivity()  {
+class Pokeball: AppCompatActivity()  {
 
-    private lateinit var binding: PokemartPokeballBinding
+    private lateinit var binding: PokeballBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = PokemartPokeballBinding.inflate(layoutInflater)
+        binding = PokeballBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
 //        binding.buyPokeballBtn.setOnClickListener {
