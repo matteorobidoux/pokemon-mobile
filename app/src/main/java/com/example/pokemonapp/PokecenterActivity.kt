@@ -1,5 +1,6 @@
 package com.example.pokemonapp
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.TransitionDrawable
@@ -53,13 +54,18 @@ class PokecenterActivity : AppCompatActivity() {
 
     private fun backToMain(){
         // go back to main
+        val menu = Intent(applicationContext, MenuActivity::class.java)
+        menu.putExtra("trainer", trainer)
+        startActivity(menu)
         finish();
     }
 
     private fun heal(){
         trainer.pokemonTeam.pokemons.forEach {
             it.currentHp = it.baseStatMaxHp
+            Log.d("HEAL", "pokemon: ${it.name} || hp: ${it.currentHp}")
         }
+        Log.d("HEAL", "healed pokemon!")
         backToMain()
     }
 }

@@ -1,5 +1,6 @@
 package com.example.pokemonapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -20,12 +21,25 @@ class BattleMenuFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = BattleStartFragmentBinding.inflate(inflater,container,false)
 
+
+
         Log.d(TAG, "arguments: ${arguments?.size()}")
 
         if(arguments != null){
             trainer = arguments?.getSerializable("trainer") as Trainer
             opponent = arguments?.getSerializable("opponent") as Pokemon
             Log.d(TAG, "trainer: ${trainer.trainerName}")
+
+            Log.d(TAG, "active pokemon: ${trainer.pokemonTeam.pokemons[0].currentHp}")
+            //TODO implement full team
+            val activePokemon: Pokemon = trainer.pokemonTeam.pokemons[0]
+
+            if(activePokemon.currentHp <= 0){
+                //fainted
+                var menu = Intent(activity?.applicationContext, MenuActivity::class.java)
+                menu.putExtra("trainer", trainer)
+                startActivity(menu)
+            }
 
             //handle fighting
             binding.fight.setOnClickListener{
@@ -47,11 +61,26 @@ class BattleMenuFragment : Fragment() {
             //handle bag
             binding.bag.setOnClickListener{
                 Log.d(TAG, "clicked on bag")
+                val fragment = BagFragment()
+                val dataToSend = Bundle()
+                dataToSend.putSerializable("trainer", trainer)
+                dataToSend.putSerializable("opponent", opponent)
+                fragment.arguments = dataToSend
+                val fragmentManager = parentFragmentManager
+                fragmentManager.commit {
+                    replace(R.id.battle_menu, fragment)
+                    setReorderingAllowed(true)
+                    addToBackStack(null)
+                }
             }
 
             //handle running
             binding.run.setOnClickListener {
                 Log.d(TAG, "clicked on run")
+                val menu = Intent(activity?.applicationContext, MenuActivity::class.java)
+                menu.putExtra("trainer", trainer)
+                startActivity(menu)
+                activity?.finish()
             }
 
             //handle team

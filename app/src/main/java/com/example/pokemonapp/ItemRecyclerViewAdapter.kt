@@ -1,7 +1,6 @@
 package com.example.pokemonapp
 
 import android.content.Context
-import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,15 +9,14 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
-import com.example.pokemonapp.objects.Move
+import com.example.pokemonapp.objects.Items
 
-class MoveRecyclerViewAdapter internal constructor(context: Context, private val mData: MutableList<Move>) : RecyclerView.Adapter<MoveRecyclerViewAdapter.ViewHolder>() {
+class ItemRecyclerViewAdapter internal constructor(context: Context, private val mData: MutableList<Items>) : RecyclerView.Adapter<ItemRecyclerViewAdapter.ViewHolder>(){
     private val TAG = "ADAPTER"
     private val mInflater: LayoutInflater
 
     //    private var mClickListener: ItemClickLister? = null
-    var onItemClick: ((Move) -> Unit)? = null
+    var onItemClick: ((Items) -> Unit)? = null
 
     init {
         this.mInflater = LayoutInflater.from(context)
@@ -26,16 +24,16 @@ class MoveRecyclerViewAdapter internal constructor(context: Context, private val
 
     // inflates the row layout from xml when needed
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = mInflater.inflate(R.layout.recyclerview_row, parent, false)
+        val view = mInflater.inflate(R.layout.item_recyclerview_row, parent, false)
         return ViewHolder(view)
     }
 
     // binds the data to the TextView in each row
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val move = mData[position]
-        val name = move.name
-        holder.tv.text = name
-
+        val item = mData[position]
+        val name = item.name
+        holder.tv.text = "$name x ${item.quantity}"
+        holder.image.setImageResource(item.sprite)
     }
 
     // total number of rows
@@ -47,9 +45,10 @@ class MoveRecyclerViewAdapter internal constructor(context: Context, private val
         RecyclerView.ViewHolder(itemView) {
         internal var tv: TextView
         internal var parent: LinearLayout
+        internal var image: ImageView
 
         init {
-//            image = itemView.findViewById(R.id.pokemon)
+            image = itemView.findViewById(R.id.item_image)
             tv = itemView.findViewById(R.id.move_name)
             parent = itemView.findViewById(R.id.parent)
 
@@ -60,4 +59,5 @@ class MoveRecyclerViewAdapter internal constructor(context: Context, private val
             }
         }
     }
+
 }

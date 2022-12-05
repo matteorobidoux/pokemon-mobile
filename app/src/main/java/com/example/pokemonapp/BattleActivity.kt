@@ -4,12 +4,21 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.pokemonapp.database.PokemonRoomDatabase
 import com.example.pokemonapp.databinding.ActivityBattleBinding
+import com.example.pokemonapp.databinding.FragmentFightBinding
 import com.example.pokemonapp.objects.*
+import com.google.gson.Gson
+import com.google.gson.JsonObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -38,11 +47,6 @@ class BattleActivity : AppCompatActivity() {
         //set up db
         pokemonRoomDatabase = PokemonRoomDatabase.getDatabase(applicationContext)
 
-        //dummy data
-//        val ash: Trainer = Trainer("Ash")
-//        val pokemons: ArrayList<Pokemon> = ArrayList<Pokemon>()
-//        val bulb: Pokemon = Pokemon("1", "bulbasaur", 49, 49, 6
-//        5, 65, 45, 49, 64, "grass", "https://pokeapi.co/api/v2/pokemon-form/1/", "https://pokeapi.co/api/v2/pokemon-form/1/")
         Log.d(TAG, "trainer: ${trainer.pokemonTeam.pokemons}")
 
         getOpponent()
@@ -56,7 +60,7 @@ class BattleActivity : AppCompatActivity() {
 
     private fun getOpponent(){
         Log.d(TAG, "fetching opponent")
-        val pokemonToFetch: Int = Random.nextInt(151)
+        val pokemonToFetch: Int = (1..150).random()
         Log.d(TAG, "fetching #$pokemonToFetch")
         var pokemon: Pokemon
         lifecycleScope.launch(Dispatchers.IO) {

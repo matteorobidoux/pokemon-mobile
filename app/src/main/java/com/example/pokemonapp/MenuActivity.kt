@@ -21,7 +21,7 @@ class MenuActivity: AppCompatActivity() {
         val extras = intent.extras
         if (extras != null) {
             trainer = extras.getSerializable("trainer") as Trainer
-            Log.d(TAG, "trainer: ${trainer.pokemonTeam.pokemons}")
+            Log.d(TAG, "trainer: ${trainer.pokemonTeam.pokemons[0].currentHp}")
         }
 
         binding.pokecenterBtn.setOnClickListener{
