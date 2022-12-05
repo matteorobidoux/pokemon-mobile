@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pokemonapp.databinding.PokeballBinding
+import com.example.pokemonapp.databinding.PokemartBinding
 import com.example.pokemonapp.objects.Items
 import com.example.pokemonapp.objects.Trainer
 
 class Pokeball: AppCompatActivity() {
     private lateinit var binding: PokeballBinding
+    lateinit var bind: PokemartBinding
     private lateinit var trainer: Trainer
 
     private val pokeball_txt = "pokeball"
@@ -22,6 +24,7 @@ class Pokeball: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = PokeballBinding.inflate(layoutInflater)
+        bind = PokemartBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val extras = intent.extras
@@ -34,7 +37,11 @@ class Pokeball: AppCompatActivity() {
             changePokemartMoney()
         }
 
-        binding.backPokeballBtn.setOnClickListener {
+        binding.sellPokeballBtn.setOnClickListener {
+            sellPokeball()
+        }
+
+        binding.exitPokeballBtn.setOnClickListener {
             changeActivityPokemart()
         }
     }
@@ -44,10 +51,18 @@ class Pokeball: AppCompatActivity() {
         startActivity(mainIntent)
     }
 
+    private fun sellPokeball(){
+    }
+
     private fun changePokemartMoney(){
         Log.d("TAG", pokeball.quantity.toString())
         pokeball.quantity = pokeball.quantity - 1
         Log.d("TAG", pokeball.quantity.toString())
+        val bag = bind.bagContent.text.toString()
+        Log.d("TAG", bag)
+        val bag_int = (bag.toInt() + 1)
+        Log.d("TAG", bag_int.toString())
+        bind.bagContent.text = bag_int.toString()
     }
 
 }
