@@ -22,5 +22,6 @@
     <string name="poke_pokeball_text">Can be used to catch the Pokémon in the wild.</string>
     <string name="buy_text">BUY</string>
     <string name="back_text">BACK</string>
-
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

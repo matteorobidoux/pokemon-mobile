@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@drawable/batte_day">
+
+    <LinearLayout
+        android:id="@+id/battle_top"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/battle_floor"
+        android:weightSum="2"
+        >
+
+        <LinearLayout
+            android:id="@+id/enemy_pokemon_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="top"
+            android:layout_weight="1"
+            >
+            <TextView
+                android:id="@+id/enemy_text_box"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:background="@drawable/pokemon_dialogue_right"
+                android:padding="10dp"
+                android:text="Name    Lv 1\nHP: 20"
+                android:layout_gravity="center"
+                />
+            <ImageView
+                android:id="@+id/enemy_pokemon"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:contentDescription="enemy pokemon"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/trainer_pokemon_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="bottom"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/trainer_pokemon"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:contentDescription="trainer pokemon"
+                android:layout_weight="1"
+                />
+            <TextView
+                android:id="@+id/trainer_text_box"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:text="Name  Lv 1\nHP: 20"
+                android:background="@drawable/pokemon_dialogue_left"
+                android:layout_gravity="center"
+                android:layout_weight="1"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/battle_text_box"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:text="text box"
+        android:paddingTop="5dp"
+        android:paddingLeft="15dp"
+        android:background="@drawable/battle_text_box" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/battle_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:name="com.example.pokemonapp.BattleMenuFragment"/>
+
+</LinearLayout>
