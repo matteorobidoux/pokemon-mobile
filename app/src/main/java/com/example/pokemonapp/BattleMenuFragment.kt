@@ -86,6 +86,16 @@ class BattleMenuFragment : Fragment() {
             //handle team
             binding.team.setOnClickListener {
                 Log.d(TAG, "clicked on pokemon button")
+                val fragment = TeamFragment()
+                val dataToSend = Bundle()
+                dataToSend.putSerializable("trainer", trainer)
+                fragment.arguments = dataToSend
+                val fragmentManager = parentFragmentManager
+                fragmentManager.commit {
+                    replace(R.id.battle_menu, fragment)
+                    setReorderingAllowed(true)
+                    addToBackStack(null)
+                }
             }
         }
 

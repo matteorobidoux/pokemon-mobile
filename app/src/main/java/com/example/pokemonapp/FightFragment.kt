@@ -24,7 +24,6 @@ import com.google.gson.JsonObject
 class FightFragment : Fragment() {
     private val TAG = "BATTLE_FIGHT_FRAGMENT"
     private lateinit var adapter: MoveRecyclerViewAdapter
-    private lateinit var list: MutableList<Move>
     private val typeCharString: String =  """{
   "normal": {
     "normal": 1,

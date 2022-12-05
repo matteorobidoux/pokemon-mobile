@@ -80,7 +80,7 @@ class BagFragment : Fragment(){
         pokemon.currentHp += 20
         Toast.makeText(activity?.applicationContext, "${pokemon.name} was healed by 20!", Toast.LENGTH_SHORT).show()
         potion.quantity -= 1
-        textView?.text = "${pokemon.name} Lv${pokemon.level}\nHP: ${pokemon.currentHp}"
+        textView?.text = "${pokemon.name} Lv${pokemon.level}\nHP: ${pokemon.currentHp}/${pokemon.baseStatMaxHp}"
     }
 
     private fun handleCatch(pokeball: Items, pokemon: Pokemon, trainer: Trainer, imageView: ImageView?){
