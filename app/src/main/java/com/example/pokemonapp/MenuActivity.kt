@@ -37,7 +37,7 @@ class MenuActivity: AppCompatActivity() {
     }
 
     private fun changeActivityPokemart(){
-        var martIntent = Intent(applicationContext, Pokemart::class.java)
-        startActivity(martIntent)
+        var pokeMart = Intent(applicationContext, Pokemart::class.java)
+        startActivity(pokeMart)
     }
 }
