@@ -2,16 +2,25 @@ package com.example.pokemonapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pokemonapp.databinding.PokemartBinding
+import com.example.pokemonapp.objects.Trainer
 
 class Pokemart: AppCompatActivity() {
     private lateinit var binding: PokemartBinding
+    private lateinit var trainer: Trainer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = PokemartBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val extras = intent.extras
+        if (extras != null) {
+            trainer = extras.getSerializable("trainer") as Trainer
+            Log.d("TRAINER", trainer.pokemonTeam.pokemons.size.toString())
+        }
 
         binding.pokePokeballBtn.setOnClickListener {
             changeActivityPokeball()
@@ -28,16 +37,19 @@ class Pokemart: AppCompatActivity() {
 
     private fun changeActivityPokeball(){
         var pokeballIntent = Intent(applicationContext, Pokeball::class.java)
+        pokeballIntent.putExtra("trainer", trainer)
         startActivity(pokeballIntent)
     }
 
     private fun changeActivityPotion(){
         var potionIntent = Intent(applicationContext, Potion::class.java)
+        potionIntent.putExtra("trainer", trainer)
         startActivity(potionIntent)
     }
 
     private fun changeActivityBack(){
         var backIntent = Intent(applicationContext, MenuActivity::class.java)
+        backIntent.putExtra("trainer", trainer)
         startActivity(backIntent)
     }
 
