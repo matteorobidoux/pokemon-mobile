@@ -37,9 +37,9 @@
                 android:id="@+id/layout_mart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="20dp"
                 android:orientation="horizontal"
-                android:weightSum="2"
+                android:weightSum="4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="parent">
@@ -48,11 +48,19 @@
                     android:id="@+id/money_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="40dp"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:padding="20dp"
+                    android:padding="5dp"
                     android:text="@string/money">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/money_textview_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="25dp"
+                    android:padding="5dp"
+                    android:text="@string/default_money">
                 </TextView>
 
                 <TextView
@@ -60,8 +68,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:padding="20dp"
+                    android:padding="5dp"
                     android:text="@string/in_bag">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/in_bag_view_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:text="@string/default_items">
                 </TextView>
 
             </LinearLayout>

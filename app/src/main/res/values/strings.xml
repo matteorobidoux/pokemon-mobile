@@ -9,8 +9,10 @@
     <string name="pokemart">Pokemart</string>
     <string name="change_team">Change Team</string>
     <string name="save_game">Save</string>
-    <string name="money">Money: </string>
+    <string name="money">Money: $</string>
+    <string name="default_money">100</string>
     <string name="in_bag">In Bag: </string>
+    <string name="default_items">0</string>
     <string name="pokeball_text">POKEBALL</string>
     <string name="potion_text">POTION</string>
     <string name="pokemart_title">POKEMART</string>
