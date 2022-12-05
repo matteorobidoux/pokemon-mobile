@@ -24,11 +24,20 @@ class MenuActivity: AppCompatActivity() {
         binding.pokecenterBtn.setOnClickListener{
             changeActivityPokecenter()
         }
+        binding.changeTeamBtn.setOnClickListener{
+            changeActivityChangeTeam()
+        }
     }
 
     private fun changeActivityPokecenter(){
         var pokeCenter = Intent(applicationContext, PokecenterActivity::class.java)
         pokeCenter.putExtra("trainer", trainer)
         startActivity(pokeCenter)
+    }
+
+    private fun changeActivityChangeTeam(){
+        var formIntent = Intent(applicationContext, TeamActivity::class.java)
+        formIntent.putExtra("trainer", trainer)
+        startActivity(formIntent)
     }
 }
