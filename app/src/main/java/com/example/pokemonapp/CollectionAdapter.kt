@@ -25,7 +25,6 @@ class CollectionAdapter(var context: Context, var collectionList: MutableList<Po
         return ViewHolder(layout)
     }
 
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val collection = collectionlist[position]
@@ -47,9 +46,7 @@ class CollectionAdapter(var context: Context, var collectionList: MutableList<Po
         notifyItemInserted(id)
     }
 
-
     override fun getItemCount(): Int = collectionlist.size
-
 
     // Initializing the Views
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {

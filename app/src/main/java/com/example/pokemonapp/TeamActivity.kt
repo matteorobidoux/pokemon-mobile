@@ -52,8 +52,9 @@ class TeamActivity : AppCompatActivity(){
         recyclerViewTeam.layoutManager = GridLayoutManager(this, 3)
 
         // setting the recycler view for the collection list
-        collectionlist.add(teamlist[0])
-        collectionlist.add(teamlist[0])
+        // hardcoded values for collection list for testing purposes
+        //collectionlist.add(teamlist[0])
+        //collectionlist.add(teamlist[0])
         Log.d("TRAINER", collectionlist.size.toString())
 
         // adding hardcoded data to the colection for testing purposes
@@ -61,7 +62,6 @@ class TeamActivity : AppCompatActivity(){
         adapterCollection = CollectionAdapter(this, collectionlist, adapterTeam)
         recyclerViewCollection.adapter = adapterCollection
         recyclerViewCollection.layoutManager = GridLayoutManager(this, 3)
-
     }
 
     // This method will animate the background color change from white to black
@@ -70,12 +70,11 @@ class TeamActivity : AppCompatActivity(){
         val mTransition = TransitionDrawable(mColors)
         binding.relativeLayout.background = mTransition
         mTransition.startTransition(3000)
-
     }
 
-    public fun addToCollection(pokemonToRemove : Pokemon){
+   fun addToCollection(pokemonToRemove : Pokemon){
         adapterCollection.addCollection(pokemonToRemove)
-    }
+   }
 
 
 
