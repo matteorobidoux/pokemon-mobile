@@ -24,6 +24,11 @@ class MenuActivity: AppCompatActivity() {
         binding.pokecenterBtn.setOnClickListener{
             changeActivityPokecenter()
         }
+
+        binding.pokemartBtn.setOnClickListener {
+            changeActivityPokemart()
+        }
+
     }
 
     private fun changeActivityPokecenter(){
@@ -31,4 +36,10 @@ class MenuActivity: AppCompatActivity() {
         pokeCenter.putExtra("trainer", trainer)
         startActivity(pokeCenter)
     }
+
+    private fun changeActivityPokemart(){
+        var pokeMart = Intent(applicationContext, Pokemart::class.java)
+        startActivity(pokeMart)
+    }
+
 }
