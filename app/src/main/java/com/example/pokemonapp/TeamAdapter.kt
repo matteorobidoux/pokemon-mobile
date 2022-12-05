@@ -46,10 +46,14 @@ class TeamAdapter(var context: Context, var teamList: MutableList<Pokemon>) :
     }
 
     fun removeTeam(pokemonToRemove : Pokemon) {
-        val id = teamlist.indexOf(pokemonToRemove)
-        teamlist.remove(pokemonToRemove)
-        notifyDataSetChanged()
-        (context as TeamActivity).addToCollection(pokemonToRemove)
+        if (teamlist.size <= 1){
+            Toast.makeText(thisContext, "A team can not have less than 1 Pokémon", Toast.LENGTH_LONG).show()
+        } else {
+            val id = teamlist.indexOf(pokemonToRemove)
+            teamlist.remove(pokemonToRemove)
+            notifyDataSetChanged()
+            (context as TeamActivity).addToCollection(pokemonToRemove)
+        }
     }
 
 
