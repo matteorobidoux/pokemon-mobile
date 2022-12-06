@@ -36,6 +36,9 @@ class MenuActivity: AppCompatActivity() {
             changeActivityWildBattle()
         }
 
+//        binding.changeTeamBtn.setOnClickListener{
+//            changeActivityChangeTeam()
+//        }
     }
 
     private fun changeActivityPokecenter(){
@@ -50,9 +53,15 @@ class MenuActivity: AppCompatActivity() {
         startActivity(pokeMart)
     }
 
-    private fun changeActivityWildBattle(){
+    private fun changeActivityWildBattle() {
         var battle = Intent(applicationContext, BattleActivity::class.java)
         battle.putExtra("trainer", trainer)
         startActivity(battle)
+
+    fun changeActivityChangeTeam() {
+        var formIntent = Intent(applicationContext, TeamActivity::class.java)
+        formIntent.putExtra("trainer", trainer)
+        startActivity(formIntent)
+    }
     }
 }
