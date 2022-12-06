@@ -7,13 +7,14 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.pokemonapp.objects.*
 
-@Database(entities = [Pokemon::class, Move::class, PokemonAndMoves::class], version = 1, exportSchema = false)
-@TypeConverters(StringArrayListTypeConverter::class, MoveArrayListTypeConverter::class)
+@Database(entities = [Pokemon::class, Move::class, PokemonMoveRef::class, Trainer::class, Items::class, PokemonCollection::class, PokemonTeam::class], version = 14, exportSchema = false)
+@TypeConverters(StringArrayListTypeConverter::class, MoveArrayListTypeConverter::class, PokemonArrayListTypeConverter::class, PokemonTeamTypeConverter::class, PokemonCollectionTypeConverter::class, ItemsTypeConverter::class)
 abstract class PokemonRoomDatabase : RoomDatabase() {
 
     abstract fun pokemonDao(): PokemonDao
     abstract fun pokemonWithMoves(): PokemonWithMovesDao
     abstract fun moveDao(): MoveDao
+    abstract fun trainerDao(): TrainerDao
 
     companion object {
         // Singleton prevents multiple instances of database opening at the
@@ -28,7 +29,7 @@ abstract class PokemonRoomDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     PokemonRoomDatabase::class.java,
-                    "poke_database"
+                    "pokemon_database"
                 ).fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance

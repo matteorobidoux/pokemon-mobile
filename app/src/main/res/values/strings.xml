@@ -9,4 +9,6 @@
     <string name="pokemart">Pokemart</string>
     <string name="change_team">Change Team</string>
     <string name="save_game">Save</string>
+    <string name="trainer_dialog_text">Game Saved!</string>
+    <string name="ok_dialog">Ok</string>
 </resources>
