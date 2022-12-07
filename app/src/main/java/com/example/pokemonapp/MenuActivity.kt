@@ -34,7 +34,6 @@ class MenuActivity: AppCompatActivity() {
             trainer = extras.getSerializable("trainer") as Trainer
         }
 
-
         binding.pokecenterBtn.setOnClickListener {
             changeActivityPokecenter()
         }
