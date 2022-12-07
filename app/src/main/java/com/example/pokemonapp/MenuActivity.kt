@@ -34,7 +34,8 @@ class MenuActivity: AppCompatActivity() {
             trainer = extras.getSerializable("trainer") as Trainer
         }
 
-        binding.pokecenterBtn.setOnClickListener{
+
+        binding.pokecenterBtn.setOnClickListener {
             changeActivityPokecenter()
         }
 
@@ -42,33 +43,46 @@ class MenuActivity: AppCompatActivity() {
             lifecycleScope.launch(Dispatchers.IO) {
                 withContext(Dispatchers.IO) {
                     val checkTrainer = pokemonRoomDatabase.trainerDao().getTrainer()
-                    if(checkTrainer == null){
-                       pokemonRoomDatabase.trainerDao().insert(trainer)
+                    if (checkTrainer == null) {
+                        pokemonRoomDatabase.trainerDao().insert(trainer)
                     } else {
                         pokemonRoomDatabase.trainerDao().update(trainer)
                     }
                 }
-                withContext(Dispatchers.Main){
+                withContext(Dispatchers.Main) {
                     var builder = AlertDialog.Builder(this@MenuActivity)
                     var dialogInflater = layoutInflater
                     var dialogView = dialogInflater.inflate(R.layout.trainer_dialog, null)
-                    dialogView.findViewById<TextView>(R.id.trainer_dialog_text).text = "Your Game Has Been Saved!"
+                    dialogView.findViewById<TextView>(R.id.trainer_dialog_text).text =
+                        "Your Game Has Been Saved!"
                     builder.setView(dialogView)
                     var alert = builder.create()
 
                     alert.show()
 
-                    dialogView.findViewById<MaterialButton>(R.id.trainer_dialog_button).setOnClickListener{
-                        alert.dismiss()
-                    }
+                    dialogView.findViewById<MaterialButton>(R.id.trainer_dialog_button)
+                        .setOnClickListener {
+                            alert.dismiss()
+                        }
                 }
             }
         }
+
+        binding.changeTeamBtn.setOnClickListener {
+            changeActivityChangeTeam()
+        }
     }
 
-    private fun changeActivityPokecenter(){
+
+    private fun changeActivityPokecenter() {
         var pokeCenter = Intent(applicationContext, PokecenterActivity::class.java)
         pokeCenter.putExtra("trainer", trainer)
         startActivity(pokeCenter)
+    }
+
+    private fun changeActivityChangeTeam() {
+        var formIntent = Intent(applicationContext, TeamActivity::class.java)
+        formIntent.putExtra("trainer", trainer)
+        startActivity(formIntent)
     }
 }
