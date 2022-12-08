@@ -56,6 +56,9 @@ class Potion: AppCompatActivity() {
     private fun sellPotion(){
         Log.d("TAG", potion.quantity.toString())
         potion.quantity = potion.quantity + 1
+        val funds = bind.moneyContent.text.toString()
+        val newFunds = funds + 20;
+        bind.moneyContent.text.toString() = newFunds
         Log.d("TAG", potion.quantity.toString())
     }
 
