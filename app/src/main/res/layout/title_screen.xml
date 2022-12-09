@@ -38,7 +38,7 @@
             android:textColor="@color/black"
             android:backgroundTint="@color/shade_white"
             android:layout_height="wrap_content"
-            android:text="New Game"/>
+            android:text="@string/new_game"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/load_game"
@@ -49,7 +49,7 @@
             android:backgroundTint="@color/shade_white"
             android:textColor="@color/black"
             android:layout_height="wrap_content"
-            android:text="Load Game"/>
+            android:text="@string/load_game"/>
     </LinearLayout>
 
     <TextView
@@ -57,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Mobile Version"
+        android:text="@string/mobile_version"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,7 +80,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="5dp"
-        android:text="Copyright '22 MR,SL,VP,AT"
+        android:text="@string/copyright_22_mr_sl_vp_at"
         android:textSize="11dp"
         android:textColor="@color/black"
         android:layout_marginTop="5dp"

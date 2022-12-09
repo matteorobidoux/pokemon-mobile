@@ -11,11 +11,11 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.pokemonapp.objects.Pokemon
+import com.example.pokemonapp.objects.Trainer
 
-class CollectionAdapter(var context: Context, var collectionList: MutableList<Pokemon>, var teamAdapter: TeamAdapter) :
+class CollectionAdapter(var context: Context, var trainer:Trainer, var teamAdapter: TeamAdapter) :
     RecyclerView.Adapter<CollectionAdapter.ViewHolder>() {
 
-    private var collectionlist : MutableList<Pokemon> = collectionList.toMutableList()
     private var thisContext : Context = context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,26 +27,26 @@ class CollectionAdapter(var context: Context, var collectionList: MutableList<Po
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val collection = collectionlist[position]
+        val collection = trainer.pokemonCollection.pokemons[position]
         val context = holder.view.context
         holder.imageView.load(collection.frontSprite)
         holder.imageView.setOnClickListener {addToTeam(collection)}
     }
 
     fun addToTeam(pokemonToAdd : Pokemon) {
-        val id = collectionlist.indexOf(pokemonToAdd)
-        collectionlist.remove(pokemonToAdd)
+        val id = trainer.pokemonCollection.pokemons.indexOf(pokemonToAdd)
+        trainer.pokemonCollection.pokemons.remove(pokemonToAdd)
         notifyItemRemoved(id)
         teamAdapter.addTeam(pokemonToAdd)
     }
 
     fun addCollection(pokemonToAdd : Pokemon) {
-        val id = collectionlist.size
-        collectionlist.add(pokemonToAdd)
+        val id = trainer.pokemonCollection.pokemons.size
+        trainer.pokemonCollection.pokemons.add(pokemonToAdd)
         notifyItemInserted(id)
     }
 
-    override fun getItemCount(): Int = collectionlist.size
+    override fun getItemCount(): Int = trainer.pokemonCollection.pokemons.size
 
     // Initializing the Views
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {

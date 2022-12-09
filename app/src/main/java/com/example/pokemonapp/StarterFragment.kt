@@ -13,10 +13,7 @@ import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
 import com.example.pokemonapp.database.PokemonRoomDatabase
 import com.example.pokemonapp.databinding.StarterFragmentBinding
-import com.example.pokemonapp.objects.Move
-import com.example.pokemonapp.objects.Pokemon
-import com.example.pokemonapp.objects.PokemonAndMoves
-import com.example.pokemonapp.objects.Trainer
+import com.example.pokemonapp.objects.*
 import com.google.android.material.button.MaterialButton
 import com.google.gson.JsonElement
 import kotlinx.coroutines.Dispatchers
@@ -152,6 +149,7 @@ class StarterFragment : Fragment(){
                                     jsonObjectMove.get("type").asString
                                 )
                                 moveList.add(pokemonMove)
+                                pokemonRoomDatabase.trainerDao().deleteAll()
                             }
                         }
                         var typeList = ArrayList<String>()
@@ -188,9 +186,10 @@ class StarterFragment : Fragment(){
         lifecycleScope.launch(Dispatchers.IO) {
             withContext(Dispatchers.IO) {
                 moveList.forEach {
-                    var pokemonWithMove = PokemonAndMoves(pokemon.pokemonNumber, it.name)
+                    var pokemonWithMove = PokemonMoveRef(pokemon.pokemonNumber, it.name)
                     pokemonRoomDatabase.pokemonWithMoves().insert(pokemonWithMove)
                     pokemonRoomDatabase.moveDao().insert(it)
+
                 }
                 pokemonRoomDatabase.pokemonDao().insert(pokemon)
             }

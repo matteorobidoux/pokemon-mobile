@@ -1,5 +1,6 @@
 package com.example.pokemonapp
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.TransitionDrawable
@@ -36,30 +37,29 @@ class TeamActivity : AppCompatActivity(){
 
         if (extras != null) {
             trainer = extras.getSerializable("trainer") as Trainer
-            Log.d("TRAINER", trainer.pokemonTeam.pokemons.size.toString())
         }
 
         teamlist = trainer.pokemonTeam.pokemons.toMutableList()
-        Log.d("TRAINER", teamlist.size.toString())
 
         collectionlist = trainer.pokemonCollection.pokemons.toMutableList()
 
 
+        binding.leaveTeam.setOnClickListener {
+            var menuIntent = Intent(applicationContext, MenuActivity::class.java)
+            menuIntent.putExtra("trainer", trainer)
+            startActivity(menuIntent)
+        }
+
         // setting the recycler view for the teams list
         val recyclerViewTeam = findViewById<RecyclerView>(R.id.recyclerviewTeam)
-        adapterTeam = TeamAdapter(this, teamlist)
+        adapterTeam = TeamAdapter(this, trainer)
         recyclerViewTeam.adapter = adapterTeam
         recyclerViewTeam.layoutManager = GridLayoutManager(this, 3)
 
-        // setting the recycler view for the collection list
-        // hardcoded values for collection list for testing purposes
-        //collectionlist.add(teamlist[0])
-        //collectionlist.add(teamlist[0])
-        Log.d("TRAINER", collectionlist.size.toString())
 
         // adding hardcoded data to the colection for testing purposes
         val recyclerViewCollection = findViewById<RecyclerView>(R.id.recyclerviewCollection)
-        adapterCollection = CollectionAdapter(this, collectionlist, adapterTeam)
+        adapterCollection = CollectionAdapter(this, trainer, adapterTeam)
         recyclerViewCollection.adapter = adapterCollection
         recyclerViewCollection.layoutManager = GridLayoutManager(this, 3)
     }

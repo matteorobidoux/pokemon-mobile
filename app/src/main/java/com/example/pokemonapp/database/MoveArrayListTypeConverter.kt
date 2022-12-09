@@ -1,6 +1,7 @@
-package com.example.pokemonapp.objects
+package com.example.pokemonapp.database
 
 import androidx.room.TypeConverter
+import com.example.pokemonapp.objects.Move
 import com.google.gson.Gson
 
 class MoveArrayListTypeConverter {
