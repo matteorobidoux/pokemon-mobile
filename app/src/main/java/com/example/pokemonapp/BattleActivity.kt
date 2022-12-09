@@ -60,7 +60,8 @@ class BattleActivity : AppCompatActivity() {
 
     private fun getOpponent(){
         Log.d(TAG, "fetching opponent")
-        val pokemonToFetch: Int = (1..150).random()
+        val rand = java.util.Random()
+        val pokemonToFetch: Int = rand.nextInt(151 - 1) + 1;
         Log.d(TAG, "fetching #$pokemonToFetch")
         var pokemon: Pokemon
         lifecycleScope.launch(Dispatchers.IO) {

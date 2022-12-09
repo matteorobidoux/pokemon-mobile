@@ -91,12 +91,14 @@ class BagFragment : Fragment(){
             //catches
             Toast.makeText(activity?.applicationContext, "Caught ${pokemon.name}", Toast.LENGTH_SHORT).show()
             val bundle = Bundle()
+            bundle.putSerializable("trainer", trainer)
             bundle.putSerializable("pokemon", pokemon)
             val rename = RenameFragment()
             rename.arguments = bundle
             Log.d(TAG, "arguments passing: ${rename.arguments}")
             rename.show(parentFragmentManager, "Rename")
-            trainer.addPokemon(pokemon)
+
+            Log.d(TAG, "trainer team size: ${trainer.pokemonTeam.pokemons.size}")
 
         } else {
             Toast.makeText(activity?.applicationContext, "PokeBall missed", Toast.LENGTH_SHORT).show()

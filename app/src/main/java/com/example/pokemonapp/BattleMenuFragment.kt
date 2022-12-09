@@ -60,6 +60,7 @@ class BattleMenuFragment : Fragment() {
 
             //handle bag
             binding.bag.setOnClickListener{
+                Log.d(TAG, "TEAM SIZE BEFORE BAG: " + trainer.pokemonTeam.pokemons.size)
                 Log.d(TAG, "clicked on bag")
                 val fragment = BagFragment()
                 val dataToSend = Bundle()

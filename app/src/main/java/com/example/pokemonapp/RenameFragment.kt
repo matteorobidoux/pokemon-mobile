@@ -1,5 +1,6 @@
 package com.example.pokemonapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.pokemonapp.databinding.PokemonRenameDialogueBinding
 import com.example.pokemonapp.objects.Pokemon
+import com.example.pokemonapp.objects.Trainer
 
 class RenameFragment : DialogFragment() {
     var TAG = "DIALOGUE"
@@ -19,6 +21,8 @@ class RenameFragment : DialogFragment() {
 
         if(arguments != null){
             val pokemon: Pokemon = arguments?.getSerializable("pokemon") as Pokemon
+            val trainer: Trainer = arguments?.getSerializable("trainer") as Trainer
+
             Log.d(TAG, "arguments in dialogue: ${pokemon.name}")
 
 
@@ -26,8 +30,13 @@ class RenameFragment : DialogFragment() {
                 pokemon.name = binding.pokemonName.text.toString()
                 Log.d(TAG, "confirmed name: ${binding.pokemonName.text.toString()} || pokemon name: ${pokemon.name}")
                 Toast.makeText(activity?.applicationContext, "${pokemon.name} has been added to your team!", Toast.LENGTH_SHORT).show()
+                trainer.addPokemon(pokemon)
                 dismiss()
-                activity?.finish()
+                //pass trainer + pokemon to menu activity
+                var menuIntent = Intent(activity, MenuActivity::class.java)
+                menuIntent.putExtra("trainer", trainer)
+                activity?.startActivity(menuIntent)
+
             }
         }
 
