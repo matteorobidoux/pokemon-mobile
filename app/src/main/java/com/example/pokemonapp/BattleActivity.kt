@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.pokemonapp.database.PokemonRoomDatabase
+import com.example.pokemonapp.database.PokemonWithMoves
 import com.example.pokemonapp.databinding.ActivityBattleBinding
 import com.example.pokemonapp.databinding.FragmentFightBinding
 import com.example.pokemonapp.objects.*
@@ -152,7 +153,7 @@ class BattleActivity : AppCompatActivity() {
         lifecycleScope.launch(Dispatchers.IO) {
             withContext(Dispatchers.IO) {
                 moveList.forEach {
-                    var pokemonWithMove = PokemonAndMoves(pokemon.pokemonNumber, it.name)
+                    var pokemonWithMove = PokemonMoveRef(pokemon.pokemonNumber, it.name)
                     pokemonRoomDatabase.pokemonWithMoves().insert(pokemonWithMove)
                     pokemonRoomDatabase.moveDao().insert(it)
                 }

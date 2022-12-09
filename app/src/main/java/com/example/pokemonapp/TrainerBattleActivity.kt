@@ -14,7 +14,7 @@ import com.example.pokemonapp.database.PokemonRoomDatabase
 import com.example.pokemonapp.databinding.ActivityTrainerBattleBinding
 import com.example.pokemonapp.objects.Move
 import com.example.pokemonapp.objects.Pokemon
-import com.example.pokemonapp.objects.PokemonAndMoves
+import com.example.pokemonapp.objects.PokemonMoveRef
 import com.example.pokemonapp.objects.Trainer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -174,7 +174,7 @@ class TrainerBattleActivity : AppCompatActivity() {
         lifecycleScope.launch(Dispatchers.IO) {
             withContext(Dispatchers.IO) {
                 moveList.forEach {
-                    var pokemonWithMove = PokemonAndMoves(pokemon.pokemonNumber, it.name)
+                    var pokemonWithMove = PokemonMoveRef(pokemon.pokemonNumber, it.name)
                     pokemonRoomDatabase.pokemonWithMoves().insert(pokemonWithMove)
                     pokemonRoomDatabase.moveDao().insert(it)
                 }

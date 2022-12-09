@@ -66,7 +66,7 @@ class PokecenterActivity : AppCompatActivity() {
         finish();
     }
 
-    
+
 
     private fun heal(){
         lifecycleScope.launch(Dispatchers.IO) {

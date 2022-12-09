@@ -7,8 +7,8 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.pokemonapp.objects.*
 
-@Database(entities = [Pokemon::class, Move::class, PokemonMoveRef::class, Trainer::class, Items::class, PokemonCollection::class, PokemonTeam::class], version = 14, exportSchema = false)
-@TypeConverters(StringArrayListTypeConverter::class, MoveArrayListTypeConverter::class, PokemonArrayListTypeConverter::class, PokemonTeamTypeConverter::class, PokemonCollectionTypeConverter::class, ItemsTypeConverter::class)
+@Database(entities = [Pokemon::class, Move::class, PokemonMoveRef::class, Trainer::class, Items::class, PokemonCollection::class, PokemonTeam::class], version = 15, exportSchema = false)
+@TypeConverters(StringArrayListTypeConverter::class, MoveArrayListTypeConverter::class, PokemonArrayListTypeConverter::class, PokemonTeamTypeConverter::class, PokemonCollectionTypeConverter::class, ItemsArrayListTypeConverter::class)
 abstract class PokemonRoomDatabase : RoomDatabase() {
 
     abstract fun pokemonDao(): PokemonDao
