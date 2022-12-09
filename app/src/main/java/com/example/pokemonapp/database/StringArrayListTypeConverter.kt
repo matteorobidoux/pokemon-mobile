@@ -1,4 +1,4 @@
-package com.example.pokemonapp.objects
+package com.example.pokemonapp.database
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson

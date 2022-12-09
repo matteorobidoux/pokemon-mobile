@@ -40,10 +40,19 @@
             android:label="Menu"></activity>
         <activity
             android:name=".PokecenterActivity"
+<<<<<<< HEAD
             android:label="Pokecenter"></activity>
         <activity
         android:name=".TrainerBattleActivity"
         android:label="TrainerBattle"></activity>
+=======
+            android:label="Pokecenter">
+        </activity>
+        <activity
+            android:name=".TeamActivity"
+            android:label="Team">
+        </activity>
+>>>>>>> 3a8fc5cfba2f9ede3600cbd57188bb7e776be7d1
     </application>
 
 </manifest>
