@@ -77,10 +77,15 @@ class BagFragment : Fragment(){
     }
 
     private fun handleHeal(potion: Items, pokemon: Pokemon, textView: TextView?){
-        pokemon.currentHp += 20
-        Toast.makeText(activity?.applicationContext, "${pokemon.name} was healed by 20!", Toast.LENGTH_SHORT).show()
-        potion.quantity -= 1
-        textView?.text = "${pokemon.name} Lv${pokemon.level}\nHP: ${pokemon.currentHp}/${pokemon.baseStatMaxHp}"
+        if(pokemon.currentHp < pokemon.baseStatMaxHp){
+            pokemon.currentHp += 20
+            Toast.makeText(activity?.applicationContext, "${pokemon.name} was healed by 20!", Toast.LENGTH_SHORT).show()
+            potion.quantity -= 1
+            textView?.text = "${pokemon.name} Lv${pokemon.level}\nHP: ${pokemon.currentHp}/${pokemon.baseStatMaxHp}"
+        } else {
+            Toast.makeText(activity?.applicationContext, "Cant Heal Pokemon already max HP", Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     private fun handleCatch(pokeball: Items, pokemon: Pokemon, trainer: Trainer, imageView: ImageView?){

@@ -1,5 +1,6 @@
 package com.example.pokemonapp
 
+import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -21,7 +22,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class TrainerBattleActivity : AppCompatActivity() {
-    private var TAG = "BATTLE_TRAINER"
+    private var TAG = "OPPONENT_TRAINER"
     lateinit var binding: ActivityTrainerBattleBinding
     private var utils: Utils = Utils()
     private lateinit var pokemonRoomDatabase: PokemonRoomDatabase
@@ -46,6 +47,7 @@ class TrainerBattleActivity : AppCompatActivity() {
         Log.d(TAG, "trainer: ${trainer.pokemonTeam.pokemons}")
 
         generateTrainer()
+//        val oppCurrentPokemon = opponent.pokemonTeam.pokemons[0]
 
 
 
@@ -66,8 +68,13 @@ class TrainerBattleActivity : AppCompatActivity() {
             for(i in (1..teamSize)){
                 getOpponent()
             }
+        }else {
+            getOpponent()
         }
-        handlePokeballRecycler()
+
+
+        Log.d(TAG, "size: ${opponent.pokemonTeam.pokemons.size}")
+
     }
 
     private fun handlePokeballRecycler(){
@@ -77,9 +84,12 @@ class TrainerBattleActivity : AppCompatActivity() {
         val layoutManager: LinearLayoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.HORIZONTAL, true)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
+        handleBattleMenu(trainer, opponentPokemon, opponent)
+
     }
 
     //generate a trainer with up to six pokemon
+    @SuppressLint("SuspiciousIndentation")
     private fun getOpponent(){
         Log.d(TAG, "fetching opponent")
         val pokemonToFetch: Int = (1..150).random()
@@ -133,12 +143,14 @@ class TrainerBattleActivity : AppCompatActivity() {
                         jsonObject.get("sprites").asJsonObject.get("back").asString,
                         moveList
                     )
-                        opponent.addPokemon(pokemon)
+//                        opponent.addPokemon(pokemon)
                     SaveToDatabase(pokemon, moveList)
                     //change ui
                     withContext(Dispatchers.Main){
                         setOpponent(pokemon)
                         handleTextBoxes(trainer.pokemonTeam.pokemons[0], pokemon)
+                        handlePokeballRecycler()
+
                     }
                 }
             } else {
@@ -158,11 +170,13 @@ class TrainerBattleActivity : AppCompatActivity() {
                     databasePokemon.backSprite,
                     databasePokemon.pokemonMoves
                 )
-                opponent.addPokemon(pokemon)
+//                opponent.addPokemon(pokemon)
                 //change ui
                 withContext(Dispatchers.Main){
                     setOpponent(pokemon)
                     handleTextBoxes(trainer.pokemonTeam.pokemons[0], pokemon)
+                    handlePokeballRecycler()
+
                 }
             }
 
@@ -183,14 +197,6 @@ class TrainerBattleActivity : AppCompatActivity() {
         }
     }
 
-    private fun setOpponent(pokemon: Pokemon){
-        val frontUri = Uri.parse(pokemon.frontSprite)
-        binding.enemyPokemon.load(frontUri)
-        opponentPokemon = pokemon
-        Log.d(TAG, "fetched: ${opponentPokemon.name}")
-
-        handleFragment(trainer, pokemon)
-    }
 
     private fun handleTextBoxes(trainer: Pokemon, opponent: Pokemon){
         val oppName = opponent.name
@@ -209,18 +215,50 @@ class TrainerBattleActivity : AppCompatActivity() {
 
     }
 
-    private fun handleFragment(trainer: Trainer, opponent: Pokemon){
+    private fun handleBattleMenu(trainer: Trainer, opponent: Pokemon, oppTrainer: Trainer){
         val fragment: BattleMenuFragment = BattleMenuFragment()
         val dataToSend: Bundle = Bundle()
         dataToSend.putSerializable("trainer", trainer)
         dataToSend.putSerializable("opponent", opponent)
+        dataToSend.putSerializable("oppTrainer", oppTrainer)
         fragment.arguments = dataToSend
-        Log.d(TAG, "main: ${fragment.requireArguments().size()}")
         supportFragmentManager.commit {
             replace(R.id.battle_menu, fragment)
             setReorderingAllowed(true)
             addToBackStack(null)
         }
+
+    }
+
+    private fun setOpponent(pokemon: Pokemon){
+
+        var highestLevel: Int = 0
+        var lowestLevel: Int = 1
+        //getting highest level pokemon on trainer team
+        trainer.pokemonTeam.pokemons.forEach {  poke ->
+            if(poke.level > highestLevel){
+                highestLevel = poke.level
+            }
+        }
+//        Log.d(TAG, "HIGHEST LEVEL: $highestLevel")
+        trainer.pokemonTeam.pokemons.forEach {  poke ->
+            if(poke.level < highestLevel){
+                lowestLevel = poke.level
+            }
+        }
+//        Log.d(TAG, "LOWEST LEVEL: $lowestLevel")
+
+        var oppLevel = ((lowestLevel - 5)..(highestLevel + 5)).random()
+        if(oppLevel <= 0){
+            oppLevel = 1
+        }
+        pokemon.updateLevel(oppLevel)
+        val frontUri = Uri.parse(pokemon.frontSprite)
+        binding.enemyPokemon.load(frontUri)
+        opponent.addPokemon(pokemon)
+        opponentPokemon = opponent.pokemonTeam.pokemons.last()
+//        Log.d(TAG, "first in set: ${opponent.pokemonTeam.pokemons[0].name}")
+
 
     }
 }

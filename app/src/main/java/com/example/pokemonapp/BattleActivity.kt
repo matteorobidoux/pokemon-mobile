@@ -4,26 +4,15 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.pokemonapp.database.PokemonRoomDatabase
-import com.example.pokemonapp.database.PokemonWithMoves
 import com.example.pokemonapp.databinding.ActivityBattleBinding
-import com.example.pokemonapp.databinding.FragmentFightBinding
 import com.example.pokemonapp.objects.*
-import com.google.gson.Gson
-import com.google.gson.JsonObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlin.random.Random
 
 
 private val TAG = "BATTLE"
@@ -166,26 +155,33 @@ class BattleActivity : AppCompatActivity() {
     private fun setOpponent(pokemon: Pokemon){
 
         var highestLevel: Int = 0
-        var lowestLevel: Int = 0
+        var lowestLevel: Int = 1
         //getting highest level pokemon on trainer team
         trainer.pokemonTeam.pokemons.forEach {  poke ->
             if(poke.level > highestLevel){
                 highestLevel = poke.level
             }
         }
+        Log.d(TAG, "HIGHEST LEVEL: $highestLevel")
         trainer.pokemonTeam.pokemons.forEach {  poke ->
             if(poke.level < highestLevel){
                 lowestLevel = poke.level
             }
         }
-        val oppLevel = (lowestLevel..highestLevel).random()
+        Log.d(TAG, "LOWEST LEVEL: $lowestLevel")
+
+
+        var oppLevel = ((lowestLevel - 5)..(highestLevel + 5)).random()
+        if(oppLevel <= 0){
+            oppLevel = 1
+        }
         pokemon.updateLevel(oppLevel)
         val frontUri = Uri.parse(pokemon.frontSprite)
         binding.enemyPokemon.load(frontUri)
         opponent = pokemon
         Log.d(TAG, "fetched: ${opponent.name}")
 
-        handleFragment(trainer, pokemon)
+        handleBattleMenu(trainer, pokemon)
     }
 
     private fun handleTextBoxes(trainer: Pokemon, opponent: Pokemon){
@@ -205,7 +201,7 @@ class BattleActivity : AppCompatActivity() {
 
     }
 
-    private fun handleFragment(trainer:Trainer, opponent:Pokemon){
+    private fun handleBattleMenu(trainer:Trainer, opponent:Pokemon){
         val fragment: BattleMenuFragment = BattleMenuFragment()
         val dataToSend: Bundle = Bundle()
         dataToSend.putSerializable("trainer", trainer)

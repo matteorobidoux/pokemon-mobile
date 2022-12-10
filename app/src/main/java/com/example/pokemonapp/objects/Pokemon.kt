@@ -1,5 +1,6 @@
 package com.example.pokemonapp.objects
 
+import android.util.Log
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -43,10 +44,11 @@ class Pokemon(@PrimaryKey @ColumnInfo(name = "pokemonNumber") val pokemonNumber:
     }
 
     fun calculateExperienceGained(oppenentPokemon: Pokemon) : Boolean{
+        Log.d("LEVEL", "CURRENT LEVEL: ${level}")
         var newMoveAvailable = false
         val prevLevel = level
         experience = (0.3 * oppenentPokemon.baseExperienceReward * oppenentPokemon.level).roundToInt()
-        level = floor(baseExperienceReward.toDouble().pow(1/3)).toInt()
+        level = floor(baseExperienceReward.toDouble().pow(1/3)).toInt() + experience
         if(prevLevel != level){
             increaseStats()
              newMoveAvailable = newMoveAvailable()
@@ -55,6 +57,7 @@ class Pokemon(@PrimaryKey @ColumnInfo(name = "pokemonNumber") val pokemonNumber:
     }
 
     private fun increaseStats(){
+        baseStatAttack = baseStatAttack * (50 + level)/50
         baseStatDefense = baseStatDefense * (50 + level)/50
         baseStatSpecialAttack = baseStatSpecialAttack * (50 + level)/50
         baseStatSpecialDefense = baseStatSpecialDefense * (50 + level)/50
@@ -109,13 +112,8 @@ class Pokemon(@PrimaryKey @ColumnInfo(name = "pokemonNumber") val pokemonNumber:
     fun updateLevel(levelToSet: Int){
         level = levelToSet;
         experience = level*level*level
-        baseStatAttack = pokemonBaseStateAttack * (50 + level)/50
-        baseStatDefense = pokemonBaseStatDefense * (50 + level)/50
-        baseStatSpecialAttack = pokemonBaseStatSpecialAttack * (50 + level)/50
-        baseStatSpecialDefense = pokemonBaseStatSpecialDefense * (50 + level)/50
-        baseStatSpeed = pokemonBaseStatSpeed * (50 + level)/50
-        baseStatMaxHp = pokemonBaseStateMaxHp * (50 + level)/50
-        currentHp = baseStatMaxHp
+        Log.d("LEVEL", "LEVEL: $level, EXPERIENC $experience, FOR $name")
+        increaseStats()
         moves.clear()
         for(move in pokemonMoves){
             if(moves.size < 4 && move.level_learned_at <= level){
