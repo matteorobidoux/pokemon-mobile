@@ -54,21 +54,16 @@ class Potion: AppCompatActivity() {
     }
 
     private fun sellPotion(){
-        Log.d("TAG", potion.quantity.toString())
-        potion.quantity = potion.quantity + 1
-        Log.d("TAG", potion.quantity.toString())
+        if(potion.quantity > 0) {
+            potion.quantity = potion.quantity - 1
+            trainer.money += potion.value
+        }
     }
 
     private fun buyingPotion(){
-        Log.d("TAG", potion.quantity.toString())
-        potion.quantity = potion.quantity - 1
-        Log.d("TAG", potion.quantity.toString())
-        val bag = bind.bagContent.text.toString()
-        Log.d("TAG", bag)
-//        val bag_int = (bag.toInt() + 1)
-//        Log.d("TAG", bag_int.toString())
-//        bind.bagContent.text = bag_int.toString()
-        val new_quantity = trainer.items[1].quantity + 1
-        bind.bagContent.text = new_quantity.toString()
+        if(trainer.money > potion.value) {
+            potion.quantity = potion.quantity + 1
+            trainer.money -= potion.value
+        }
     }
 }

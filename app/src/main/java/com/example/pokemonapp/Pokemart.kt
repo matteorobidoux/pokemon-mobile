@@ -19,7 +19,7 @@ class Pokemart: AppCompatActivity() {
         val extras = intent.extras
         if (extras != null) {
             trainer = extras.getSerializable("trainer") as Trainer
-            Log.d("TRAINER", trainer.pokemonTeam.pokemons.size.toString())
+            binding.moneyTextviewContent.text = trainer.money.toString()
         }
 
         binding.pokePokeballBtn.setOnClickListener {

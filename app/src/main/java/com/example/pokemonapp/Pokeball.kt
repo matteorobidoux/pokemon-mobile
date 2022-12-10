@@ -11,7 +11,6 @@ import com.example.pokemonapp.objects.Trainer
 
 class Pokeball: AppCompatActivity() {
     private lateinit var binding: PokeballBinding
-    lateinit var bind: PokemartBinding
     private lateinit var trainer: Trainer
 
     private val pokeball_txt = "pokeball"
@@ -24,7 +23,6 @@ class Pokeball: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = PokeballBinding.inflate(layoutInflater)
-        bind = PokemartBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val extras = intent.extras
@@ -52,17 +50,17 @@ class Pokeball: AppCompatActivity() {
     }
 
     private fun sellPokeball(){
+        if(pokeball.quantity > 0) {
+            pokeball.quantity = pokeball.quantity - 1
+            trainer.money += pokeball.value
+        }
     }
 
     private fun changePokemartMoney(){
-        Log.d("TAG", pokeball.quantity.toString())
-        pokeball.quantity = pokeball.quantity - 1
-        Log.d("TAG", pokeball.quantity.toString())
-        val bag = bind.bagContent.text.toString()
-        Log.d("TAG", bag)
-        val bag_int = (bag.toInt() + 1)
-        Log.d("TAG", bag_int.toString())
-        bind.bagContent.text = bag_int.toString()
+        if(trainer.money > pokeball.value) {
+            pokeball.quantity = pokeball.quantity + 1
+            trainer.money -= pokeball.value
+        }
     }
 
 }
