@@ -560,6 +560,7 @@ class FightFragment : Fragment() {
     }
 
     private fun handleFaint(pokemon: Pokemon, pokemonTextBox: TextView?){
+        Log.d("OPPONENT_TRAINER", "battle type: $battleType")
         when(battleType){
             "TRAINER" -> {
 

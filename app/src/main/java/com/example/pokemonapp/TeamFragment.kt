@@ -20,6 +20,7 @@ import com.example.pokemonapp.objects.Trainer
 class TeamFragment: Fragment() {
     private val TAG = "TEAM_FRAGMENT"
     lateinit var trainer: Trainer
+    private lateinit var oppTrainer: Trainer
     lateinit var opponent: Pokemon
     lateinit var adapter: TeamRecyclerViewAdapter
     lateinit var binding: TeamFragmentBinding
@@ -34,6 +35,10 @@ class TeamFragment: Fragment() {
         if(arguments != null){
             trainer= arguments?.getSerializable("trainer") as Trainer
             opponent = arguments?.getSerializable("opponent") as Pokemon
+
+            if(arguments?.containsKey("oppTrainer") == true){
+                oppTrainer = arguments?.getSerializable("oppTrainer") as Trainer
+            }
 
             //TODO implement entire team
 
@@ -60,6 +65,9 @@ class TeamFragment: Fragment() {
                 val dataToSend = Bundle()
                 dataToSend.putSerializable("trainer", trainer)
                 dataToSend.putSerializable("opponent", opponent)
+                if(arguments?.containsKey("oppTrainer") == true){
+                    dataToSend.putSerializable("oppTrainer", oppTrainer)
+                }
                 fragment.arguments = dataToSend
                 val fragmentManager = parentFragmentManager
                 fragmentManager.commit {

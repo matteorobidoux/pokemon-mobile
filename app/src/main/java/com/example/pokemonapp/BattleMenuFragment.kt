@@ -135,6 +135,9 @@ class BattleMenuFragment : Fragment() {
                 val dataToSend = Bundle()
                 dataToSend.putSerializable("trainer", trainer)
                 dataToSend.putSerializable("opponent", opponent)
+                if(arguments?.containsKey("oppTrainer") == true){
+                    dataToSend.putSerializable("oppTrainer", oppTrainer)
+                }
                 fragment.arguments = dataToSend
                 val fragmentManager = parentFragmentManager
                 fragmentManager.commit {
