@@ -70,6 +70,7 @@ class StarterFragment : Fragment(){
 
             dialogView.findViewById<MaterialButton>(R.id.yes_pokemon).setOnClickListener{
                 retrievePokemon("squirtle")
+                //alert.dismiss()
             }
 
             dialogView.findViewById<MaterialButton>(R.id.no_pokemon).setOnClickListener{
