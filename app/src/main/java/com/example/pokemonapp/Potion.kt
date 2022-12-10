@@ -61,10 +61,10 @@ class Potion: AppCompatActivity() {
         if(trainer.items[0].quantity > 0) {
             trainer.items[0].quantity = trainer.items[0].quantity - 1
             trainer.money += potion.value
-            Toast.makeText(applicationContext, "POTION SOLD", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, R.string.potion_sold, Toast.LENGTH_SHORT).show()
         }
         else{
-            Toast.makeText(applicationContext, "YOU HAVE 0 POTIONS TO SELL", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, R.string.no_potions, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -72,10 +72,10 @@ class Potion: AppCompatActivity() {
         if(trainer.money > potion.value) {
             trainer.items[0].quantity = trainer.items[0].quantity + 1
             trainer.money -= potion.value
-            Toast.makeText(applicationContext, "POTION PURCHASED", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, R.string.potion_purchase, Toast.LENGTH_SHORT).show()
         }
         else{
-            Toast.makeText(applicationContext, "NOT ENOUGH MONEY TO BUY POTION", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, R.string.potion_no_money, Toast.LENGTH_SHORT).show()
         }
     }
 }

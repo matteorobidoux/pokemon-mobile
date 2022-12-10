@@ -40,7 +40,6 @@ class RenameFragment : DialogFragment() {
             }
         }
 
-
         return binding.root
     }
 }

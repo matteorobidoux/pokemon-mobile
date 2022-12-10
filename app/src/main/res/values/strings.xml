@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">PokemonApp</string>
     <string name="pokecenter_title">Pokémon Center</string>
+    <string name="hello_trainer">Hey there trainer! Whats your name?</string>
     <string name="heal_description">Do you want to heal your Pokémon?</string>
     <string name="main_menu">Main Menu</string>
     <string name="wild_battle">Wild Pokemon Battle</string>
@@ -24,7 +25,6 @@
     <string name="back_text">BACK</string>
     <string name="sell_text">SELL</string>
     <string name="x_text">X</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="potion_bag">Potion:</string>
     <string name="pokeball">Pokeball:</string>
@@ -41,4 +41,12 @@
     <string name="pick_your_starter">Pick Your Starter!</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="potion_sold">POTION SOLD</string>
+    <string name="potion_purchase">POTION PURCHASE"</string>
+    <string name="no_potions">YOU HAVE 0 POTIONS TO SELL</string>
+    <string name="potion_no_money">NOT ENOUGH MONEY TO BUY POTION</string>
+    <string name="pokeball_sold">POKEBALL SOLD</string>
+    <string name="pokeball_purchase">POKEBALL PURCHASE"</string>
+    <string name="no_pokeballs">YOU HAVE 0 POKEBALLS TO SELL</string>
+    <string name="pokeballs_no_money">NOT ENOUGH MONEY TO BUY POKEBALL</string>
 </resources>

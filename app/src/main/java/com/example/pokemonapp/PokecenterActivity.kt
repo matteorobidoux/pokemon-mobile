@@ -9,6 +9,7 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.pokemonapp.databinding.PokecenterBinding
@@ -49,11 +50,10 @@ class PokecenterActivity : AppCompatActivity() {
     private fun setListeners(){
         binding.yesButton.setOnClickListener{
             heal()
-            // alert, display message saying "pokemon has been healed"
-        }
+    }
 
         binding.noButton.setOnClickListener{
-            // alert, display message saying "pokemon has not been healed"
+            Toast.makeText(applicationContext, "POKEMON HAS NOT BEEN HEALED", Toast.LENGTH_SHORT).show()
             backToMain()
         }
     }

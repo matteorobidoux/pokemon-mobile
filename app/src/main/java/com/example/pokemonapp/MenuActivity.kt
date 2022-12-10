@@ -93,9 +93,6 @@ class MenuActivity: AppCompatActivity() {
             changeActivityWildBattle()
         }
 
-//        binding.changeTeamBtn.setOnClickListener{
-//            changeActivityChangeTeam()
-//        }
     }
 
 

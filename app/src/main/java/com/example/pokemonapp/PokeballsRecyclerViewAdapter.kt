@@ -34,9 +34,6 @@ class PokeballsRecyclerViewAdapter internal constructor(context: Context, privat
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val pokemon = mData[position]
         val image = holder.image
-//        val parent = holder.parent
-//        image.load(R.drawable.pokeball)
-//        image.setBackgroundColor(android.R.color.transparent)
     }
 
     // total number of rows
@@ -46,20 +43,10 @@ class PokeballsRecyclerViewAdapter internal constructor(context: Context, privat
     // stores and recycles views as they are scrolled off screen
     inner class ViewHolder internal constructor(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
-//        internal var tv: TextView
-//        internal var parent: LinearLayout
         internal var image: ImageView
 
         init {
             image = itemView.findViewById(R.id.pokeball_image)
-//            tv = itemView.findViewById(R.id.move_name)
-//            parent = itemView.findViewById(R.id.parent)
-//
-//            parent.setOnClickListener {
-//                Log.d(TAG, "in adapter clicking")
-//                onItemClick?.invoke(mData[adapterPosition])
-//
-//            }
         }
     }
 }

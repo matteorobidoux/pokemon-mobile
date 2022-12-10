@@ -365,8 +365,6 @@ class FightFragment : Fragment() {
 
         val types = typeChart.getAsJsonObject("normal").get("normal")
 
-        Log.d(TAG, "arguments: ${arguments?.size()} || types json: $types")
-
         if(arguments != null){
             trainer = arguments?.getSerializable("trainer") as Trainer
             if(arguments?.containsKey("oppTrainer") == true){
@@ -423,8 +421,6 @@ class FightFragment : Fragment() {
         binding.fightCancelButton.setOnClickListener{
             activity?.onBackPressed()
         }
-
-
         return binding.root
     }
 
@@ -432,53 +428,52 @@ class FightFragment : Fragment() {
         //handling accuracy
         val isMiss = Random.nextInt(101)
 
+        if(trainer.baseStatSpeed > opponent.baseStatSpeed){
+            if(trainer.currentHp > 0){
+                //alive
 
-            if(trainer.baseStatSpeed > opponent.baseStatSpeed){
-                if(trainer.currentHp > 0){
-                    //alive
-
-                    // trainer goes first
-                    Log.d(TAG, "Trainer goes first!")
-                    if(isMiss <= move.accuracy){
-                        //landed
-                        Log.d(TAG, "${move.name} Landed!")
-                        val damage = computeDamage(move, trainer, opponent)
-                        val opponentTv: TextView? = activity?.findViewById(R.id.enemy_text_box)
-                        if(!isFaint(damage, opponent)){
-                            handleHit(damage, opponent, opponentTv)
-                        }else {
-                            //opponent fainted
-                            handleFaint(opponent, opponentTv)
-                            //handle win
-                            handleWin(trainer, opponent, battleType)
-                        }
-                    } else {
-                        //missed
-                        Toast.makeText(activity?.applicationContext, "move missed", Toast.LENGTH_SHORT).show()
-                    }
-
-                    //opponent turn
-                    //choose random move for opponent
-                    val oppMove: Move = handleOpponentMove(opponent)
-                    if(isMiss <= oppMove.accuracy){
-                        //landed
-                        Log.d(TAG, "Opponent ${oppMove.name} Landed!")
-                        val damage = computeDamage(oppMove, opponent, trainer)
-                        val trainerTv: TextView? = activity?.findViewById(R.id.trainer_text_box)
-                        if(!isFaint(damage,trainer)){
-                            handleHit(damage, trainer, trainerTv)
-                        } else {
-                            //trainer fainted
-                            handleFaint(trainer, trainerTv)
-                        }
-
-                    } else {
-                        //missed
-                        Toast.makeText(activity?.applicationContext, "opponent missed", Toast.LENGTH_SHORT).show()
+                // trainer goes first
+                Log.d(TAG, "Trainer goes first!")
+                if(isMiss <= move.accuracy){
+                    //landed
+                    Log.d(TAG, "${move.name} Landed!")
+                    val damage = computeDamage(move, trainer, opponent)
+                    val opponentTv: TextView? = activity?.findViewById(R.id.enemy_text_box)
+                    if(!isFaint(damage, opponent)){
+                        handleHit(damage, opponent, opponentTv)
+                    }else {
+                        //opponent fainted
+                        handleFaint(opponent, opponentTv)
+                        //handle win
+                        handleWin(trainer, opponent, battleType)
                     }
                 } else {
-                    Log.d(TAG, "${trainer.name} is FAINTED")
+                    //missed
+                    Toast.makeText(activity?.applicationContext, "move missed", Toast.LENGTH_SHORT).show()
                 }
+
+                //opponent turn
+                //choose random move for opponent
+                val oppMove: Move = handleOpponentMove(opponent)
+                if(isMiss <= oppMove.accuracy){
+                    //landed
+                    Log.d(TAG, "Opponent ${oppMove.name} Landed!")
+                    val damage = computeDamage(oppMove, opponent, trainer)
+                    val trainerTv: TextView? = activity?.findViewById(R.id.trainer_text_box)
+                    if(!isFaint(damage,trainer)){
+                        handleHit(damage, trainer, trainerTv)
+                    } else {
+                        //trainer fainted
+                        handleFaint(trainer, trainerTv)
+                    }
+
+                } else {
+                    //missed
+                    Toast.makeText(activity?.applicationContext, "opponent missed", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Log.d(TAG, "${trainer.name} is FAINTED")
+            }
 
             } else {
                 //opponent goes first
@@ -548,9 +543,7 @@ class FightFragment : Fragment() {
                 }
         }
 
-
     }
-
 
     private fun isFaint(damage: Int, pokemon:Pokemon): Boolean{
         if(pokemon.currentHp - damage <= 0){
@@ -589,7 +582,7 @@ class FightFragment : Fragment() {
 
     private fun computeDamage(move:Move, attacker: Pokemon, defender: Pokemon): Int{
         val textBox: TextView? = activity?.findViewById(R.id.battle_text_box)
-//        fix text box only printng for one pokemon
+//        fix text box only printing for one pokemon
         textBox?.text = "${attacker.name} used ${move.name}"
         Toast.makeText(activity?.applicationContext, "${attacker.name} used ${move.name}", Toast.LENGTH_SHORT).show()
         var baseDamage : Double = 0.00
@@ -635,8 +628,6 @@ class FightFragment : Fragment() {
                 textBox?.text = "${move.name} IS SUPER WEAK!"
             }
 
-
-//        Thread sleep doesnt work for some reason
         Thread.sleep(500)
         Log.d(TAG, "multplier = $multiplier || move type: ${move.type} || move: ${move.name}")
         return multiplier

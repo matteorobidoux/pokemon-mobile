@@ -32,10 +32,6 @@ class BagFragment : Fragment(){
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = BagFragmentBinding.inflate(inflater,container,false)
 
-
-
-        Log.d(TAG, "arguments: ${arguments?.size()}")
-
         if(arguments != null){
             val trainer: Trainer = arguments?.getSerializable("trainer") as Trainer
 
@@ -45,7 +41,7 @@ class BagFragment : Fragment(){
             }else {
                 battleType = "WILD"
             }
-            //TODO implement entire team
+
             val activePokemon = trainer.pokemonTeam.pokemons[0]
             val opponent: Pokemon = arguments?.getSerializable("opponent") as Pokemon
 
@@ -118,14 +114,11 @@ class BagFragment : Fragment(){
             Log.d(TAG, "arguments passing: ${rename.arguments}")
             rename.show(parentFragmentManager, "Rename")
 
-            Log.d(TAG, "trainer team size: ${trainer.pokemonTeam.pokemons.size}")
-
         } else {
             Toast.makeText(activity?.applicationContext, "PokeBall missed", Toast.LENGTH_SHORT).show()
             //misses
         }
 
         pokeball.quantity -= 1
-        Log.d(TAG, "quantity = ${pokeball.quantity}")
     }
 }

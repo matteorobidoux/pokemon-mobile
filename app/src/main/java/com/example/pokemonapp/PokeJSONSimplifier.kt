@@ -99,23 +99,8 @@ fun getPokemonSprites(pokemonResponse: JsonObject): JsonObject{
     sprites.add("front", pokemonResponse["sprites"].asJsonObject["front_default"])
     sprites.add("back", pokemonResponse["sprites"].asJsonObject["back_default"])
 
-
-    /* EXAMPLE: Using GEN 1 grayscale sprites instead of default:
-    sprites.add("front", pokemonResponse["sprites"]
-        .asJsonObject["versions"]
-        .asJsonObject["generation-i"]
-        .asJsonObject["red-blue"]
-        .asJsonObject["front_gray"])
-    sprites.add("front", pokemonResponse["sprites"]
-        .asJsonObject["versions"]
-        .asJsonObject["generation-i"]
-        .asJsonObject["red-blue"]
-        .asJsonObject["back_gray"])
-     */
-
     return sprites
 }
-
 
 /**
  * Parses a pokemon's types
@@ -180,8 +165,6 @@ fun parsePokemonData( pokemonResponse: JsonObject): JsonObject {
     return pokemonResponse
 }
 
-
-
 /**
  * Parses the target of a move
  *
@@ -201,7 +184,6 @@ private fun getMoveTarget(moveResponse: JsonObject): String =
         else -> "OTHER"
     }
 
-
 /**
  * Parses a single move data
  *
@@ -212,7 +194,6 @@ private fun getMoveTarget(moveResponse: JsonObject): String =
  */
 fun parseMoveData(moveResponse: JsonObject): JsonObject {
     val outMove = JsonObject()
-
 
     outMove.add("name", moveResponse["name"])
     outMove.add("maxPP", moveResponse["pp"])
@@ -226,7 +207,6 @@ fun parseMoveData(moveResponse: JsonObject): JsonObject {
         if (moveResponse["power"].isJsonNull) 0 else moveResponse["power"].asInt
     ))
 
-
     outMove.add("damageClass", JsonPrimitive(
         when (moveResponse["damage_class"].asJsonObject["name"].asString) {
             "physical" -> "PHYSICAL"
@@ -234,7 +214,6 @@ fun parseMoveData(moveResponse: JsonObject): JsonObject {
             else -> "SPECIAL"
         }))
     outMove.remove("damage_class")
-
 
     /* A portion of the API response containing a lot of metadata */
     val meta = moveResponse["meta"].asJsonObject
@@ -263,4 +242,3 @@ fun parseMoveData(moveResponse: JsonObject): JsonObject {
     return outMove
 
 }
-

@@ -11,7 +11,7 @@ class FormActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FormActivityBinding.inflate(layoutInflater)
-        binding.profOakText.text = "Hey there trainer! Whats your name?"
+        binding.profOakText.text = "@string/hello_trainer"
         setContentView(binding.root)
     }
 
