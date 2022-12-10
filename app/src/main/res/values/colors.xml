@@ -8,5 +8,13 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="shade_white">#FBFBF8</color>
+    <color name="red">#e83838</color>
+    <color name="darkRed">#884041</color>
+    <color name="yellow">#e19828</color>
+    <color name="darkYellow">#856c3e</color>
+    <color name="green">#5daf28</color>
+    <color name="darkGreen">#506d3f</color>
+    <color name="blue">#2a96d5</color>
+    <color name="darkBLue">#485778</color>
 
 </resources>

@@ -9,4 +9,36 @@
     <string name="pokemart">Pokemart</string>
     <string name="change_team">Change Team</string>
     <string name="save_game">Save</string>
+    <string name="money">Money: $</string>
+    <string name="default_money">100</string>
+    <string name="in_bag">In Bag</string>
+    <string name="default_items">0</string>
+    <string name="pokeball_text">POKEBALL</string>
+    <string name="potion_text">POTION</string>
+    <string name="pokemart_title">POKEMART</string>
+    <string name="pokeball_btn">Pokeball</string>
+    <string name="potion_btn">Potion</string>
+    <string name="poke_potion_text">Heals 20 HP from selected Pokémon.</string>
+    <string name="poke_pokeball_text">Can be used to catch the Pokémon in the wild.</string>
+    <string name="buy_text">BUY</string>
+    <string name="back_text">BACK</string>
+    <string name="sell_text">SELL</string>
+    <string name="x_text">X</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="potion_bag">Potion:</string>
+    <string name="pokeball">Pokeball:</string>
+    <string name="trainer_dialog_text">Game Saved!</string>
+    <string name="ok_dialog">Ok</string>
+    <string name="exit">Exit</string>
+    <string name="new_game">New Game</string>
+    <string name="load_game">Load Game</string>
+    <string name="mobile_version">Mobile Version</string>
+    <string name="copyright_22_mr_sl_vp_at">Copyright \'22 MR,SL,VP,AT</string>
+    <string name="change_team_text">Change Team</string>
+    <string name="your_team">Your Team</string>
+    <string name="your_collection">Your collection</string>
+    <string name="pick_your_starter">Pick Your Starter!</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>
