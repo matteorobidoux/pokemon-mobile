@@ -44,12 +44,20 @@ class Pokemon(@PrimaryKey @ColumnInfo(name = "pokemonNumber") val pokemonNumber:
     }
 
     fun calculateExperienceGained(oppenentPokemon: Pokemon) : Boolean{
-        Log.d("LEVEL", "CURRENT LEVEL: ${level}")
+        Log.d("LEVEL", "CURRENT LEVEL: ${level} | EXPERIENCE: $experience")
         var newMoveAvailable = false
         val prevLevel = level
-        experience = (0.3 * oppenentPokemon.baseExperienceReward * oppenentPokemon.level).roundToInt()
-        level = floor(baseExperienceReward.toDouble().pow(1/3)).toInt() + experience
-        if(prevLevel != level){
+        val experienceGain = (0.3 * oppenentPokemon.baseExperienceReward * oppenentPokemon.level).roundToInt()
+        experience += experienceGain
+        Log.d("LEVEL", "LEVEL AFTER: ${level} | EXPERIENCE AFTER: $experience")
+
+
+        val newLevel = floor(Math.cbrt(experience.toDouble())).toInt()
+        Log.d("LEVEL", "after level calc $newLevel")
+        level = newLevel
+        Log.d("LEVEL", "NEW LEVEL $level")
+        if(prevLevel != newLevel){
+            updateLevel(newLevel)
             increaseStats()
              newMoveAvailable = newMoveAvailable()
         }
