@@ -9,7 +9,6 @@
     <string name="pokemart">Pokemart</string>
     <string name="change_team">Change Team</string>
     <string name="save_game">Save</string>
-<<<<<<< HEAD
     <string name="money">Money: $</string>
     <string name="default_money">100</string>
     <string name="in_bag">In Bag</string>
@@ -29,7 +28,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="potion_bag">Potion:</string>
     <string name="pokeball">Pokeball:</string>
-=======
     <string name="trainer_dialog_text">Game Saved!</string>
     <string name="ok_dialog">Ok</string>
     <string name="exit">Exit</string>
@@ -43,5 +41,4 @@
     <string name="pick_your_starter">Pick Your Starter!</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
->>>>>>> 3a8fc5cfba2f9ede3600cbd57188bb7e776be7d1
 </resources>

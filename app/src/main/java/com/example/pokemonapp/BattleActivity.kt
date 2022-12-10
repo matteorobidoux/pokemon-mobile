@@ -146,7 +146,7 @@ class BattleActivity : AppCompatActivity() {
         lifecycleScope.launch(Dispatchers.IO) {
             withContext(Dispatchers.IO) {
                 moveList.forEach {
-                    var pokemonWithMove = PokemonAndMoves(pokemon.pokemonNumber, it.name)
+                    var pokemonWithMove = PokemonMoveRef(pokemon.pokemonNumber, it.name)
                     pokemonRoomDatabase.pokemonWithMoves().insert(pokemonWithMove)
                     pokemonRoomDatabase.moveDao().insert(it)
                 }
