@@ -1,12 +1,20 @@
 package com.example.pokemonapp.objects
 
+<<<<<<< HEAD
 import android.util.Log
 import androidx.room.Entity
 import com.example.pokemonapp.R
+=======
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+>>>>>>> 3a8fc5cfba2f9ede3600cbd57188bb7e776be7d1
 
 
 @Entity(tableName = "trainer_table")
-class Trainer(var trainerName: String) : java.io.Serializable{
+class Trainer(
+    @ColumnInfo(name="trainerName") val trainerName: String) : java.io.Serializable{
+    @PrimaryKey var id: Int = 0
     var pokemonTeam = PokemonTeam()
     var pokemonCollection = PokemonCollection()
     var items = ArrayList<Items>()

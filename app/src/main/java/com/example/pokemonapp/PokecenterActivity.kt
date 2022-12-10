@@ -1,14 +1,20 @@
 package com.example.pokemonapp
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.TransitionDrawable
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.example.pokemonapp.databinding.PokecenterBinding
 import com.example.pokemonapp.objects.Trainer
+import com.google.android.material.button.MaterialButton
+import kotlinx.coroutines.*
 
 
 class PokecenterActivity : AppCompatActivity() {
@@ -61,11 +67,28 @@ class PokecenterActivity : AppCompatActivity() {
     }
 
     private fun heal(){
-        trainer.pokemonTeam.pokemons.forEach {
-            it.currentHp = it.baseStatMaxHp
-            Log.d("HEAL", "pokemon: ${it.name} || hp: ${it.currentHp}")
+        lifecycleScope.launch(Dispatchers.IO) {
+            withContext(Dispatchers.Main) {
+                trainer.pokemonTeam.pokemons.forEach {
+                    it.currentHp = it.baseStatMaxHp
+                }
+                var mediaPlayer = MediaPlayer.create(applicationContext, R.raw.pokecenter_sound)
+                mediaPlayer.start()
+                delay(4000)
+                var builder = AlertDialog.Builder(this@PokecenterActivity)
+                var dialogInflater = layoutInflater
+                var dialogView = dialogInflater.inflate(R.layout.trainer_dialog, null)
+                dialogView.findViewById<TextView>(R.id.trainer_dialog_text).text = "Your Pokemon Have Been Healed!"
+                builder.setView(dialogView)
+                var alert = builder.create()
+
+                alert.show()
+
+                dialogView.findViewById<MaterialButton>(R.id.trainer_dialog_button).setOnClickListener{
+                    alert.dismiss()
+                    backToMain()
+                }
+            }
         }
-        Log.d("HEAL", "healed pokemon!")
-        backToMain()
     }
 }

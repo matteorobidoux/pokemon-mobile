@@ -1,5 +1,6 @@
 package com.example.pokemonapp
 
+import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -10,11 +11,13 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.pokemonapp.objects.Pokemon
+import com.example.pokemonapp.objects.Trainer
+import com.google.android.material.button.MaterialButton
 
-class TeamAdapter(var context: Context, var teamList: MutableList<Pokemon>) :
+
+class TeamAdapter(var context: Context, var trainer: Trainer) :
     RecyclerView.Adapter<TeamAdapter.ViewHolder>() {
 
-    private var teamlist : MutableList<Pokemon> = teamList.toMutableList()
     private var thisContext : Context = context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,7 +30,7 @@ class TeamAdapter(var context: Context, var teamList: MutableList<Pokemon>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val team = teamlist[position]
+        val team = trainer.pokemonTeam.pokemons[position]
         val context = holder.view.context
         holder.imageView.load(team.frontSprite)
         holder.imageView.setOnClickListener {removeTeam(team)}
@@ -35,29 +38,61 @@ class TeamAdapter(var context: Context, var teamList: MutableList<Pokemon>) :
     }
 
     fun addTeam(pokemonToAdd : Pokemon) {
-        if (teamlist.size >=6){
-            Toast.makeText(thisContext, "A team can not have more than 6 Pokémons", Toast.LENGTH_LONG).show()
+        if (trainer.pokemonTeam.pokemons.size >=6){
+            val inflater =
+                context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+
+            var builder = AlertDialog.Builder(thisContext)
+            var dialogInflater = inflater
+            var dialogView = dialogInflater.inflate(R.layout.trainer_dialog, null)
+            dialogView.findViewById<TextView>(R.id.trainer_dialog_text).text =
+                "Pokemon Team Cannot Have More Than 6 Pokemon!"
+            builder.setView(dialogView)
+            var alert = builder.create()
+
+            alert.show()
+
+            dialogView.findViewById<MaterialButton>(R.id.trainer_dialog_button)
+                .setOnClickListener {
+                    alert.dismiss()
+                }
         } else {
-            val id = teamlist.size
-            teamlist.add(pokemonToAdd)
+            val id = trainer.pokemonTeam.pokemons.size
+            trainer.pokemonTeam.pokemons.add(pokemonToAdd)
             notifyItemInserted(id)
 
         }
     }
 
     fun removeTeam(pokemonToRemove : Pokemon) {
-        if (teamlist.size <= 1){
-            Toast.makeText(thisContext, "A team can not have less than 1 Pokémon", Toast.LENGTH_LONG).show()
+        if (trainer.pokemonTeam.pokemons.size <= 1){
+            val inflater =
+                context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+
+            var builder = AlertDialog.Builder(thisContext)
+            var dialogInflater = inflater
+            var dialogView = dialogInflater.inflate(R.layout.trainer_dialog, null)
+            dialogView.findViewById<TextView>(R.id.trainer_dialog_text).text =
+                "Pokemon Team Cannot Have Less Than 1 Pokemon!"
+            builder.setView(dialogView)
+            var alert = builder.create()
+
+            alert.show()
+
+            dialogView.findViewById<MaterialButton>(R.id.trainer_dialog_button)
+                .setOnClickListener {
+                    alert.dismiss()
+                }
         } else {
-            val id = teamlist.indexOf(pokemonToRemove)
-            teamlist.remove(pokemonToRemove)
+            val id = trainer.pokemonTeam.pokemons.indexOf(pokemonToRemove)
+            trainer.pokemonTeam.pokemons.remove(pokemonToRemove)
             notifyDataSetChanged()
             (context as TeamActivity).addToCollection(pokemonToRemove)
         }
     }
 
 
-    override fun getItemCount(): Int = teamlist.size
+    override fun getItemCount(): Int = trainer.pokemonTeam.pokemons.size
 
 
     // Initializing the Views
