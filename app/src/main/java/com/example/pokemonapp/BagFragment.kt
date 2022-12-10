@@ -22,9 +22,12 @@ import com.example.pokemonapp.objects.Trainer
 class BagFragment : Fragment(){
     private val TAG = "BAG_FRAGMENT"
     lateinit var trainer: Trainer
+    lateinit var oppTrainer: Trainer
     lateinit var opponent: Pokemon
     lateinit var adapter: ItemRecyclerViewAdapter
     lateinit var binding: BagFragmentBinding
+    private lateinit var battleType: String
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = BagFragmentBinding.inflate(inflater,container,false)
@@ -35,6 +38,13 @@ class BagFragment : Fragment(){
 
         if(arguments != null){
             val trainer: Trainer = arguments?.getSerializable("trainer") as Trainer
+
+            if(arguments?.containsKey("oppTrainer") == true){
+                oppTrainer = arguments?.getSerializable("oppTrainer") as Trainer
+                battleType = "TRAINER"
+            }else {
+                battleType = "WILD"
+            }
             //TODO implement entire team
             val activePokemon = trainer.pokemonTeam.pokemons[0]
             val opponent: Pokemon = arguments?.getSerializable("opponent") as Pokemon
@@ -59,7 +69,12 @@ class BagFragment : Fragment(){
                 if(item.quantity > 0){
                     when(item.name){
                         "potion" -> handleHeal(item,activePokemon,trainerTv)
-                        "pokeball" -> handleCatch(item, opponent, trainer, opponentImage)
+                        "pokeball" -> {
+                            when(battleType){
+                                "TRAINER" -> { Toast.makeText(activity?.applicationContext, "CANNOT CATCH TRAINER POKEMON", Toast.LENGTH_SHORT).show()}
+                                "WILD" -> {handleCatch(item, opponent, trainer, opponentImage) }
+                            }
+                        }
                     }
                 }
 

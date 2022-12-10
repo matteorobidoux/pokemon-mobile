@@ -80,6 +80,9 @@ class BattleMenuFragment : Fragment() {
                 }
             }
 
+            //setting text box
+            handleBattleDialogue("WHAT WILL ${activePokemon.name} DO?")
+
             //handle fighting
             binding.fight.setOnClickListener{
                 Log.d(TAG, "clicked fight in the fragment")
@@ -110,6 +113,9 @@ class BattleMenuFragment : Fragment() {
                 val dataToSend = Bundle()
                 dataToSend.putSerializable("trainer", trainer)
                 dataToSend.putSerializable("opponent", opponent)
+                if(arguments?.containsKey("oppTrainer") == true){
+                    dataToSend.putSerializable("oppTrainer", oppTrainer)
+                }
                 fragment.arguments = dataToSend
                 val fragmentManager = parentFragmentManager
                 fragmentManager.commit {
@@ -119,13 +125,22 @@ class BattleMenuFragment : Fragment() {
                 }
             }
 
+
             //handle running
             binding.run.setOnClickListener {
-                Log.d(TAG, "clicked on run")
-                val menu = Intent(activity?.applicationContext, MenuActivity::class.java)
-                menu.putExtra("trainer", trainer)
-                startActivity(menu)
-                activity?.finish()
+                when(battleType){
+                 "WILD" -> {
+                     Log.d(TAG, "clicked on run")
+                     val menu = Intent(activity?.applicationContext, MenuActivity::class.java)
+                     menu.putExtra("trainer", trainer)
+                     startActivity(menu)
+                     activity?.finish()
+                 }
+                 "TRAINER" -> {
+                     Toast.makeText(activity?.applicationContext, "CANNOT RUN FROM TRAINER", Toast.LENGTH_SHORT).show()
+                 }
+                }
+
             }
 
             //handle team
@@ -152,6 +167,11 @@ class BattleMenuFragment : Fragment() {
 
 
         return binding.root
+    }
+
+    fun handleBattleDialogue(text: String){
+        val textbox: TextView? = activity?.findViewById(R.id.battle_text_box)
+        textbox?.text = text
     }
 
     fun handleSwap(trainer: Trainer, trainerType: String): Boolean{

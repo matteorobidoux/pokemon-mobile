@@ -80,7 +80,7 @@
         android:id="@+id/battle_text_box"
         android:layout_width="wrap_content"
         android:layout_height="75dp"
-        android:text="text box"
+        android:text="What will you do..."
         android:paddingTop="5dp"
         android:paddingLeft="15dp"
         android:background="@drawable/battle_text_box" />
