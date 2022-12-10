@@ -15,7 +15,6 @@ import com.example.pokemonapp.database.PokemonRoomDatabase
 import com.example.pokemonapp.databinding.StarterFragmentBinding
 import com.example.pokemonapp.objects.*
 import com.google.android.material.button.MaterialButton
-import com.google.gson.JsonElement
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -152,7 +151,6 @@ class StarterFragment : Fragment(){
                                     jsonObjectMove.get("type").asString
                                 )
                                 moveList.add(pokemonMove)
-                                pokemonRoomDatabase.trainerDao().deleteAll()
                             }
                         }
                         var typeList = ArrayList<String>()

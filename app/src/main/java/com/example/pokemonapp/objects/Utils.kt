@@ -1,12 +1,10 @@
-package com.example.pokemonapp
+package com.example.pokemonapp.objects
 
-import android.content.Context
+import com.example.pokemonapp.parseMoveData
+import com.example.pokemonapp.parsePokemonData
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.google.gson.JsonArray
 import com.google.gson.JsonObject
-import org.json.JSONObject
-import java.io.IOException
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
 

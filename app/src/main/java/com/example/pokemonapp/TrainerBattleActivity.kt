@@ -13,10 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.pokemonapp.database.PokemonRoomDatabase
 import com.example.pokemonapp.databinding.ActivityTrainerBattleBinding
-import com.example.pokemonapp.objects.Move
-import com.example.pokemonapp.objects.Pokemon
-import com.example.pokemonapp.objects.PokemonMoveRef
-import com.example.pokemonapp.objects.Trainer
+import com.example.pokemonapp.objects.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
