@@ -20,6 +20,7 @@ class MenuActivity: AppCompatActivity() {
 
     private lateinit var binding: MenuActivityBinding
     private lateinit var trainer: Trainer
+    private val TAG = "MENU"
     private lateinit var pokemonRoomDatabase: PokemonRoomDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,11 +33,24 @@ class MenuActivity: AppCompatActivity() {
         val extras = intent.extras
         if (extras != null) {
             trainer = extras.getSerializable("trainer") as Trainer
+            Log.d(TAG, "trainer team size: ${trainer.pokemonTeam.pokemons.size}")
         }
 
+        trainer.pokemonTeam.pokemons.forEach { poke ->
+            Log.d(TAG, "${poke.name} : LV ${poke.experience}")
+        }
         binding.pokecenterBtn.setOnClickListener {
             changeActivityPokecenter()
         }
+
+        binding.wildPokeBattleBtn.setOnClickListener{
+            changeActivityWildBattle()
+        }
+
+        binding.trainerBattleBtn.setOnClickListener{
+            changeActivityTrainerBattle()
+        }
+
 
         binding.saveGameBtn.setOnClickListener {
             lifecycleScope.launch(Dispatchers.IO) {
@@ -77,6 +91,18 @@ class MenuActivity: AppCompatActivity() {
         var pokeCenter = Intent(applicationContext, PokecenterActivity::class.java)
         pokeCenter.putExtra("trainer", trainer)
         startActivity(pokeCenter)
+    }
+
+    private fun changeActivityWildBattle(){
+        var battle = Intent(applicationContext, BattleActivity::class.java)
+        battle.putExtra("trainer", trainer)
+        startActivity(battle)
+    }
+
+    private fun changeActivityTrainerBattle() {
+        var battle = Intent(applicationContext, TrainerBattleActivity::class.java)
+        battle.putExtra("trainer", trainer)
+        startActivity(battle)
     }
 
     private fun changeActivityChangeTeam() {

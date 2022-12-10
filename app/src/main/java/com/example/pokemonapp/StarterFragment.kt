@@ -121,6 +121,9 @@ class StarterFragment : Fragment(){
                         databasePokemon.backSprite,
                         databasePokemon.pokemonMoves
                     )
+                    if(pokemon.level <= 1){
+                        pokemon.updateLevel(5)
+                    }
                     trainer.addPokemon(pokemon)
                 }
             }
@@ -169,6 +172,7 @@ class StarterFragment : Fragment(){
                             jsonObject.get("sprites").asJsonObject.get("back").asString,
                             moveList
                         )
+                        pokemon.updateLevel(5)
                         trainer.addPokemon(pokemon!!)
                         SaveToDatabase(pokemon, moveList)
                     }

@@ -3,6 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.pokemonapp">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,6 +19,13 @@
         android:theme="@style/Theme.PokemonApp"
         tools:targetApi="31">
         <activity
+            android:name=".BattleActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".TitleScreenActivity"
             android:exported="true">
             <intent-filter>
@@ -24,24 +36,23 @@
         </activity>
         <activity
             android:name=".FormActivity"
-            android:label="Form">
-        </activity>
+            android:label="Form"></activity>
         <activity
             android:name=".MenuActivity"
-            android:label="Menu">
-        </activity>
+            android:label="Menu"></activity>
         <activity
             android:name=".PokecenterActivity"
-            android:label="Pokecenter">
-        </activity>
+            android:label="Pokecenter"></activity>
+        <activity
+        android:name=".TrainerBattleActivity"
+        android:label="TrainerBattle"></activity>
         <activity
             android:name=".TeamActivity"
             android:label="Team">
         </activity>
     </application>
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+
 
 </manifest>

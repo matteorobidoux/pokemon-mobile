@@ -1,5 +1,6 @@
 package com.example.pokemonapp.objects
 
+import android.util.Log
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -43,11 +44,20 @@ class Pokemon(@PrimaryKey @ColumnInfo(name = "pokemonNumber") val pokemonNumber:
     }
 
     fun calculateExperienceGained(oppenentPokemon: Pokemon) : Boolean{
+        Log.d("LEVEL", "CURRENT LEVEL: ${level} | EXPERIENCE: $experience")
         var newMoveAvailable = false
         val prevLevel = level
-        experience = (0.3 * oppenentPokemon.baseExperienceReward * oppenentPokemon.level).roundToInt()
-        level = floor(baseExperienceReward.toDouble().pow(1/3)).toInt()
-        if(prevLevel != level){
+        val experienceGain = (0.3 * oppenentPokemon.baseExperienceReward * oppenentPokemon.level).roundToInt()
+        experience += experienceGain
+        Log.d("LEVEL", "LEVEL AFTER: ${level} | EXPERIENCE AFTER: $experience")
+
+
+        val newLevel = floor(Math.cbrt(experience.toDouble())).toInt()
+        Log.d("LEVEL", "after level calc $newLevel")
+        level = newLevel
+        Log.d("LEVEL", "NEW LEVEL $level")
+        if(prevLevel != newLevel){
+            updateLevel(newLevel)
             increaseStats()
              newMoveAvailable = newMoveAvailable()
         }
@@ -61,6 +71,7 @@ class Pokemon(@PrimaryKey @ColumnInfo(name = "pokemonNumber") val pokemonNumber:
         baseStatSpecialDefense = baseStatSpecialDefense * (50 + level)/50
         baseStatSpeed = baseStatSpeed * (50 + level)/50
         baseStatMaxHp = baseStatMaxHp * (50 + level)/50
+        currentHp = baseStatMaxHp
     }
 
     private fun newMoveAvailable(): Boolean{
@@ -77,5 +88,46 @@ class Pokemon(@PrimaryKey @ColumnInfo(name = "pokemonNumber") val pokemonNumber:
             }
         }
         return false
+    }
+
+    fun attackOpponent(opposingPokemon: Pokemon, move: Move) : Double{
+        if(move.damageClass == "physical") {
+            val calculaton = ((2 * level) / 5 + 2).toDouble()
+            var baseDamage =
+                (1 / 50 * calculaton * move.power * (baseStatAttack / opposingPokemon.baseStatDefense) + 2).toDouble()
+            for (type in types) {
+                if (move.type == type) {
+                    baseDamage *= 1.5
+                    break
+                }
+                //TODO Create the type chart to calculate effective not effective moves
+            }
+            return baseDamage
+        } else {
+            val calculaton = ((2 * level) / 5 + 2).toDouble()
+            var baseSpecialDamage =
+                (1 / 50 * calculaton * move.power * (baseStatSpecialAttack / opposingPokemon.baseStatSpecialDefense) + 2).toDouble()
+            for (type in types) {
+                if (move.type == type) {
+                    baseSpecialDamage *= 1.5
+                    break
+                }
+                //TODO Create the type chart to calculate effective not effective moves
+            }
+            return baseSpecialDamage
+        }
+    }
+
+    fun updateLevel(levelToSet: Int){
+        level = levelToSet;
+        experience = level*level*level
+        Log.d("LEVEL", "LEVEL: $level, EXPERIENC $experience, FOR $name")
+        increaseStats()
+        moves.clear()
+        for(move in pokemonMoves){
+            if(moves.size < 4 && move.level_learned_at <= level){
+                moves.add(move)
+            }
+        }
     }
 }

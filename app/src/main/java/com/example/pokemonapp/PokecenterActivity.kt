@@ -60,10 +60,13 @@ class PokecenterActivity : AppCompatActivity() {
 
     private fun backToMain(){
         // go back to main
-        var menuIntent = Intent(this, MenuActivity::class.java)
-        menuIntent.putExtra("trainer", trainer)
-        this.startActivity(menuIntent)
+        val menu = Intent(applicationContext, MenuActivity::class.java)
+        menu.putExtra("trainer", trainer)
+        startActivity(menu)
+        finish();
     }
+
+
 
     private fun heal(){
         lifecycleScope.launch(Dispatchers.IO) {
