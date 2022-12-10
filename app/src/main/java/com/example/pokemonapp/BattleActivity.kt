@@ -176,6 +176,7 @@ class BattleActivity : AppCompatActivity() {
             oppLevel = 1
         }
         pokemon.updateLevel(oppLevel)
+        Log.d("OPPONENT_POKE", "CURRENT HP: ${pokemon.currentHp} || MAX HP: ${pokemon.baseStatMaxHp}")
         val frontUri = Uri.parse(pokemon.frontSprite)
         binding.enemyPokemon.load(frontUri)
         opponent = pokemon

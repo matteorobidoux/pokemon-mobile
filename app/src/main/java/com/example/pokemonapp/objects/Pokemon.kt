@@ -71,6 +71,7 @@ class Pokemon(@PrimaryKey @ColumnInfo(name = "pokemonNumber") val pokemonNumber:
         baseStatSpecialDefense = baseStatSpecialDefense * (50 + level)/50
         baseStatSpeed = baseStatSpeed * (50 + level)/50
         baseStatMaxHp = baseStatMaxHp * (50 + level)/50
+        currentHp = baseStatMaxHp
     }
 
     private fun newMoveAvailable(): Boolean{
