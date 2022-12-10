@@ -43,6 +43,11 @@ class MenuActivity: AppCompatActivity() {
             changeActivityPokecenter()
         }
 
+        binding.pokemartBtn.setOnClickListener {
+            changeActivityPokemart()
+
+        }
+
         binding.wildPokeBattleBtn.setOnClickListener{
             changeActivityWildBattle()
         }
@@ -50,7 +55,6 @@ class MenuActivity: AppCompatActivity() {
         binding.trainerBattleBtn.setOnClickListener{
             changeActivityTrainerBattle()
         }
-
 
         binding.saveGameBtn.setOnClickListener {
             lifecycleScope.launch(Dispatchers.IO) {
@@ -84,13 +88,27 @@ class MenuActivity: AppCompatActivity() {
         binding.changeTeamBtn.setOnClickListener {
             changeActivityChangeTeam()
         }
+
+        binding.wildPokeBattleBtn.setOnClickListener{
+            changeActivityWildBattle()
+        }
+
+//        binding.changeTeamBtn.setOnClickListener{
+//            changeActivityChangeTeam()
+//        }
     }
 
 
-    private fun changeActivityPokecenter() {
+    fun changeActivityPokecenter() {
         var pokeCenter = Intent(applicationContext, PokecenterActivity::class.java)
         pokeCenter.putExtra("trainer", trainer)
         startActivity(pokeCenter)
+    }
+
+    fun changeActivityPokemart(){
+        var pokeMart = Intent(applicationContext, Pokemart::class.java)
+        pokeMart.putExtra("trainer", trainer)
+        startActivity(pokeMart)
     }
 
     private fun changeActivityWildBattle(){

@@ -25,9 +25,6 @@ class BattleActivity : AppCompatActivity() {
     private lateinit var opponent: Pokemon
     private lateinit var trainer : Trainer
 
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBattleBinding.inflate(layoutInflater)
@@ -43,8 +40,6 @@ class BattleActivity : AppCompatActivity() {
 //        Log.d(TAG, "main: opponent: ${opponent?.name}")
         val backUri = Uri.parse(trainer.pokemonTeam.pokemons[0].backSprite)
         binding.trainerPokemon.load(backUri)
-
-
 
     }
 

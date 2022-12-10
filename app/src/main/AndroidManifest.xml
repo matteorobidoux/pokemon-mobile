@@ -36,23 +36,37 @@
         </activity>
         <activity
             android:name=".FormActivity"
-            android:label="Form"></activity>
+            android:label="Form">
+        </activity>
         <activity
             android:name=".MenuActivity"
-            android:label="Menu"></activity>
+            android:label="Menu">
+        </activity>
         <activity
             android:name=".PokecenterActivity"
-            android:label="Pokecenter"></activity>
+            android:label="Pokecenter">
+        </activity>
+
         <activity
         android:name=".TrainerBattleActivity"
-        android:label="TrainerBattle"></activity>
+        android:label="TrainerBattle">
+        </activity>
+        <activity
+            android:name=".Pokemart"
+            android:label="Pokemart">
+        </activity>
+        <activity
+            android:name=".Pokeball"
+            android:label="Pokeball">
+        </activity>
+        <activity
+            android:name=".Potion"
+            android:label="Potion">
+        </activity>
+
         <activity
             android:name=".TeamActivity"
             android:label="Team">
         </activity>
     </application>
-
-
-
-
 </manifest>
