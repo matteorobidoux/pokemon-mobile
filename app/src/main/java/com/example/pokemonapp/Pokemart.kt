@@ -1,15 +1,19 @@
 package com.example.pokemonapp
 
+import android.content.ClipData
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pokemonapp.databinding.PokemartBinding
+import com.example.pokemonapp.objects.Items
 import com.example.pokemonapp.objects.Trainer
 
 class Pokemart: AppCompatActivity() {
     private lateinit var binding: PokemartBinding
     private lateinit var trainer: Trainer
+    lateinit var pokeball : Items
+    lateinit var potion : Items
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +24,8 @@ class Pokemart: AppCompatActivity() {
         if (extras != null) {
             trainer = extras.getSerializable("trainer") as Trainer
             binding.moneyTextviewContent.text = trainer.money.toString()
+            binding.bagContentPotion.text = trainer.items[0].quantity.toString()
+            binding.bagContentPokeball.text = trainer.items[1].quantity.toString()
         }
 
         binding.pokePokeballBtn.setOnClickListener {

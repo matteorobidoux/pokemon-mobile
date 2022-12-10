@@ -62,18 +62,46 @@
                     android:padding="5dp"
                     android:text="@string/default_money">
                 </TextView>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout_bag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:orientation="horizontal"
+                android:weightSum="5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent">
 
                 <TextView
-                    android:id="@+id/in_bag_view"
+                    android:id="@+id/in_bag_potion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:padding="5dp"
-                    android:text="@string/in_bag">
+                    android:padding="2dp"
+                    android:text="@string/potion_bag">
                 </TextView>
 
                 <TextView
-                    android:id="@+id/bag_content"
+                    android:id="@+id/bag_content_potion"
+                    android:layout_width="32dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="2dp"
+                    android:text="@string/default_items"></TextView>
+
+                <TextView
+                    android:id="@+id/in_bag_pokeball"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="2dp"
+                    android:text="@string/pokeball">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/bag_content_pokeball"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

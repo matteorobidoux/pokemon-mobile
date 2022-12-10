@@ -11,7 +11,7 @@
     <string name="save_game">Save</string>
     <string name="money">Money: $</string>
     <string name="default_money">100</string>
-    <string name="in_bag">In Bag: </string>
+    <string name="in_bag">In Bag</string>
     <string name="default_items">0</string>
     <string name="pokeball_text">POKEBALL</string>
     <string name="potion_text">POTION</string>
@@ -26,4 +26,6 @@
     <string name="x_text">X</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="potion_bag">Potion:</string>
+    <string name="pokeball">Pokeball:</string>
 </resources>

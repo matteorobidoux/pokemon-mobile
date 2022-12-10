@@ -54,15 +54,15 @@ class Potion: AppCompatActivity() {
     }
 
     private fun sellPotion(){
-        if(potion.quantity > 0) {
-            potion.quantity = potion.quantity - 1
+        if(trainer.items[0].quantity > 0) {
+            trainer.items[0].quantity = trainer.items[0].quantity - 1
             trainer.money += potion.value
         }
     }
 
     private fun buyingPotion(){
         if(trainer.money > potion.value) {
-            potion.quantity = potion.quantity + 1
+            trainer.items[0].quantity = trainer.items[0].quantity + 1
             trainer.money -= potion.value
         }
     }

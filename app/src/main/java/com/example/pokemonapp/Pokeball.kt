@@ -50,15 +50,15 @@ class Pokeball: AppCompatActivity() {
     }
 
     private fun sellPokeball(){
-        if(pokeball.quantity > 0) {
-            pokeball.quantity = pokeball.quantity - 1
+        if(trainer.items[1].quantity > 0) {
+            trainer.items[1].quantity = trainer.items[1].quantity - 1
             trainer.money += pokeball.value
         }
     }
 
     private fun changePokemartMoney(){
         if(trainer.money > pokeball.value) {
-            pokeball.quantity = pokeball.quantity + 1
+            trainer.items[1].quantity = trainer.items[1].quantity + 1
             trainer.money -= pokeball.value
         }
     }
