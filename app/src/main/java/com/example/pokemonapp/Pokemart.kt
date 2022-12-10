@@ -2,6 +2,9 @@ package com.example.pokemonapp
 
 import android.content.ClipData
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.TransitionDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -12,8 +15,6 @@ import com.example.pokemonapp.objects.Trainer
 class Pokemart: AppCompatActivity() {
     private lateinit var binding: PokemartBinding
     private lateinit var trainer: Trainer
-    lateinit var pokeball : Items
-    lateinit var potion : Items
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +28,7 @@ class Pokemart: AppCompatActivity() {
             binding.bagContentPotion.text = trainer.items[0].quantity.toString()
             binding.bagContentPokeball.text = trainer.items[1].quantity.toString()
         }
+        animateBG();
 
         binding.pokePokeballBtn.setOnClickListener {
             changeActivityPokeball()
@@ -39,6 +41,13 @@ class Pokemart: AppCompatActivity() {
         binding.pokemartBackBtn.setOnClickListener {
             changeActivityBack()
         }
+    }
+
+    private fun animateBG(){
+        val mColors = arrayOf(ColorDrawable(Color.WHITE), ColorDrawable(Color.BLACK))
+        val mTransition = TransitionDrawable(mColors)
+        binding.scrollingPokemart.background = mTransition
+        mTransition.startTransition(2000)
     }
 
     private fun changeActivityPokeball(){

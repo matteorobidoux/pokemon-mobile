@@ -7,6 +7,7 @@
     android:layout_margin="10dp">
 
     <ScrollView
+        android:id="@+id/scrolling_pokemart"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -28,6 +29,7 @@
                 android:padding="20dp"
                 android:text="@string/pokemart_title"
                 android:textSize="30sp"
+                android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -50,7 +52,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="5dp"
-                    android:text="@string/money">
+                    android:text="@string/money"
+                    android:textColor="@color/white">
                 </TextView>
 
                 <TextView
@@ -60,7 +63,8 @@
                     android:layout_weight="1"
                     android:layout_marginEnd="25dp"
                     android:padding="5dp"
-                    android:text="@string/default_money">
+                    android:text="@string/default_money"
+                    android:textColor="@color/white">
                 </TextView>
             </LinearLayout>
             <LinearLayout
@@ -80,7 +84,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="2dp"
-                    android:text="@string/potion_bag">
+                    android:text="@string/potion_bag"
+                    android:textColor="@color/white">
                 </TextView>
 
                 <TextView
@@ -89,7 +94,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="2dp"
-                    android:text="@string/default_items"></TextView>
+                    android:text="@string/default_items"
+                    android:textColor="@color/white">
+                </TextView>
 
                 <TextView
                     android:id="@+id/in_bag_pokeball"
@@ -97,7 +104,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="2dp"
-                    android:text="@string/pokeball">
+                    android:text="@string/pokeball"
+                    android:textColor="@color/white">
                 </TextView>
 
                 <TextView
@@ -106,7 +114,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="5dp"
-                    android:text="@string/default_items">
+                    android:text="@string/default_items"
+                    android:textColor="@color/white">
                 </TextView>
 
             </LinearLayout>
