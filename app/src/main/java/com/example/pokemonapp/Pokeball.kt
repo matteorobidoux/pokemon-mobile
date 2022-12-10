@@ -3,6 +3,7 @@ package com.example.pokemonapp
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pokemonapp.databinding.PokeballBinding
 import com.example.pokemonapp.databinding.PokemartBinding
@@ -53,6 +54,10 @@ class Pokeball: AppCompatActivity() {
         if(trainer.items[1].quantity > 0) {
             trainer.items[1].quantity = trainer.items[1].quantity - 1
             trainer.money += pokeball.value
+            Toast.makeText(applicationContext, "POKEBALL SOLD", Toast.LENGTH_SHORT).show()
+        }
+        else{
+            Toast.makeText(applicationContext, "YOU HAVE 0 POKEBALLS TO SELL", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -60,6 +65,10 @@ class Pokeball: AppCompatActivity() {
         if(trainer.money > pokeball.value) {
             trainer.items[1].quantity = trainer.items[1].quantity + 1
             trainer.money -= pokeball.value
+            Toast.makeText(applicationContext, "POKEBALL PURCHASED", Toast.LENGTH_SHORT).show()
+        }
+        else{
+            Toast.makeText(applicationContext, "NOT ENOUGH MONEY TO BUY POKEBALL", Toast.LENGTH_SHORT).show()
         }
     }
 

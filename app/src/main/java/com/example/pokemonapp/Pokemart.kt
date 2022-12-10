@@ -28,7 +28,6 @@ class Pokemart: AppCompatActivity() {
             binding.bagContentPotion.text = trainer.items[0].quantity.toString()
             binding.bagContentPokeball.text = trainer.items[1].quantity.toString()
         }
-        animateBG();
 
         binding.pokePokeballBtn.setOnClickListener {
             changeActivityPokeball()
@@ -41,13 +40,6 @@ class Pokemart: AppCompatActivity() {
         binding.pokemartBackBtn.setOnClickListener {
             changeActivityBack()
         }
-    }
-
-    private fun animateBG(){
-        val mColors = arrayOf(ColorDrawable(Color.WHITE), ColorDrawable(Color.BLACK))
-        val mTransition = TransitionDrawable(mColors)
-        binding.scrollingPokemart.background = mTransition
-        mTransition.startTransition(2000)
     }
 
     private fun changeActivityPokeball(){

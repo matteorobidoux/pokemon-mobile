@@ -1,8 +1,12 @@
 package com.example.pokemonapp
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.TransitionDrawable
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pokemonapp.databinding.PokemartBinding
 import com.example.pokemonapp.databinding.PotionBinding
@@ -57,6 +61,10 @@ class Potion: AppCompatActivity() {
         if(trainer.items[0].quantity > 0) {
             trainer.items[0].quantity = trainer.items[0].quantity - 1
             trainer.money += potion.value
+            Toast.makeText(applicationContext, "POTION SOLD", Toast.LENGTH_SHORT).show()
+        }
+        else{
+            Toast.makeText(applicationContext, "YOU HAVE 0 POTIONS TO SELL", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -64,6 +72,10 @@ class Potion: AppCompatActivity() {
         if(trainer.money > potion.value) {
             trainer.items[0].quantity = trainer.items[0].quantity + 1
             trainer.money -= potion.value
+            Toast.makeText(applicationContext, "POTION PURCHASED", Toast.LENGTH_SHORT).show()
+        }
+        else{
+            Toast.makeText(applicationContext, "NOT ENOUGH MONEY TO BUY POTION", Toast.LENGTH_SHORT).show()
         }
     }
 }
