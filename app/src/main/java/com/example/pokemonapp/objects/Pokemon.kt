@@ -55,6 +55,7 @@ class Pokemon(@PrimaryKey @ColumnInfo(name = "pokemonNumber") val pokemonNumber:
     }
 
     private fun increaseStats(){
+        baseStatAttack = baseStatAttack * (50 + level)/50
         baseStatDefense = baseStatDefense * (50 + level)/50
         baseStatSpecialAttack = baseStatSpecialAttack * (50 + level)/50
         baseStatSpecialDefense = baseStatSpecialDefense * (50 + level)/50
@@ -76,33 +77,5 @@ class Pokemon(@PrimaryKey @ColumnInfo(name = "pokemonNumber") val pokemonNumber:
             }
         }
         return false
-    }
-
-    fun attackOpponent(opposingPokemon: Pokemon, move: Move) : Double{
-        if(move.damageClass == "physical") {
-            val calculaton = ((2 * level) / 5 + 2).toDouble()
-            var baseDamage =
-                (1 / 50 * calculaton * move.power * (baseStatAttack / opposingPokemon.baseStatDefense) + 2).toDouble()
-            for (type in types) {
-                if (move.type == type) {
-                    baseDamage *= 1.5
-                    break
-                }
-                //TODO Create the type chart to calculate effective not effective moves
-            }
-            return baseDamage
-        } else {
-            val calculaton = ((2 * level) / 5 + 2).toDouble()
-            var baseSpecialDamage =
-                (1 / 50 * calculaton * move.power * (baseStatSpecialAttack / opposingPokemon.baseStatSpecialDefense) + 2).toDouble()
-            for (type in types) {
-                if (move.type == type) {
-                    baseSpecialDamage *= 1.5
-                    break
-                }
-                //TODO Create the type chart to calculate effective not effective moves
-            }
-            return baseSpecialDamage
-        }
     }
 }

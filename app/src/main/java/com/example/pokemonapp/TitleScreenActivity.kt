@@ -4,20 +4,24 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
-import androidx.appcompat.app.AppCompatActivity
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.net.wifi.WifiManager
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModel
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.pokemonapp.database.PokemonRoomDatabase
 import com.example.pokemonapp.databinding.TitleScreenBinding
 import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.net.URL
+import javax.net.ssl.HttpsURLConnection
+
 
 class TitleScreenActivity : AppCompatActivity() {
 
@@ -91,5 +95,4 @@ class TitleScreenActivity : AppCompatActivity() {
             }
         }
     }
-
 }
