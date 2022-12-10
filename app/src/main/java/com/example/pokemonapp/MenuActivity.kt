@@ -36,6 +36,9 @@ class MenuActivity: AppCompatActivity() {
             Log.d(TAG, "trainer team size: ${trainer.pokemonTeam.pokemons.size}")
         }
 
+        trainer.pokemonTeam.pokemons.forEach { poke ->
+            Log.d(TAG, "${poke.name} : LV ${poke.experience}")
+        }
         binding.pokecenterBtn.setOnClickListener {
             changeActivityPokecenter()
         }

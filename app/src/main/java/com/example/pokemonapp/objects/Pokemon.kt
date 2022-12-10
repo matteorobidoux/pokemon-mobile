@@ -105,4 +105,22 @@ class Pokemon(@PrimaryKey @ColumnInfo(name = "pokemonNumber") val pokemonNumber:
             return baseSpecialDamage
         }
     }
+
+    fun updateLevel(levelToSet: Int){
+        level = levelToSet;
+        experience = level*level*level
+        baseStatAttack = pokemonBaseStateAttack * (50 + level)/50
+        baseStatDefense = pokemonBaseStatDefense * (50 + level)/50
+        baseStatSpecialAttack = pokemonBaseStatSpecialAttack * (50 + level)/50
+        baseStatSpecialDefense = pokemonBaseStatSpecialDefense * (50 + level)/50
+        baseStatSpeed = pokemonBaseStatSpeed * (50 + level)/50
+        baseStatMaxHp = pokemonBaseStateMaxHp * (50 + level)/50
+        currentHp = baseStatMaxHp
+        moves.clear()
+        for(move in pokemonMoves){
+            if(moves.size < 4 && move.level_learned_at <= level){
+                moves.add(move)
+            }
+        }
+    }
 }

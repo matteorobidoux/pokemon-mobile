@@ -350,6 +350,7 @@ class FightFragment : Fragment() {
   }
 }"""
     private lateinit var typeChart: JsonObject
+    private lateinit var trainer: Trainer
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -363,7 +364,7 @@ class FightFragment : Fragment() {
         Log.d(TAG, "arguments: ${arguments?.size()} || types json: $types")
 
         if(arguments != null){
-            val trainer: Trainer = arguments?.getSerializable("trainer") as Trainer
+            trainer = arguments?.getSerializable("trainer") as Trainer
             val opponent: Pokemon = arguments?.getSerializable("opponent") as Pokemon
             val activePokemon: Pokemon = trainer.pokemonTeam.pokemons[0]
 
@@ -499,9 +500,11 @@ class FightFragment : Fragment() {
 
     private fun handleWin(winner: Pokemon, opponent: Pokemon){
         val expGain : Int = (0.3 * opponent.baseExperienceReward * opponent.level).toInt()
-        winner.experience += expGain
+        winner.calculateExperienceGained(opponent)
         Toast.makeText(activity?.applicationContext, "${winner.name} Gained $expGain!", Toast.LENGTH_SHORT).show()
-        activity?.finish()
+        var menuIntent = Intent(activity, MenuActivity::class.java)
+        menuIntent.putExtra("trainer", trainer)
+        activity?.startActivity(menuIntent)
     }
 
 
@@ -522,6 +525,7 @@ class FightFragment : Fragment() {
 
     private fun handleOpponentMove(opponent: Pokemon): Move {
         val availableMoves = opponent.moves.size
+        Log.d(TAG, "BOUND: "+ availableMoves)
         return opponent.moves[Random.nextInt(availableMoves)]
     }
 

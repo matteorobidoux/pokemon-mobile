@@ -117,6 +117,7 @@ class BattleActivity : AppCompatActivity() {
                         SaveToDatabase(pokemon, moveList)
                             //change ui
                             withContext(Dispatchers.Main){
+
                                 setOpponent(pokemon)
                                 handleTextBoxes(trainer.pokemonTeam.pokemons[0], pokemon)
                             }
@@ -163,6 +164,22 @@ class BattleActivity : AppCompatActivity() {
     }
 
     private fun setOpponent(pokemon: Pokemon){
+
+        var highestLevel: Int = 0
+        var lowestLevel: Int = 0
+        //getting highest level pokemon on trainer team
+        trainer.pokemonTeam.pokemons.forEach {  poke ->
+            if(poke.level > highestLevel){
+                highestLevel = poke.level
+            }
+        }
+        trainer.pokemonTeam.pokemons.forEach {  poke ->
+            if(poke.level < highestLevel){
+                lowestLevel = poke.level
+            }
+        }
+        val oppLevel = (lowestLevel..highestLevel).random()
+        pokemon.updateLevel(oppLevel)
         val frontUri = Uri.parse(pokemon.frontSprite)
         binding.enemyPokemon.load(frontUri)
         opponent = pokemon
