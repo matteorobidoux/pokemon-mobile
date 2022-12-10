@@ -33,9 +33,12 @@ class MenuActivity: AppCompatActivity() {
         val extras = intent.extras
         if (extras != null) {
             trainer = extras.getSerializable("trainer") as Trainer
-            Log.d(TAG, "trainer: ${trainer.pokemonTeam.pokemons[0].currentHp}")
+            Log.d(TAG, "trainer team size: ${trainer.pokemonTeam.pokemons.size}")
         }
 
+        trainer.pokemonTeam.pokemons.forEach { poke ->
+            Log.d(TAG, "${poke.name} : LV ${poke.experience}")
+        }
         binding.pokecenterBtn.setOnClickListener {
             changeActivityPokecenter()
         }
@@ -43,6 +46,14 @@ class MenuActivity: AppCompatActivity() {
         binding.pokemartBtn.setOnClickListener {
             changeActivityPokemart()
 
+        }
+
+        binding.wildPokeBattleBtn.setOnClickListener{
+            changeActivityWildBattle()
+        }
+
+        binding.trainerBattleBtn.setOnClickListener{
+            changeActivityTrainerBattle()
         }
 
         binding.saveGameBtn.setOnClickListener {
@@ -100,13 +111,19 @@ class MenuActivity: AppCompatActivity() {
         startActivity(pokeMart)
     }
 
-    fun changeActivityWildBattle() {
+    private fun changeActivityWildBattle(){
         var battle = Intent(applicationContext, BattleActivity::class.java)
         battle.putExtra("trainer", trainer)
         startActivity(battle)
     }
 
-    fun changeActivityChangeTeam() {
+    private fun changeActivityTrainerBattle() {
+        var battle = Intent(applicationContext, TrainerBattleActivity::class.java)
+        battle.putExtra("trainer", trainer)
+        startActivity(battle)
+    }
+
+    private fun changeActivityChangeTeam() {
         var formIntent = Intent(applicationContext, TeamActivity::class.java)
         formIntent.putExtra("trainer", trainer)
         startActivity(formIntent)

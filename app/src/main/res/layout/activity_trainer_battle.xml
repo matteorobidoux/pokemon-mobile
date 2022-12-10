@@ -15,29 +15,36 @@
         android:background="@drawable/battle_floor"
         android:weightSum="2"
         >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/pokeballs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"/>
 
         <LinearLayout
             android:id="@+id/enemy_pokemon_container"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:orientation="horizontal"
             android:layout_gravity="top"
             android:layout_weight="1"
-            android:orientation="horizontal">
-
+            >
             <TextView
                 android:id="@+id/enemy_text_box"
                 android:layout_width="250dp"
                 android:layout_height="50dp"
-                android:layout_gravity="center"
                 android:background="@drawable/pokemon_dialogue_right"
                 android:padding="10dp"
-                android:text="Name    Lv 1\nHP: 20" />
-
+                android:text="Name    Lv 1\nHP: 20"
+                android:layout_gravity="center"
+                />
             <ImageView
                 android:id="@+id/enemy_pokemon"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:contentDescription="enemy pokemon" />
+                android:contentDescription="enemy pokemon"
+                android:src="@drawable/bulbasaur"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -54,6 +61,7 @@
                 android:layout_height="200dp"
                 android:contentDescription="trainer pokemon"
                 android:layout_weight="1"
+                android:src="@drawable/bulbasaur"
                 />
             <TextView
                 android:id="@+id/trainer_text_box"
@@ -72,7 +80,7 @@
         android:id="@+id/battle_text_box"
         android:layout_width="wrap_content"
         android:layout_height="75dp"
-        android:text="What will you do ..."
+        android:text="What will you do..."
         android:paddingTop="5dp"
         android:paddingLeft="15dp"
         android:background="@drawable/battle_text_box" />

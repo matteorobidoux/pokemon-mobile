@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.commit
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokemonapp.databinding.FragmentFightBinding
@@ -350,6 +351,10 @@ class FightFragment : Fragment() {
   }
 }"""
     private lateinit var typeChart: JsonObject
+    private lateinit var trainer: Trainer
+    private lateinit var oppTrainer: Trainer
+    private lateinit var opponent: Pokemon
+    private lateinit var battleType: String
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -363,11 +368,23 @@ class FightFragment : Fragment() {
         Log.d(TAG, "arguments: ${arguments?.size()} || types json: $types")
 
         if(arguments != null){
-            val trainer: Trainer = arguments?.getSerializable("trainer") as Trainer
-            val opponent: Pokemon = arguments?.getSerializable("opponent") as Pokemon
+            trainer = arguments?.getSerializable("trainer") as Trainer
+            if(arguments?.containsKey("oppTrainer") == true){
+                oppTrainer = arguments?.getSerializable("oppTrainer") as Trainer
+
+            }
+            battleType = arguments?.getString("battleType") as String
+
+            if(battleType == "TRAINER"){
+                opponent = oppTrainer.pokemonTeam.pokemons.last()
+
+            } else {
+                opponent= arguments?.getSerializable("opponent") as Pokemon
+            }
+
             val activePokemon: Pokemon = trainer.pokemonTeam.pokemons[0]
 
-            Log.d(TAG, "GOT TRAINER: ${trainer.trainerName}")
+            Log.d("LEVEL", "OPPONENT IS : ${opponent.name}")
             //recycler view Setup
             val activity = activity
             val recyclerView: RecyclerView = binding.moves
@@ -382,7 +399,24 @@ class FightFragment : Fragment() {
                 Log.d(TAG, "clicked ${move.name} || acc: ${move.accuracy} || damageClass: ${move.damageClass} || damage: ${move.power} || type: ${move.type}")
                 // check if pokemon are alive
                 handleFight(activePokemon, opponent, move)
-                activity?.onBackPressed()
+
+
+
+                val fragment = BattleMenuFragment()
+                val dataToSend = Bundle()
+                dataToSend.putSerializable("trainer", trainer)
+                if(arguments?.containsKey("oppTrainer") == true){
+                    dataToSend.putSerializable("oppTrainer", oppTrainer)
+                }
+                dataToSend.putSerializable("opponent", opponent)
+                dataToSend.putString("battleType", battleType)
+                fragment.arguments = dataToSend
+                val fragmentManager = parentFragmentManager
+                fragmentManager.commit {
+                    replace(R.id.battle_menu, fragment)
+                    setReorderingAllowed(true)
+                    addToBackStack(null)
+                }
             }
         }
 
@@ -416,7 +450,7 @@ class FightFragment : Fragment() {
                             //opponent fainted
                             handleFaint(opponent, opponentTv)
                             //handle win
-                            handleWin(trainer, opponent)
+                            handleWin(trainer, opponent, battleType)
                         }
                     } else {
                         //missed
@@ -483,7 +517,7 @@ class FightFragment : Fragment() {
                             //opponent fainted
                             handleFaint(opponent, opponentTv)
                             //handle win
-                            handleWin(trainer, opponent)
+                            handleWin(trainer, opponent, battleType)
                         }
                     } else {
                         //missed
@@ -497,11 +531,24 @@ class FightFragment : Fragment() {
             }
     }
 
-    private fun handleWin(winner: Pokemon, opponent: Pokemon){
+    private fun handleWin(winner: Pokemon, opponent: Pokemon, battleType: String){
         val expGain : Int = (0.3 * opponent.baseExperienceReward * opponent.level).toInt()
-        winner.experience += expGain
+        winner.calculateExperienceGained(opponent)
         Toast.makeText(activity?.applicationContext, "${winner.name} Gained $expGain!", Toast.LENGTH_SHORT).show()
-        activity?.finish()
+        when(battleType){
+                "WILD" -> {var menuIntent = Intent(activity, MenuActivity::class.java)
+                    menuIntent.putExtra("trainer", trainer)
+                    activity?.startActivity(menuIntent)}
+                "TRAINER" -> {
+                    if(oppTrainer.pokemonTeam.pokemons.size <= 1){
+                        var menuIntent = Intent(activity, MenuActivity::class.java)
+                        menuIntent.putExtra("trainer", trainer)
+                        activity?.startActivity(menuIntent)
+                    }
+                }
+        }
+
+
     }
 
 
@@ -513,11 +560,26 @@ class FightFragment : Fragment() {
     }
 
     private fun handleFaint(pokemon: Pokemon, pokemonTextBox: TextView?){
-        val textBox: TextView? = activity?.findViewById(R.id.battle_text_box)
+        Log.d("OPPONENT_TRAINER", "battle type: $battleType")
+        when(battleType){
+            "TRAINER" -> {
 
-        textBox?.text = "${pokemon.name} has fainted!"
-        pokemon.currentHp = 0
-        pokemonTextBox?.text = "${pokemon.name} Lv${pokemon.level}\nHP: ${pokemon.currentHp}"
+                //check if there are other pokemon in the party
+                Log.d("LEVEL", "FAINTED: ${pokemon.name}")
+                Toast.makeText(activity?.applicationContext, "${pokemon.name} HAS FAINTED", Toast.LENGTH_SHORT).show()
+                val textBox: TextView? = activity?.findViewById(R.id.battle_text_box)
+                textBox?.text = "${pokemon.name} has fainted!"
+                pokemon.currentHp = 0
+                pokemonTextBox?.text = "${pokemon.name} Lv${pokemon.level}\nHP: ${pokemon.currentHp}/${pokemon.baseStatMaxHp}"
+
+            }
+            "WILD" -> {val textBox: TextView? = activity?.findViewById(R.id.battle_text_box)
+                Toast.makeText(activity?.applicationContext, "${pokemon.name} HAS FAINTED", Toast.LENGTH_SHORT).show()
+                textBox?.text = "${pokemon.name} has fainted!"
+                pokemon.currentHp = 0
+                pokemonTextBox?.text = "${pokemon.name} Lv${pokemon.level}\nHP: ${pokemon.currentHp}/${pokemon.baseStatMaxHp}"
+            }
+        }
     }
 
     private fun handleOpponentMove(opponent: Pokemon): Move {
@@ -526,6 +588,10 @@ class FightFragment : Fragment() {
     }
 
     private fun computeDamage(move:Move, attacker: Pokemon, defender: Pokemon): Int{
+        val textBox: TextView? = activity?.findViewById(R.id.battle_text_box)
+//        fix text box only printng for one pokemon
+        textBox?.text = "${attacker.name} used ${move.name}"
+        Toast.makeText(activity?.applicationContext, "${attacker.name} used ${move.name}", Toast.LENGTH_SHORT).show()
         var baseDamage : Double = 0.00
         when(move.damageClass){
             "PHYSICAL" -> {
@@ -550,18 +616,28 @@ class FightFragment : Fragment() {
         //handler type multiplier
         baseDamage *= handleTypeMultiplier(move, defender)
         Log.d(TAG, "${attacker.name} did ${baseDamage.toInt()} DAMAGE")
-
         return baseDamage.toInt()
     }
 
     //move is attacker move and defender is defender type
     //type json is formatted such that you look for the attackers move type compared to the defender type
     private fun handleTypeMultiplier(move: Move, defender: Pokemon): Double{
+        val textBox: TextView? = activity?.findViewById(R.id.battle_text_box)
         var multiplier = 1.0
         defender.types.forEach{ type ->
             multiplier *= typeChart.getAsJsonObject(move.type).get(type).asDouble
             Log.d(TAG, "Defender Types: $type")
         }
+            if(multiplier > 1){
+                textBox?.text = "${move.name} IS SUPER EFFECTIVE!"
+
+            } else if(multiplier < 1){
+                textBox?.text = "${move.name} IS SUPER WEAK!"
+            }
+
+
+//        Thread sleep doesnt work for some reason
+        Thread.sleep(500)
         Log.d(TAG, "multplier = $multiplier || move type: ${move.type} || move: ${move.name}")
         return multiplier
     }
