@@ -42,18 +42,20 @@ class Pokemart: AppCompatActivity() {
         }
     }
 
+    // View pokeball in detail
     private fun changeActivityPokeball(){
         var pokeballIntent = Intent(applicationContext, Pokeball::class.java)
         pokeballIntent.putExtra("trainer", trainer)
         startActivity(pokeballIntent)
     }
 
+    // View potion in detail
     private fun changeActivityPotion(){
         var potionIntent = Intent(applicationContext, Potion::class.java)
         potionIntent.putExtra("trainer", trainer)
         startActivity(potionIntent)
     }
-
+    // Back to main menu
     private fun changeActivityBack(){
         var backIntent = Intent(applicationContext, MenuActivity::class.java)
         backIntent.putExtra("trainer", trainer)

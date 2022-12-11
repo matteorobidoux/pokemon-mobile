@@ -44,31 +44,34 @@ class Pokeball: AppCompatActivity() {
             changeActivityPokemart()
         }
     }
+    // Returning to main menu
     private fun changeActivityPokemart(){
         var mainIntent = Intent(applicationContext, Pokemart::class.java)
         mainIntent.putExtra("trainer", trainer)
         startActivity(mainIntent)
     }
 
+    // Selling pokeball and updating money and pokeball amounts
     private fun sellPokeball(){
         if(trainer.items[1].quantity > 0) {
             trainer.items[1].quantity = trainer.items[1].quantity - 1
             trainer.money += pokeball.value
-            Toast.makeText(applicationContext, "POKEBALL SOLD", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, R.string.pokeball_sold, Toast.LENGTH_SHORT).show()
         }
         else{
-            Toast.makeText(applicationContext, "YOU HAVE 0 POKEBALLS TO SELL", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, R.string.no_pokeballs, Toast.LENGTH_SHORT).show()
         }
     }
 
+    // Modifying Pokemart money
     private fun changePokemartMoney(){
         if(trainer.money > pokeball.value) {
             trainer.items[1].quantity = trainer.items[1].quantity + 1
             trainer.money -= pokeball.value
-            Toast.makeText(applicationContext, "POKEBALL PURCHASED", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, R.string.pokeball_purchase, Toast.LENGTH_SHORT).show()
         }
         else{
-            Toast.makeText(applicationContext, "NOT ENOUGH MONEY TO BUY POKEBALL", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, R.string.pokeballs_no_money, Toast.LENGTH_SHORT).show()
         }
     }
 

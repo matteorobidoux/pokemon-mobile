@@ -33,6 +33,7 @@ class CollectionAdapter(var context: Context, var trainer:Trainer, var teamAdapt
         holder.imageView.setOnClickListener {addToTeam(collection)}
     }
 
+    // Adding Pokemon to the team
     fun addToTeam(pokemonToAdd : Pokemon) {
         val id = trainer.pokemonCollection.pokemons.indexOf(pokemonToAdd)
         trainer.pokemonCollection.pokemons.remove(pokemonToAdd)
@@ -40,6 +41,7 @@ class CollectionAdapter(var context: Context, var trainer:Trainer, var teamAdapt
         teamAdapter.addTeam(pokemonToAdd)
     }
 
+    // Adding pokemon collection
     fun addCollection(pokemonToAdd : Pokemon) {
         val id = trainer.pokemonCollection.pokemons.size
         trainer.pokemonCollection.pokemons.add(pokemonToAdd)

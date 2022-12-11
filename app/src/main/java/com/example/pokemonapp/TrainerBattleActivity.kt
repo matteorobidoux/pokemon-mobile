@@ -28,9 +28,6 @@ class TrainerBattleActivity : AppCompatActivity() {
     private lateinit var trainer : Trainer
     private lateinit var adapter : PokeballsRecyclerViewAdapter
 
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTrainerBattleBinding.inflate(layoutInflater)
@@ -42,21 +39,12 @@ class TrainerBattleActivity : AppCompatActivity() {
         pokemonRoomDatabase = PokemonRoomDatabase.getDatabase(applicationContext)
 
         Log.d(TAG, "trainer: ${trainer.pokemonTeam.pokemons}")
-
         generateTrainer()
-//        val oppCurrentPokemon = opponent.pokemonTeam.pokemons[0]
-
-
-
-//        Log.d(TAG, "main: opponent: ${opponent?.name}")
         val backUri = Uri.parse(trainer.pokemonTeam.pokemons[0].backSprite)
         binding.trainerPokemon.load(backUri)
-
-
-
     }
 
-
+    //Generating Pokemon trainer
     private fun generateTrainer(){
 
         val teamSize: Int = (1 .. 6).random()
@@ -68,10 +56,6 @@ class TrainerBattleActivity : AppCompatActivity() {
         }else {
             getOpponent()
         }
-
-
-        Log.d(TAG, "size: ${opponent.pokemonTeam.pokemons.size}")
-
     }
 
     private fun handlePokeballRecycler(){
@@ -140,7 +124,6 @@ class TrainerBattleActivity : AppCompatActivity() {
                         jsonObject.get("sprites").asJsonObject.get("back").asString,
                         moveList
                     )
-//                        opponent.addPokemon(pokemon)
                     SaveToDatabase(pokemon, moveList)
                     //change ui
                     withContext(Dispatchers.Main){
@@ -167,7 +150,6 @@ class TrainerBattleActivity : AppCompatActivity() {
                     databasePokemon.backSprite,
                     databasePokemon.pokemonMoves
                 )
-//                opponent.addPokemon(pokemon)
                 //change ui
                 withContext(Dispatchers.Main){
                     setOpponent(pokemon)
@@ -176,11 +158,10 @@ class TrainerBattleActivity : AppCompatActivity() {
 
                 }
             }
-
-
         }
     }
 
+    //Saving to database
     private fun SaveToDatabase(pokemon: Pokemon, moveList: List<Move>){
         lifecycleScope.launch(Dispatchers.IO) {
             withContext(Dispatchers.IO) {
@@ -193,7 +174,6 @@ class TrainerBattleActivity : AppCompatActivity() {
             }
         }
     }
-
 
     private fun handleTextBoxes(trainer: Pokemon, opponent: Pokemon){
         val oppName = opponent.name
@@ -212,6 +192,7 @@ class TrainerBattleActivity : AppCompatActivity() {
 
     }
 
+    // Handling battle menu
     private fun handleBattleMenu(trainer: Trainer, opponent: Pokemon, oppTrainer: Trainer){
         val fragment: BattleMenuFragment = BattleMenuFragment()
         val dataToSend: Bundle = Bundle()
@@ -227,6 +208,7 @@ class TrainerBattleActivity : AppCompatActivity() {
 
     }
 
+    // Setting opponent for Pokemon
     private fun setOpponent(pokemon: Pokemon){
 
         var highestLevel: Int = 0
@@ -237,13 +219,12 @@ class TrainerBattleActivity : AppCompatActivity() {
                 highestLevel = poke.level
             }
         }
-//        Log.d(TAG, "HIGHEST LEVEL: $highestLevel")
+
         trainer.pokemonTeam.pokemons.forEach {  poke ->
             if(poke.level < highestLevel){
                 lowestLevel = poke.level
             }
         }
-//        Log.d(TAG, "LOWEST LEVEL: $lowestLevel")
 
         var oppLevel = ((lowestLevel - 5)..(highestLevel + 5)).random()
         if(oppLevel <= 0){
@@ -254,8 +235,6 @@ class TrainerBattleActivity : AppCompatActivity() {
         binding.enemyPokemon.load(frontUri)
         opponent.addPokemon(pokemon)
         opponentPokemon = opponent.pokemonTeam.pokemons.last()
-//        Log.d(TAG, "first in set: ${opponent.pokemonTeam.pokemons[0].name}")
-
 
     }
 }

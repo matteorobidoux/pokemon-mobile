@@ -100,6 +100,7 @@ class StarterFragment : Fragment(){
         return binding.root
     }
 
+    //Retrieving Pokemon
     private fun retrievePokemon(data : String){
         var pokemon: Pokemon
         lifecycleScope.launch(Dispatchers.IO) {
@@ -184,6 +185,7 @@ class StarterFragment : Fragment(){
         }
     }
 
+    //Saving to Database
     private fun SaveToDatabase(pokemon: Pokemon, moveList: List<Move>){
         lifecycleScope.launch(Dispatchers.IO) {
             withContext(Dispatchers.IO) {

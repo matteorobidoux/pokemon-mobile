@@ -27,7 +27,6 @@ class TeamAdapter(var context: Context, var trainer: Trainer) :
         return ViewHolder(layout)
     }
 
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val team = trainer.pokemonTeam.pokemons[position]
@@ -37,6 +36,7 @@ class TeamAdapter(var context: Context, var trainer: Trainer) :
         holder.textView.text=(position+1).toString()
     }
 
+    //Adding Pokemon to team
     fun addTeam(pokemonToAdd : Pokemon) {
         if (trainer.pokemonTeam.pokemons.size >=6){
             val inflater =
@@ -64,6 +64,7 @@ class TeamAdapter(var context: Context, var trainer: Trainer) :
         }
     }
 
+    // Removing Pokemon from team
     fun removeTeam(pokemonToRemove : Pokemon) {
         if (trainer.pokemonTeam.pokemons.size <= 1){
             val inflater =

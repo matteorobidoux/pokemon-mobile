@@ -28,10 +28,6 @@ class TeamFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = TeamFragmentBinding.inflate(inflater,container,false)
 
-
-
-        Log.d(TAG, "arguments: ${arguments?.size()}")
-
         if(arguments != null){
             trainer= arguments?.getSerializable("trainer") as Trainer
             opponent = arguments?.getSerializable("opponent") as Pokemon
@@ -39,8 +35,6 @@ class TeamFragment: Fragment() {
             if(arguments?.containsKey("oppTrainer") == true){
                 oppTrainer = arguments?.getSerializable("oppTrainer") as Trainer
             }
-
-            //TODO implement entire team
 
             Log.d(TAG, "GOT TRAINER: ${trainer.trainerName}")
             //recycler view Setup
@@ -57,7 +51,6 @@ class TeamFragment: Fragment() {
             adapter.onItemClick = { pokemon ->
                 Log.d(TAG, "clicked ${pokemon.name} || hp: ${pokemon.currentHp}")
 
-//                activity?.findViewById(R.id.)
                 handleSwap(pokemon)
                 handleUI(pokemon)
                 //after press
@@ -86,12 +79,14 @@ class TeamFragment: Fragment() {
 
     }
 
+    //Handling swap of Pokemon
     fun handleSwap(pokemon: Pokemon){
         val index = trainer.pokemonTeam.pokemons.indexOf(pokemon)
         trainer.pokemonTeam.pokemons.removeAt(index)
         trainer.pokemonTeam.pokemons.add(0, pokemon)
     }
 
+    // Handling UI
     fun handleUI(pokemon: Pokemon){
         val pokeImg: ImageView? = activity?.findViewById(R.id.trainer_pokemon)
         val pokeText: TextView? = activity?.findViewById(R.id.trainer_text_box)

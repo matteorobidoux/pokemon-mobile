@@ -100,7 +100,6 @@ class Pokemon(@PrimaryKey @ColumnInfo(name = "pokemonNumber") val pokemonNumber:
                     baseDamage *= 1.5
                     break
                 }
-                //TODO Create the type chart to calculate effective not effective moves
             }
             return baseDamage
         } else {
@@ -112,16 +111,16 @@ class Pokemon(@PrimaryKey @ColumnInfo(name = "pokemonNumber") val pokemonNumber:
                     baseSpecialDamage *= 1.5
                     break
                 }
-                //TODO Create the type chart to calculate effective not effective moves
             }
             return baseSpecialDamage
         }
     }
 
+    // Updating level
     fun updateLevel(levelToSet: Int){
         level = levelToSet;
         experience = level*level*level
-        Log.d("LEVEL", "LEVEL: $level, EXPERIENC $experience, FOR $name")
+        Log.d("LEVEL", "LEVEL: $level, EXPERIENCE $experience, FOR $name")
         increaseStats()
         moves.clear()
         for(move in pokemonMoves){

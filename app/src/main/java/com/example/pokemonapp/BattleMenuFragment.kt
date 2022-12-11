@@ -24,14 +24,8 @@ class BattleMenuFragment : Fragment() {
     lateinit var oppTrainer: Trainer
     lateinit var battleType: String
 
-
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = BattleStartFragmentBinding.inflate(inflater,container,false)
-
-
-
-        Log.d(TAG, "arguments: ${arguments?.size()}")
 
         if(arguments != null){
             trainer = arguments?.getSerializable("trainer") as Trainer
@@ -85,8 +79,6 @@ class BattleMenuFragment : Fragment() {
 
             //handle fighting
             binding.fight.setOnClickListener{
-                Log.d(TAG, "clicked fight in the fragment")
-
                 val fragment = FightFragment()
                 val dataToSend = Bundle()
                 dataToSend.putSerializable("trainer", trainer)
@@ -108,7 +100,6 @@ class BattleMenuFragment : Fragment() {
             //handle bag
             binding.bag.setOnClickListener{
                 Log.d(TAG, "TEAM SIZE BEFORE BAG: " + trainer.pokemonTeam.pokemons.size)
-                Log.d(TAG, "clicked on bag")
                 val fragment = BagFragment()
                 val dataToSend = Bundle()
                 dataToSend.putSerializable("trainer", trainer)
@@ -145,7 +136,6 @@ class BattleMenuFragment : Fragment() {
 
             //handle team
             binding.team.setOnClickListener {
-                Log.d(TAG, "clicked on pokemon button")
                 val fragment = TeamFragment()
                 val dataToSend = Bundle()
                 dataToSend.putSerializable("trainer", trainer)
@@ -163,17 +153,16 @@ class BattleMenuFragment : Fragment() {
             }
         }
 
-
-
-
         return binding.root
     }
 
+    // Handling battle dialogue
     fun handleBattleDialogue(text: String){
         val textbox: TextView? = activity?.findViewById(R.id.battle_text_box)
         textbox?.text = text
     }
 
+    // Handling swap
     fun handleSwap(trainer: Trainer, trainerType: String): Boolean{
         val pokemons = trainer.pokemonTeam.pokemons
         if(trainerType == "OPPONENT"){
@@ -216,6 +205,7 @@ class BattleMenuFragment : Fragment() {
 
     }
 
+    // Handling the UI
     fun handleUI(pokemon: Pokemon, trainerType: String){
         when(trainerType){
             "TRAINER" -> {

@@ -60,7 +60,6 @@ class TeamRecyclerViewAdapter internal constructor(context: Context, private val
             parent = itemView.findViewById(R.id.parent)
 
             parent.setOnClickListener {
-                Log.d(TAG, "in adapter clicking")
                 onItemClick?.invoke(mData[adapterPosition])
 
             }
