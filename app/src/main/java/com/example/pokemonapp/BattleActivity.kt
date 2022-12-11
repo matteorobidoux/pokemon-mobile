@@ -134,6 +134,7 @@ class BattleActivity : AppCompatActivity() {
         }
     }
 
+    // Saving to database
     private fun SaveToDatabase(pokemon: Pokemon, moveList: List<Move>){
         lifecycleScope.launch(Dispatchers.IO) {
             withContext(Dispatchers.IO) {
@@ -147,6 +148,7 @@ class BattleActivity : AppCompatActivity() {
         }
     }
 
+    //Setting opponent
     private fun setOpponent(pokemon: Pokemon){
 
         var highestLevel: Int = 0
@@ -157,15 +159,11 @@ class BattleActivity : AppCompatActivity() {
                 highestLevel = poke.level
             }
         }
-        Log.d(TAG, "HIGHEST LEVEL: $highestLevel")
         trainer.pokemonTeam.pokemons.forEach {  poke ->
             if(poke.level < highestLevel){
                 lowestLevel = poke.level
             }
         }
-        Log.d(TAG, "LOWEST LEVEL: $lowestLevel")
-
-
         var oppLevel = ((lowestLevel - 5)..(highestLevel + 5)).random()
         if(oppLevel <= 0){
             oppLevel = 1
@@ -180,6 +178,7 @@ class BattleActivity : AppCompatActivity() {
         handleBattleMenu(trainer, pokemon)
     }
 
+    // Handling text boxes
     private fun handleTextBoxes(trainer: Pokemon, opponent: Pokemon){
         val oppName = opponent.name
         val oppLevel = opponent.level
@@ -197,6 +196,7 @@ class BattleActivity : AppCompatActivity() {
 
     }
 
+    // Handling the battle menu
     private fun handleBattleMenu(trainer:Trainer, opponent:Pokemon){
         val fragment: BattleMenuFragment = BattleMenuFragment()
         val dataToSend: Bundle = Bundle()

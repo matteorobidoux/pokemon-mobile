@@ -44,12 +44,14 @@ class Pokeball: AppCompatActivity() {
             changeActivityPokemart()
         }
     }
+    // Returning to main menu
     private fun changeActivityPokemart(){
         var mainIntent = Intent(applicationContext, Pokemart::class.java)
         mainIntent.putExtra("trainer", trainer)
         startActivity(mainIntent)
     }
 
+    // Selling pokeball and updating money and pokeball amounts
     private fun sellPokeball(){
         if(trainer.items[1].quantity > 0) {
             trainer.items[1].quantity = trainer.items[1].quantity - 1
@@ -61,6 +63,7 @@ class Pokeball: AppCompatActivity() {
         }
     }
 
+    // Modifying Pokemart money
     private fun changePokemartMoney(){
         if(trainer.money > pokeball.value) {
             trainer.items[1].quantity = trainer.items[1].quantity + 1

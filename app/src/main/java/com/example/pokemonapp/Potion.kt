@@ -51,12 +51,14 @@ class Potion: AppCompatActivity() {
         }
     }
 
+    // Back to Pokemart
     private fun changeActivityPokemart(){
         var mainIntent = Intent(applicationContext, Pokemart::class.java)
         mainIntent.putExtra("trainer", trainer)
         startActivity(mainIntent)
     }
 
+    // Selling Potion
     private fun sellPotion(){
         if(trainer.items[0].quantity > 0) {
             trainer.items[0].quantity = trainer.items[0].quantity - 1
@@ -67,7 +69,7 @@ class Potion: AppCompatActivity() {
             Toast.makeText(applicationContext, R.string.no_potions, Toast.LENGTH_SHORT).show()
         }
     }
-
+    //Buying Potion
     private fun buyingPotion(){
         if(trainer.money > potion.value) {
             trainer.items[0].quantity = trainer.items[0].quantity + 1

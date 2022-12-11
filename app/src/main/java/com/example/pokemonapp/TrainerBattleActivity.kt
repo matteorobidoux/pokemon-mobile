@@ -44,6 +44,7 @@ class TrainerBattleActivity : AppCompatActivity() {
         binding.trainerPokemon.load(backUri)
     }
 
+    //Generating Pokemon trainer
     private fun generateTrainer(){
 
         val teamSize: Int = (1 .. 6).random()
@@ -160,6 +161,7 @@ class TrainerBattleActivity : AppCompatActivity() {
         }
     }
 
+    //Saving to database
     private fun SaveToDatabase(pokemon: Pokemon, moveList: List<Move>){
         lifecycleScope.launch(Dispatchers.IO) {
             withContext(Dispatchers.IO) {
@@ -172,7 +174,6 @@ class TrainerBattleActivity : AppCompatActivity() {
             }
         }
     }
-
 
     private fun handleTextBoxes(trainer: Pokemon, opponent: Pokemon){
         val oppName = opponent.name
@@ -191,6 +192,7 @@ class TrainerBattleActivity : AppCompatActivity() {
 
     }
 
+    // Handling battle menu
     private fun handleBattleMenu(trainer: Trainer, opponent: Pokemon, oppTrainer: Trainer){
         val fragment: BattleMenuFragment = BattleMenuFragment()
         val dataToSend: Bundle = Bundle()
@@ -206,6 +208,7 @@ class TrainerBattleActivity : AppCompatActivity() {
 
     }
 
+    // Setting opponent for Pokemon
     private fun setOpponent(pokemon: Pokemon){
 
         var highestLevel: Int = 0

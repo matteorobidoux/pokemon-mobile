@@ -79,12 +79,14 @@ class TeamFragment: Fragment() {
 
     }
 
+    //Handling swap of Pokemon
     fun handleSwap(pokemon: Pokemon){
         val index = trainer.pokemonTeam.pokemons.indexOf(pokemon)
         trainer.pokemonTeam.pokemons.removeAt(index)
         trainer.pokemonTeam.pokemons.add(0, pokemon)
     }
 
+    // Handling UI
     fun handleUI(pokemon: Pokemon){
         val pokeImg: ImageView? = activity?.findViewById(R.id.trainer_pokemon)
         val pokeText: TextView? = activity?.findViewById(R.id.trainer_text_box)

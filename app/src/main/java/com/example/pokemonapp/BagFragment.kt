@@ -87,6 +87,7 @@ class BagFragment : Fragment(){
 
     }
 
+    // function for handling the healing of Pokemons
     private fun handleHeal(potion: Items, pokemon: Pokemon, textView: TextView?){
         if(pokemon.currentHp < pokemon.baseStatMaxHp){
             pokemon.currentHp += 20
@@ -99,6 +100,7 @@ class BagFragment : Fragment(){
 
     }
 
+    // function for handling the catching of Pokemons
     private fun handleCatch(pokeball: Items, pokemon: Pokemon, trainer: Trainer, imageView: ImageView?){
         val chance: Double = 100.0 * ( 1.0 - ((pokemon.currentHp).toDouble() / (pokemon.baseStatMaxHp).toDouble()))
         val range = (1..100).random()

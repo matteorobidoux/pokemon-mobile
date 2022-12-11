@@ -38,6 +38,7 @@ class TitleScreenActivity : AppCompatActivity() {
         setTitleMusic()
     }
 
+    //Setting title screen music
     private fun setTitleMusic(){
         mediaPlayer = MediaPlayer.create(applicationContext, R.raw.title_screen_music)
         mediaPlayer.start()
@@ -52,13 +53,14 @@ class TitleScreenActivity : AppCompatActivity() {
             loadMenuIntent()
         }
     }
-
+    // Changing activity to Form activity
     private fun changeFormActivity(){
         var formIntent = Intent(applicationContext, FormActivity::class.java)
         mediaPlayer.stop()
         startActivity(formIntent)
     }
 
+    // Loading menu
     private fun loadMenuIntent(){
         var builder = AlertDialog.Builder(this@TitleScreenActivity)
         var dialogInflater = layoutInflater

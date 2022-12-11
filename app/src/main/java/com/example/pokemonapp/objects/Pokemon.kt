@@ -116,6 +116,7 @@ class Pokemon(@PrimaryKey @ColumnInfo(name = "pokemonNumber") val pokemonNumber:
         }
     }
 
+    // Updating level
     fun updateLevel(levelToSet: Int){
         level = levelToSet;
         experience = level*level*level

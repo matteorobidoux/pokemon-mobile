@@ -424,6 +424,7 @@ class FightFragment : Fragment() {
         return binding.root
     }
 
+    // Handle fight functionality
     private fun handleFight(trainer: Pokemon, opponent: Pokemon, move: Move){
         //handling accuracy
         val isMiss = Random.nextInt(101)
@@ -526,6 +527,7 @@ class FightFragment : Fragment() {
             }
     }
 
+    // Handle win functionality
     private fun handleWin(winner: Pokemon, opponent: Pokemon, battleType: String){
         val expGain : Int = (0.3 * opponent.baseExperienceReward * opponent.level).toInt()
         winner.calculateExperienceGained(opponent)
@@ -545,6 +547,7 @@ class FightFragment : Fragment() {
 
     }
 
+    // Function checking if the Pokemon is faint
     private fun isFaint(damage: Int, pokemon:Pokemon): Boolean{
         if(pokemon.currentHp - damage <= 0){
             return true
@@ -552,6 +555,7 @@ class FightFragment : Fragment() {
         return false
     }
 
+    //Handling faint Pokemon
     private fun handleFaint(pokemon: Pokemon, pokemonTextBox: TextView?){
         Log.d("OPPONENT_TRAINER", "battle type: $battleType")
         when(battleType){
@@ -575,11 +579,13 @@ class FightFragment : Fragment() {
         }
     }
 
+    // Handling opponent moves
     private fun handleOpponentMove(opponent: Pokemon): Move {
         val availableMoves = opponent.moves.size
         return opponent.moves[Random.nextInt(availableMoves)]
     }
 
+    // Computing damage functionality
     private fun computeDamage(move:Move, attacker: Pokemon, defender: Pokemon): Int{
         val textBox: TextView? = activity?.findViewById(R.id.battle_text_box)
 //        fix text box only printing for one pokemon
@@ -633,6 +639,7 @@ class FightFragment : Fragment() {
         return multiplier
     }
 
+    // Handling hit functionality
     private fun handleHit(damage: Int, defender: Pokemon, textBox: TextView?){
         if(defender.currentHp - damage <= 0){
             Log.d(TAG, "${defender.name} HAS FAINTED")

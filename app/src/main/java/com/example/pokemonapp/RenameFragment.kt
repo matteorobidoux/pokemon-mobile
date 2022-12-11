@@ -23,9 +23,6 @@ class RenameFragment : DialogFragment() {
             val pokemon: Pokemon = arguments?.getSerializable("pokemon") as Pokemon
             val trainer: Trainer = arguments?.getSerializable("trainer") as Trainer
 
-            Log.d(TAG, "arguments in dialogue: ${pokemon.name}")
-
-
             binding.confirmName.setOnClickListener{
                 pokemon.name = binding.pokemonName.text.toString()
                 Log.d(TAG, "confirmed name: ${binding.pokemonName.text.toString()} || pokemon name: ${pokemon.name}")
@@ -36,7 +33,6 @@ class RenameFragment : DialogFragment() {
                 var menuIntent = Intent(activity, MenuActivity::class.java)
                 menuIntent.putExtra("trainer", trainer)
                 activity?.startActivity(menuIntent)
-
             }
         }
 

@@ -58,6 +58,7 @@ class PokecenterActivity : AppCompatActivity() {
         }
     }
 
+    // Back to main menu
     private fun backToMain(){
         // go back to main
         val menu = Intent(applicationContext, MenuActivity::class.java)
@@ -66,6 +67,7 @@ class PokecenterActivity : AppCompatActivity() {
         finish();
     }
 
+    // Healing Pokemon functionality
     private fun heal(){
         lifecycleScope.launch(Dispatchers.IO) {
             withContext(Dispatchers.Main) {

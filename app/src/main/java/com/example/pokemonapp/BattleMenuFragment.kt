@@ -156,11 +156,13 @@ class BattleMenuFragment : Fragment() {
         return binding.root
     }
 
+    // Handling battle dialogue
     fun handleBattleDialogue(text: String){
         val textbox: TextView? = activity?.findViewById(R.id.battle_text_box)
         textbox?.text = text
     }
 
+    // Handling swap
     fun handleSwap(trainer: Trainer, trainerType: String): Boolean{
         val pokemons = trainer.pokemonTeam.pokemons
         if(trainerType == "OPPONENT"){
@@ -203,6 +205,7 @@ class BattleMenuFragment : Fragment() {
 
     }
 
+    // Handling the UI
     fun handleUI(pokemon: Pokemon, trainerType: String){
         when(trainerType){
             "TRAINER" -> {
